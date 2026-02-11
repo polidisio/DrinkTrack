@@ -21,12 +21,10 @@ class CoreDataManager {
     }
     
     func save() {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                print("Error saving context: \(error)")
-            }
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context: \(error)")
         }
     }
     

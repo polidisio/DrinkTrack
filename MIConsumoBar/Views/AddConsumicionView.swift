@@ -2,6 +2,8 @@ import SwiftUI
 
 struct AddConsumicionView: View {
     @Environment(\.dismiss) var dismiss
+    let onSave: () -> Void
+    
     @State private var bebidas: [Bebida] = []
     @State private var selectedBebidaIndex = 0
     @State private var cantidad: String = "1"
@@ -155,6 +157,7 @@ struct AddConsumicionView: View {
             notas: notas.isEmpty ? nil : notas
         )
         
+        onSave()
         dismiss()
     }
 }
