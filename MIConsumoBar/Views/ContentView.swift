@@ -84,7 +84,7 @@ struct ContentView: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
-            .background(Color(.systemGray6))
+            .background(Color(uiColor: .secondarySystemBackground))
             .cornerRadius(12)
             .padding(.horizontal, 16)
             .padding(.top, 8)
@@ -110,6 +110,6 @@ struct ContentView: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 8)
         }
-        .background(Color(.systemBackground))
+        .background(Color(uiColor: .systemBackground))
     }
 }

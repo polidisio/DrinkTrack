@@ -60,11 +60,11 @@ struct BebidaCounterCard: View {
             }
         }
         .padding(16)
-        .background(Color(.systemGray6))
+        .background(Color(uiColor: .secondarySystemBackground))
         .cornerRadius(12)
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color(.systemGray4), lineWidth: 1)
+                .stroke(Color(uiColor: .separator), lineWidth: 1)
         )
     }
 }
