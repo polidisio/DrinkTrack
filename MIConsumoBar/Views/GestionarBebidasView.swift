@@ -3,9 +3,8 @@ import SwiftUI
 struct GestionarBebidasView: View {
     @Environment(\.dismiss) var dismiss
     @State private var bebidas: [Bebida] = []
-    @State private var showingEditar = false
-    @State private var bebidaToEditID: UUID?
     @State private var showingNueva = false
+    @State private var editingBebida: Bebida?
     
     let onDismiss: () -> Void
     
@@ -13,36 +12,26 @@ struct GestionarBebidasView: View {
         NavigationView {
             List {
                 ForEach(bebidas) { bebida in
-                    HStack {
-                        Text(bebida.emoji ?? "")
-                            .font(.title2)
-                        VStack(alignment: .leading) {
-                            Text(bebida.nombre ?? "")
-                                .font(.headline)
-                            Text("\(String(format: "%.2f", bebida.precioBase)) €")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
-                        Spacer()
-                        let isDefault = isBebidaDefault(bebida)
-                        if !isDefault {
-                            Image(systemName: "chevron.right")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                    Button(action: {
+                        editingBebida = bebida
+                    }) {
+                        HStack {
+                            Text(bebida.emoji ?? "")
+                                .font(.title2)
+                            VStack(alignment: .leading) {
+                                Text(bebida.nombre ?? "")
+                                    .font(.headline)
+                                Text("\(String(format: "%.2f", bebida.precioBase)) €")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
+                            Spacer()
                         }
                     }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        if let id = bebida.id {
-                            bebidaToEditID = id
-                            showingEditar = true
-                        }
-                    }
+                    .buttonStyle(PlainButtonStyle())
                     .swipeActions(edge: .trailing) {
                         Button(role: .destructive) {
-                            if let id = bebida.id, let freshBebida = CoreDataManager.shared.fetchBebidaByID(id) {
-                                deleteBebida(freshBebida)
-                            }
+                            deleteBebida(bebida)
                         } label: {
                             Label("Eliminar", systemImage: "trash")
                         }
@@ -66,33 +55,19 @@ struct GestionarBebidasView: View {
                 }
             }
             .sheet(isPresented: $showingNueva) {
-                EditarBebidaView(mode: .nueva) { nuevaBebida in
-                    if let id = nuevaBebida.id {
-                        bebidaToEditID = id
-                        showingNueva = false
-                        showingEditar = true
-                    }
+                EditarBebidaView(mode: .nueva) { _ in
                     reloadData()
-                    onDismiss()
                 }
             }
-            .sheet(isPresented: $showingEditar) {
-                if let id = bebidaToEditID {
-                    EditarBebidaView(mode: .editar(id)) { _ in
-                        reloadData()
-                        onDismiss()
-                    }
+            .sheet(item: $editingBebida) { bebida in
+                EditarBebidaView(mode: .editar(bebida)) { _ in
+                    reloadData()
                 }
             }
         }
         .onAppear {
             reloadData()
         }
-    }
-    
-    private func isBebidaDefault(_ bebida: Bebida) -> Bool {
-        let defaultNombres = ["Cerveza", "Refresco", "Agua", "Vino", "Copa", "Café"]
-        return defaultNombres.contains(bebida.nombre ?? "")
     }
     
     private func deleteBebida(_ bebida: Bebida) {
