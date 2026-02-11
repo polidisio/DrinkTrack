@@ -2,9 +2,7 @@ import SwiftUI
 
 struct AddConsumicionView: View {
     @Environment(\.dismiss) var dismiss
-    let bebidas: [Bebida]
-    let onRefresh: () -> Void
-    
+    @State private var bebidas: [Bebida] = []
     @State private var selectedBebidaIndex = 0
     @State private var cantidad: String = "1"
     @State private var precioUnitario: String = ""
@@ -34,6 +32,7 @@ struct AddConsumicionView: View {
                         Spacer()
                         TextField("1", text: $cantidad)
                             .frame(width: 50)
+                            .keyboardType(.numberPad)
                     }
                     
                     HStack {
@@ -41,6 +40,7 @@ struct AddConsumicionView: View {
                         Spacer()
                         TextField("0.00", text: $precioUnitario)
                             .frame(width: 80)
+                            .keyboardType(.decimalPad)
                     }
                     
                     HStack {
@@ -62,7 +62,6 @@ struct AddConsumicionView: View {
                 }
             }
             .navigationTitle("Añadir Consumición")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancelar") {
@@ -87,10 +86,12 @@ struct AddConsumicionView: View {
                 }
             }
             .sheet(isPresented: $showingGestionar) {
-                GestionarBebidasView()
+                GestionarBebidasView {
+                    reloadBebidas()
+                }
             }
             .onAppear {
-                updatePrecioUnitario()
+                reloadBebidas()
             }
             .onChange(of: selectedBebidaIndex) { _, _ in
                 updatePrecioUnitario()
@@ -111,9 +112,22 @@ struct AddConsumicionView: View {
         return true
     }
     
+    private func reloadBebidas() {
+        bebidas = CoreDataManager.shared.fetchBebidas()
+        if !bebidas.isEmpty {
+            selectedBebidaIndex = 0
+            updatePrecioUnitario()
+        }
+    }
+    
     private func updatePrecioUnitario() {
-        if let bebida = selectedBebida, precioUnitario.isEmpty {
-            precioUnitario = String(format: "%.2f", bebida.precioBase)
+        if let index = bebidas.indices.contains(selectedBebidaIndex) ? selectedBebidaIndex : nil {
+            let bebida = bebidas[index]
+            if let freshBebida = CoreDataManager.shared.fetchBebidas().first(where: { $0.id == bebida.id }) {
+                precioUnitario = String(format: "%.2f", freshBebida.precioBase)
+            } else {
+                precioUnitario = String(format: "%.2f", bebida.precioBase)
+            }
         }
     }
     
@@ -130,7 +144,6 @@ struct AddConsumicionView: View {
             notas: notas.isEmpty ? nil : notas
         )
         
-        onRefresh()
         dismiss()
     }
 }

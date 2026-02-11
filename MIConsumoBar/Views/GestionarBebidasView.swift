@@ -7,6 +7,8 @@ struct GestionarBebidasView: View {
     @State private var bebidaToEdit: Bebida?
     @State private var showingNueva = false
     
+    let onDismiss: () -> Void
+    
     var body: some View {
         NavigationView {
             List {
@@ -51,6 +53,7 @@ struct GestionarBebidasView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cerrar") {
+                        onDismiss()
                         dismiss()
                     }
                 }
@@ -81,7 +84,7 @@ struct GestionarBebidasView: View {
     }
     
     private func isBebidaDefault(_ bebida: Bebida) -> Bool {
-        let defaultNombres = ["Cebra", "Refresco", "Agua", "Vino", "Copa", "Café"]
+        let defaultNombres = ["Cerveza", "Refresco", "Agua", "Vino", "Copa", "Café"]
         return defaultNombres.contains(bebida.nombre ?? "")
     }
     
