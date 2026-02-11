@@ -7,7 +7,7 @@ struct GestionarBebidasView: View {
     @State private var bebidaToEdit: Bebida?
     @State private var showingNueva = false
     
-    private let viewModel = ConsumicionViewModel()
+    @StateObject private var viewModel = ConsumicionViewModel()
     
     var body: some View {
         NavigationView {
@@ -19,7 +19,7 @@ struct GestionarBebidasView: View {
                         VStack(alignment: .leading) {
                             Text(bebida.nombre ?? "")
                                 .font(.headline)
-                            Text("\(String(format: "%.2f", bebida.precioBase)) €")
+                            Text("\(String(format: "%.2f", getFreshPrecio(bebida: bebida))) €")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }
@@ -41,6 +41,7 @@ struct GestionarBebidasView: View {
                         if !viewModel.isBebidaDefault(bebida) {
                             Button(role: .destructive) {
                                 viewModel.deleteBebidaPersonalizada(bebida)
+                                reloadData()
                             } label: {
                                 Label("Eliminar", systemImage: "trash")
                             }
@@ -65,24 +66,31 @@ struct GestionarBebidasView: View {
                 }
             }
             .sheet(isPresented: $showingNueva) {
-                EditarBebidaView(mode: .nueva) { nuevaBebida in
-                    bebidas = viewModel.bebidas
+                EditarBebidaView(viewModel: viewModel, mode: .nueva) { _ in
+                    reloadData()
                 }
             }
             .sheet(isPresented: $showingEditar) {
                 if let bebida = bebidaToEdit {
-                    EditarBebidaView(mode: .editar(bebida)) { bebidaEditada in
-                        bebidas = viewModel.bebidas
+                    EditarBebidaView(viewModel: viewModel, mode: .editar(bebida)) { _ in
+                        reloadData()
                     }
                 }
             }
         }
         .onAppear {
-            bebidas = viewModel.bebidas
+            reloadData()
         }
     }
-}
-
-#Preview {
-    GestionarBebidasView()
+    
+    private func getFreshPrecio(bebida: Bebida) -> Double {
+        if let id = bebida.id {
+            return CoreDataManager.shared.fetchBebidas().first { $0.id == id }?.precioBase ?? bebida.precioBase
+        }
+        return bebida.precioBase
+    }
+    
+    private func reloadData() {
+        bebidas = CoreDataManager.shared.fetchBebidas()
+    }
 }

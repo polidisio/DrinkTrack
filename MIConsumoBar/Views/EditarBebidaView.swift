@@ -8,6 +8,7 @@ enum EditarBebidaMode {
 
 struct EditarBebidaView: View {
     @Environment(\.dismiss) var dismiss
+    @ObservedObject var viewModel: ConsumicionViewModel
     let mode: EditarBebidaMode
     let onSave: (Bebida) -> Void
     
@@ -17,7 +18,6 @@ struct EditarBebidaView: View {
     @State private var categoria: String = "Alcohol"
     
     private let categorias = ["Alcohol", "Sin Alcohol"]
-    private let viewModel = ConsumicionViewModel()
     
     private var isFormValid: Bool {
         !nombre.trimmingCharacters(in: .whitespaces).isEmpty && (Double(precio) ?? 0) > 0
@@ -44,7 +44,6 @@ struct EditarBebidaView: View {
                     HStack {
                         Text("€")
                         TextField("0.00", text: $precio)
-                            .keyboardType(.decimalPad)
                     }
                 }
                 
@@ -77,16 +76,22 @@ struct EditarBebidaView: View {
             }
             .onAppear {
                 if case .editar(let bebida) = mode {
-                    nombre = bebida.nombre ?? ""
-                    emoji = bebida.emoji ?? "📦"
-                    precio = String(format: "%.2f", bebida.precioBase)
-                    categoria = bebida.categoria ?? "Alcohol"
+                    if let freshBebida = getFreshBebida(bebida: bebida) {
+                        nombre = freshBebida.nombre ?? ""
+                        emoji = freshBebida.emoji ?? "📦"
+                        precio = String(format: "%.2f", freshBebida.precioBase)
+                        categoria = freshBebida.categoria ?? "Alcohol"
+                    }
                 }
             }
         }
     }
     
     @State private var showingEmojiPicker = false
+    
+    private func getFreshBebida(bebida: Bebida) -> Bebida? {
+        return viewModel.bebidas.first { $0.id == bebida.id }
+    }
     
     private func save() {
         guard let precioDouble = Double(precio), precioDouble > 0 else { return }
@@ -98,6 +103,7 @@ struct EditarBebidaView: View {
             _ = viewModel.createBebidaPersonalizada(nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
         }
         
+        onSave(Bebida())
         dismiss()
     }
 }
