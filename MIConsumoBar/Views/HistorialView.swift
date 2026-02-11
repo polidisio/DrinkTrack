@@ -5,6 +5,7 @@ struct HistorialView: View {
     @State private var selectedDate = Date()
     @State private var consumiciones: [Consumicion] = []
     @State private var showingDatePicker = false
+    let onDismiss: () -> Void
     
     private let coreDataManager = CoreDataManager.shared
     
@@ -26,6 +27,7 @@ struct HistorialView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cerrar") {
+                        onDismiss()
                         dismiss()
                     }
                 }

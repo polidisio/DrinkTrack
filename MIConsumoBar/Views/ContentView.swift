@@ -45,7 +45,9 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showingHistorial) {
-                HistorialView()
+                HistorialView {
+                    viewModel.refreshTodayData()
+                }
             }
             .sheet(isPresented: $showingAddBebida) {
                 AddConsumicionView(bebidas: viewModel.bebidas) {
