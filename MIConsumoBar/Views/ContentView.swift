@@ -35,8 +35,10 @@ struct ContentView: View {
                 // Bottom actions
                 bottomActionsView
             }
-            .navigationTitle("DrinkTrack")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle {
+                Text("DrinkTrack")
+                    .font(.title)
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Historial") {
