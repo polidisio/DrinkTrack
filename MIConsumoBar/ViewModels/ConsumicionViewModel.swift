@@ -16,7 +16,8 @@ class ConsumicionViewModel {
     
     func loadData() {
         Task { @MainActor in
-            coreDataManager.cleanupOldConsumiciones()
+            // TEMPORARILY DISABLED: cleanupOldConsumiciones()
+            // coreDataManager.cleanupOldConsumiciones()
             bebidas = coreDataManager.fetchBebidas()
             
             if bebidas.isEmpty {
