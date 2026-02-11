@@ -120,52 +120,6 @@ struct EditarBebidaView: View {
     }
 }
 
-struct EmojiPickerView: View {
-    @Environment(\.dismiss) var dismiss
-    @Binding var selectedEmoji: String
-    
-    private let emojis = [
-        "🍺", "🥤", "💧", "🍷", "🍸", "☕",
-        "🍹", "🍺", "🥂", "🧉", "🥃", "🍷",
-        "🧋", "🍵", "🥛", "🫖", "🍶", "🥡",
-        "🍲", "🍛", "🍜", "🥘", "🍝", "🍕",
-        "🍔", "🍟", "🌭", "🥪", "🌮", "🌯"
-    ]
-    
-    private let columns = [
-        GridItem(.adaptive(minimum: 60))
-    ]
-    
-    var body: some View {
-        NavigationView {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(emojis, id: \.self) { emoji in
-                        Text(emoji)
-                            .font(.largeTitle)
-                            .frame(width: 60, height: 60)
-                            .background(selectedEmoji == emoji ? Color.orange.opacity(0.2) : Color.clear)
-                            .cornerRadius(10)
-                            .onTapGesture {
-                                selectedEmoji = emoji
-                                dismiss()
-                            }
-                    }
-                }
-                .padding()
-            }
-            .navigationTitle("Emoji")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Cerrar") {
-                        dismiss()
-                    }
-                }
-            }
-        }
-    }
-}
-
 extension EditarBebidaMode {
     var isNueva: Bool {
         if case .nueva = self { return true }
