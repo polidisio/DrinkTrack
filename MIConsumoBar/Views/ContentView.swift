@@ -21,7 +21,8 @@ struct ContentView: View {
                                 count: viewModel.getConsumicionCount(for: bebida),
                                 cost: viewModel.getConsumicionCost(for: bebida),
                                 onAdd: { viewModel.addConsumicion(bebida: bebida) },
-                                onRemove: { viewModel.decrementConsumicion(bebida: bebida) }
+                                onRemove: { viewModel.decrementConsumicion(bebida: bebida) },
+                                onReset: { viewModel.resetCounters(for: bebida) }
                             )
                         }
                     }
@@ -34,7 +35,7 @@ struct ContentView: View {
                 // Bottom actions
                 bottomActionsView
             }
-            .navigationTitle("Mi Consumo Bar")
+            .navigationTitle("DrinkTrack")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

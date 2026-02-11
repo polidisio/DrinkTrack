@@ -6,10 +6,10 @@ struct BebidaCounterCard: View {
     let cost: Double
     let onAdd: () -> Void
     let onRemove: () -> Void
+    let onReset: () -> Void
     
     var body: some View {
         HStack(spacing: 16) {
-            // Emoji y nombre
             VStack(alignment: .leading, spacing: 4) {
                 Text(bebida.emoji ?? "")
                     .font(.system(size: 32))
@@ -23,10 +23,8 @@ struct BebidaCounterCard: View {
             
             Spacer()
             
-            // Contador
             VStack(spacing: 8) {
                 HStack(spacing: 16) {
-                    // Botón de decremento
                     Button(action: onRemove) {
                         Image(systemName: "minus.circle.fill")
                             .font(.title2)
@@ -34,21 +32,27 @@ struct BebidaCounterCard: View {
                     }
                     .disabled(count <= 0)
                     
-                    // Contador
                     Text("\(count)")
                         .font(.title)
                         .fontWeight(.bold)
                         .frame(minWidth: 40)
                     
-                    // Botón de incremento
                     Button(action: onAdd) {
                         Image(systemName: "plus.circle.fill")
                             .font(.title2)
                             .foregroundColor(.green)
                     }
+                    
+                    Divider()
+                        .frame(height: 24)
+                    
+                    Button(action: onReset) {
+                        Image(systemName: "arrow.counterclockwise")
+                            .font(.title3)
+                            .foregroundColor(.gray)
+                    }
                 }
                 
-                // Coste
                 Text("€\(String(format: "%.2f", cost))")
                     .font(.subheadline)
                     .foregroundColor(.orange)

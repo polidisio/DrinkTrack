@@ -77,4 +77,12 @@ class ConsumicionViewModel {
             .filter { $0.bebidaID == bebida.id }
             .reduce(0.0) { $0 + (Double($1.cantidad) * $1.precioUnitario) }
     }
+    
+    func resetCounters(for bebida: Bebida) {
+        let consumicionesBebida = consumicionesHoy.filter { $0.bebidaID == bebida.id }
+        for consumicion in consumicionesBebida {
+            coreDataManager.deleteConsumicion(consumicion)
+        }
+        refreshTodayData()
+    }
 }
