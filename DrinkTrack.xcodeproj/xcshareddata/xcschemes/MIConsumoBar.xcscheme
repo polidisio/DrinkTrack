@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D271D1C82F3BC58B00BE33AA"
-               BuildableName = "MIConsumoBar.app"
-               BlueprintName = "MIConsumoBar"
-               ReferencedContainer = "container:MIConsumoBar.xcodeproj">
+               BuildableName = "DrinkTrack.app"
+               BlueprintName = "DrinkTrack"
+               ReferencedContainer = "container:DrinkTrack.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D271D1C82F3BC58B00BE33AA"
-            BuildableName = "MIConsumoBar.app"
-            BlueprintName = "MIConsumoBar"
-            ReferencedContainer = "container:MIConsumoBar.xcodeproj">
+            BuildableName = "DrinkTrack.app"
+            BlueprintName = "DrinkTrack"
+            ReferencedContainer = "container:DrinkTrack.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D271D1C82F3BC58B00BE33AA"
-            BuildableName = "MIConsumoBar.app"
-            BlueprintName = "MIConsumoBar"
-            ReferencedContainer = "container:MIConsumoBar.xcodeproj">
+            BuildableName = "DrinkTrack.app"
+            BlueprintName = "DrinkTrack"
+            ReferencedContainer = "container:DrinkTrack.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

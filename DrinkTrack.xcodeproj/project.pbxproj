@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		D271D1C92F3BC58B00BE33AA /* MIConsumoBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MIConsumoBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D271D1C92F3BC58B00BE33AA /* DrinkTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		D271D1CA2F3BC58B00BE33AA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D271D1C92F3BC58B00BE33AA /* MIConsumoBar.app */,
+				D271D1C92F3BC58B00BE33AA /* DrinkTrack.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D271D1C82F3BC58B00BE33AA /* MIConsumoBar */ = {
+		D271D1C82F3BC58B00BE33AA /* DrinkTrack */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D271D1D92F3BC58C00BE33AA /* Build configuration list for PBXNativeTarget "MIConsumoBar" */;
+			buildConfigurationList = D271D1D92F3BC58C00BE33AA /* Build configuration list for PBXNativeTarget "DrinkTrack" */;
 			buildPhases = (
 				D271D1C52F3BC58B00BE33AA /* Sources */,
 				D271D1C62F3BC58B00BE33AA /* Frameworks */,
@@ -63,11 +63,11 @@
 			fileSystemSynchronizedGroups = (
 				D271D1CB2F3BC58B00BE33AA /* MIConsumoBar */,
 			);
-			name = MIConsumoBar;
+			name = DrinkTrack;
 			packageProductDependencies = (
 			);
 			productName = MIConsumoBar;
-			productReference = D271D1C92F3BC58B00BE33AA /* MIConsumoBar.app */;
+			productReference = D271D1C92F3BC58B00BE33AA /* DrinkTrack.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D271D1C42F3BC58B00BE33AA /* Build configuration list for PBXProject "MIConsumoBar" */;
+			buildConfigurationList = D271D1C42F3BC58B00BE33AA /* Build configuration list for PBXProject "DrinkTrack" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D271D1C82F3BC58B00BE33AA /* MIConsumoBar */,
+				D271D1C82F3BC58B00BE33AA /* DrinkTrack */,
 			);
 		};
 /* End PBXProject section */
@@ -313,7 +313,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D271D1C42F3BC58B00BE33AA /* Build configuration list for PBXProject "MIConsumoBar" */ = {
+		D271D1C42F3BC58B00BE33AA /* Build configuration list for PBXProject "DrinkTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D271D1D72F3BC58C00BE33AA /* Debug */,
@@ -322,7 +322,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D271D1D92F3BC58C00BE33AA /* Build configuration list for PBXNativeTarget "MIConsumoBar" */ = {
+		D271D1D92F3BC58C00BE33AA /* Build configuration list for PBXNativeTarget "DrinkTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D271D1DA2F3BC58C00BE33AA /* Debug */,
