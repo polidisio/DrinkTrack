@@ -33,6 +33,9 @@ class CoreDataManager {
     // MARK: - Bebida Operations
     
     func createDefaultBebidas() {
+        let existingBebidas = fetchBebidas()
+        guard existingBebidas.isEmpty else { return }
+        
         let bebidasPredeterminadas: [(nombre: String, emoji: String, precio: Double, categoria: String)] = [
             ("Cerveza", "🍺", 3.5, "Alcohol"),
             ("Refresco", "🥤", 2.0, "Sin Alcohol"),
