@@ -30,7 +30,7 @@ class ConsumicionViewModel {
     }
     
     func refreshTodayData() {
-        consumicionesHoy = coreDataManager.fetchConsumiciones(for: Date())
+        consumicionesHoy = coreDataManager.fetchAllConsumiciones()
         totalHoy = coreDataManager.getTotalToday()
     }
     

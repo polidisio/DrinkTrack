@@ -178,6 +178,18 @@ class CoreDataManager {
         }
     }
     
+    func fetchAllConsumiciones() -> [Consumicion] {
+        let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        
+        do {
+            return try context.fetch(request)
+        } catch {
+            print("Error fetching all consumiciones: \(error)")
+            return []
+        }
+    }
+    
     func deleteConsumicion(_ consumicion: Consumicion) {
         context.delete(consumicion)
         save()

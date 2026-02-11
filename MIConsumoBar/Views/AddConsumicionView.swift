@@ -146,9 +146,22 @@ struct AddConsumicionView: View {
     
     private func saveConsumicion() {
         guard let bebida = selectedBebida,
-              let bebidaID = bebida.id else { return }
-        guard let cantidadInt = Int(cantidad) else { return }
-        guard let precioDouble = Double(precioUnitario) else { return }
+              let bebidaID = bebida.id else {
+            print("ERROR: No hay bebida seleccionada")
+            return
+        }
+        
+        guard let cantidadInt = Int(cantidad), cantidadInt > 0 else {
+            print("ERROR: Cantidad inválida: \(cantidad)")
+            return
+        }
+        
+        guard let precioDouble = Double(precioUnitario), precioDouble > 0 else {
+            print("ERROR: Precio inválido: \(precioUnitario)")
+            return
+        }
+        
+        print("GUARDANDO CONSUMICION: bebidaID=\(bebidaID), cantidad=\(cantidadInt), precio=\(precioDouble)")
         
         CoreDataManager.shared.addConsumicion(
             bebidaID: bebidaID,
@@ -157,7 +170,9 @@ struct AddConsumicionView: View {
             notas: notas.isEmpty ? nil : notas
         )
         
+        print("CONSUMICION GUARDADA - LLAMANDO onSave()")
         onSave()
+        print("DESPACHO dismiss()")
         dismiss()
     }
 }
