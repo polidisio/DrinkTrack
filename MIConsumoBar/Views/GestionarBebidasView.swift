@@ -78,7 +78,7 @@ struct GestionarBebidasView: View {
             }
             .sheet(isPresented: $showingEditar) {
                 if let id = bebidaToEditID {
-                    EditarBebidaView(mode: .editar(id)) {
+                    EditarBebidaView(mode: .editar(id)) { _ in
                         reloadData()
                         onDismiss()
                     }
