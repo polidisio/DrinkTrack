@@ -8,6 +8,10 @@ class CoreDataManager {
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "MiConsumoBar")
+        
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        
         container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Core Data failed to load: \(error.localizedDescription)")

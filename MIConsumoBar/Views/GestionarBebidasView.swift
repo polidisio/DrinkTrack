@@ -33,20 +33,18 @@ struct GestionarBebidasView: View {
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        if !isBebidaDefault(bebida), let id = bebida.id {
+                        if let id = bebida.id {
                             bebidaToEditID = id
                             showingEditar = true
                         }
                     }
                     .swipeActions(edge: .trailing) {
-                        if !isBebidaDefault(bebida) {
-                            Button(role: .destructive) {
-                                if let id = bebida.id, let freshBebida = CoreDataManager.shared.fetchBebidaByID(id) {
-                                    deleteBebida(freshBebida)
-                                }
-                            } label: {
-                                Label("Eliminar", systemImage: "trash")
+                        Button(role: .destructive) {
+                            if let id = bebida.id, let freshBebida = CoreDataManager.shared.fetchBebidaByID(id) {
+                                deleteBebida(freshBebida)
                             }
+                        } label: {
+                            Label("Eliminar", systemImage: "trash")
                         }
                     }
                 }
@@ -70,12 +68,14 @@ struct GestionarBebidasView: View {
             .sheet(isPresented: $showingNueva) {
                 EditarBebidaView(mode: .nueva) {
                     reloadData()
+                    onDismiss()
                 }
             }
             .sheet(isPresented: $showingEditar) {
                 if let id = bebidaToEditID {
                     EditarBebidaView(mode: .editar(id)) {
                         reloadData()
+                        onDismiss()
                     }
                 }
             }
