@@ -7,7 +7,7 @@ struct GestionarBebidasView: View {
     @State private var bebidaToEdit: Bebida?
     @State private var showingNueva = false
     
-    @StateObject private var viewModel = ConsumicionViewModel()
+    private let viewModel = ConsumicionViewModel()
     
     var body: some View {
         NavigationView {

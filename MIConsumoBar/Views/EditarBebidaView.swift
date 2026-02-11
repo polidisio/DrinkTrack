@@ -8,7 +8,7 @@ enum EditarBebidaMode {
 
 struct EditarBebidaView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel: ConsumicionViewModel
+    let viewModel: ConsumicionViewModel
     let mode: EditarBebidaMode
     let onSave: (Bebida) -> Void
     
