@@ -85,4 +85,24 @@ class ConsumicionViewModel {
         }
         refreshTodayData()
     }
+    
+    func createBebidaPersonalizada(nombre: String, emoji: String, precio: Double, categoria: String) -> Bebida {
+        let bebida = coreDataManager.createBebida(nombre: nombre, emoji: emoji, precio: precio, categoria: categoria)
+        loadData()
+        return bebida
+    }
+    
+    func updateBebida(_ bebida: Bebida, nombre: String, emoji: String, precio: Double, categoria: String) {
+        coreDataManager.updateBebida(bebida, nombre: nombre, emoji: emoji, precio: precio, categoria: categoria)
+        loadData()
+    }
+    
+    func deleteBebidaPersonalizada(_ bebida: Bebida) {
+        coreDataManager.deleteBebida(bebida)
+        loadData()
+    }
+    
+    func isBebidaDefault(_ bebida: Bebida) -> Bool {
+        return coreDataManager.isBebidaDefault(bebida)
+    }
 }

@@ -73,6 +73,43 @@ class CoreDataManager {
         }
     }
     
+    func createBebida(nombre: String, emoji: String, precio: Double, categoria: String) -> Bebida {
+        let request: NSFetchRequest<Bebida> = Bebida.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "orden", ascending: false)]
+        request.fetchLimit = 1
+        
+        let maxOrden = (try? context.fetch(request).first?.orden) ?? 0
+        
+        let bebida = Bebida(context: context)
+        bebida.id = UUID()
+        bebida.nombre = nombre
+        bebida.emoji = emoji
+        bebida.precioBase = precio
+        bebida.categoria = categoria
+        bebida.orden = maxOrden + 1
+        
+        save()
+        return bebida
+    }
+    
+    func updateBebida(_ bebida: Bebida, nombre: String, emoji: String, precio: Double, categoria: String) {
+        bebida.nombre = nombre
+        bebida.emoji = emoji
+        bebida.precioBase = precio
+        bebida.categoria = categoria
+        save()
+    }
+    
+    func deleteBebida(_ bebida: Bebida) {
+        context.delete(bebida)
+        save()
+    }
+    
+    func isBebidaDefault(_ bebida: Bebida) -> Bool {
+        let defaultNombres = ["Cerveza", "Refresco", "Agua", "Vino", "Copa", "Café"]
+        return defaultNombres.contains(bebida.nombre ?? "")
+    }
+    
     // MARK: - Consumicion Operations
     
     func addConsumicion(bebidaID: UUID, cantidad: Int, precioUnitario: Double, notas: String? = nil) {

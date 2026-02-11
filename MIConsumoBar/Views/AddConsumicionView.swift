@@ -10,6 +10,7 @@ struct AddConsumicionView: View {
     @State private var precioUnitario: String = ""
     @State private var notas: String = ""
     @State private var timestamp: Date = Date()
+    @State private var showingGestionar = false
     
     private var selectedBebida: Bebida? {
         bebidas.indices.contains(selectedBebidaIndex) ? bebidas[selectedBebidaIndex] : nil
@@ -69,12 +70,24 @@ struct AddConsumicionView: View {
                     }
                 }
                 
+                ToolbarItem(placement: .principal) {
+                    Button {
+                        showingGestionar = true
+                    } label: {
+                        Text("Gestionar")
+                            .font(.subheadline)
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Guardar") {
                         saveConsumicion()
                     }
                     .disabled(!isFormValid)
                 }
+            }
+            .sheet(isPresented: $showingGestionar) {
+                GestionarBebidasView()
             }
             .onAppear {
                 updatePrecioUnitario()
