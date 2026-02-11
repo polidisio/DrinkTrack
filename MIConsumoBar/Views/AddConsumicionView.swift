@@ -113,20 +113,31 @@ struct AddConsumicionView: View {
     }
     
     private func reloadBebidas() {
-        bebidas = CoreDataManager.shared.fetchBebidas()
-        if !bebidas.isEmpty {
+        let freshBebidas = CoreDataManager.shared.fetchBebidas()
+        guard !freshBebidas.isEmpty else {
+            bebidas = []
+            return
+        }
+        
+        bebidas = freshBebidas
+        
+        if selectedBebidaIndex >= bebidas.count {
             selectedBebidaIndex = 0
-            updatePrecioUnitario()
+        }
+        
+        if let index = bebidas.indices.contains(selectedBebidaIndex) ? selectedBebidaIndex : nil {
+            let currentBebida = bebidas[index]
+            if let freshBebida = CoreDataManager.shared.fetchBebidas().first(where: { $0.id == currentBebida.id }) {
+                precioUnitario = String(format: "%.2f", freshBebida.precioBase)
+            }
         }
     }
     
     private func updatePrecioUnitario() {
         if let index = bebidas.indices.contains(selectedBebidaIndex) ? selectedBebidaIndex : nil {
-            let bebida = bebidas[index]
-            if let freshBebida = CoreDataManager.shared.fetchBebidas().first(where: { $0.id == bebida.id }) {
+            let currentBebida = bebidas[index]
+            if let freshBebida = CoreDataManager.shared.fetchBebidas().first(where: { $0.id == currentBebida.id }) {
                 precioUnitario = String(format: "%.2f", freshBebida.precioBase)
-            } else {
-                precioUnitario = String(format: "%.2f", bebida.precioBase)
             }
         }
     }
