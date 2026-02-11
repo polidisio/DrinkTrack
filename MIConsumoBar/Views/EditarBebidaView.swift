@@ -95,16 +95,27 @@ struct EditarBebidaView: View {
     @State private var showingEmojiPicker = false
     
     private func save() {
-        guard let precioDouble = Double(precio), precioDouble > 0 else { return }
+        guard let precioDouble = Double(precio), precioDouble > 0 else {
+            print("ERROR: Precio inválido: \(precio)")
+            return
+        }
         let nombreTrimmed = nombre.trimmingCharacters(in: .whitespaces)
         
         if case .editar = mode, let id = bebidaID {
+            print("EDITANDO BEBIDA ID: \(id)")
+            print("  Nuevo nombre: \(nombreTrimmed)")
+            print("  Nuevo emoji: \(emoji)")
+            print("  Nuevo precio: \(precioDouble)")
+            print("  Nueva categoría: \(categoria)")
             CoreDataManager.shared.updateBebidaByID(id, nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
         } else {
+            print("CREANDO NUEVA BEBIDA")
             _ = CoreDataManager.shared.createBebida(nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
         }
         
+        print("LLAMANDO onSave()")
         onSave()
+        print("DESPACHO dismiss()")
         dismiss()
     }
 }
