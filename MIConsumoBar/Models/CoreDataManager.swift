@@ -73,6 +73,19 @@ class CoreDataManager {
         }
     }
     
+    func fetchBebidaByID(_ id: UUID) -> Bebida? {
+        let request: NSFetchRequest<Bebida> = Bebida.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        request.fetchLimit = 1
+        
+        do {
+            return try context.fetch(request).first
+        } catch {
+            print("Error fetching bebida by ID: \(error)")
+            return nil
+        }
+    }
+    
     func createBebida(nombre: String, emoji: String, precio: Double, categoria: String) -> Bebida {
         let request: NSFetchRequest<Bebida> = Bebida.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "orden", ascending: false)]

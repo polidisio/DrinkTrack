@@ -4,7 +4,7 @@ struct GestionarBebidasView: View {
     @Environment(\.dismiss) var dismiss
     @State private var bebidas: [Bebida] = []
     @State private var showingEditar = false
-    @State private var bebidaToEdit: Bebida?
+    @State private var bebidaToEditID: UUID?
     @State private var showingNueva = false
     
     let onDismiss: () -> Void
@@ -33,15 +33,17 @@ struct GestionarBebidasView: View {
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        if !isBebidaDefault(bebida) {
-                            bebidaToEdit = bebida
+                        if !isBebidaDefault(bebida), let id = bebida.id {
+                            bebidaToEditID = id
                             showingEditar = true
                         }
                     }
                     .swipeActions(edge: .trailing) {
                         if !isBebidaDefault(bebida) {
                             Button(role: .destructive) {
-                                deleteBebida(bebida)
+                                if let id = bebida.id, let freshBebida = CoreDataManager.shared.fetchBebidaByID(id) {
+                                    deleteBebida(freshBebida)
+                                }
                             } label: {
                                 Label("Eliminar", systemImage: "trash")
                             }
@@ -71,8 +73,8 @@ struct GestionarBebidasView: View {
                 }
             }
             .sheet(isPresented: $showingEditar) {
-                if let bebida = bebidaToEdit {
-                    EditarBebidaView(mode: .editar(bebida)) {
+                if let id = bebidaToEditID {
+                    EditarBebidaView(mode: .editar(id)) {
                         reloadData()
                     }
                 }

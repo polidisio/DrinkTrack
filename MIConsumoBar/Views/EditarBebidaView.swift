@@ -3,7 +3,7 @@ import CoreData
 
 enum EditarBebidaMode {
     case nueva
-    case editar(Bebida)
+    case editar(UUID)
 }
 
 struct EditarBebidaView: View {
@@ -28,12 +28,14 @@ struct EditarBebidaView: View {
         self.mode = mode
         self.onSave = onSave
         
-        if case .editar(let bebida) = mode {
-            _nombre = State(initialValue: bebida.nombre ?? "")
-            _emoji = State(initialValue: bebida.emoji ?? "📦")
-            _precio = State(initialValue: String(format: "%.2f", bebida.precioBase))
-            _categoria = State(initialValue: bebida.categoria ?? "Alcohol")
-            bebidaID = bebida.id
+        if case .editar(let id) = mode {
+            if let bebida = CoreDataManager.shared.fetchBebidaByID(id) {
+                _nombre = State(initialValue: bebida.nombre ?? "")
+                _emoji = State(initialValue: bebida.emoji ?? "📦")
+                _precio = State(initialValue: String(format: "%.2f", bebida.precioBase))
+                _categoria = State(initialValue: bebida.categoria ?? "Alcohol")
+                bebidaID = id
+            }
         }
     }
     
