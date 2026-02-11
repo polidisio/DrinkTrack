@@ -93,11 +93,23 @@ class CoreDataManager {
     }
     
     func updateBebida(_ bebida: Bebida, nombre: String, emoji: String, precio: Double, categoria: String) {
-        bebida.nombre = nombre
-        bebida.emoji = emoji
-        bebida.precioBase = precio
-        bebida.categoria = categoria
-        save()
+        guard let bebidaID = bebida.id else { return }
+        
+        let request: NSFetchRequest<Bebida> = Bebida.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", bebidaID as CVarArg)
+        request.fetchLimit = 1
+        
+        do {
+            if let bebidaActual = try context.fetch(request).first {
+                bebidaActual.nombre = nombre
+                bebidaActual.emoji = emoji
+                bebidaActual.precioBase = precio
+                bebidaActual.categoria = categoria
+                save()
+            }
+        } catch {
+            print("Error updating bebida: \(error)")
+        }
     }
     
     func deleteBebida(_ bebida: Bebida) {
