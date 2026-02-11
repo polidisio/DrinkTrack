@@ -5,6 +5,7 @@ struct ContentView: View {
     @State private var viewModel = ConsumicionViewModel()
     @State private var showingHistorial = false
     @State private var showingAddBebida = false
+    @State private var refreshTrigger = false
     
     var body: some View {
         NavigationView {
@@ -51,7 +52,8 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingAddBebida) {
                 AddConsumicionView(onSave: {
-                    viewModel.loadData()
+                    // Force complete reload by recreating viewModel
+                    viewModel = ConsumicionViewModel()
                 })
             }
         }
