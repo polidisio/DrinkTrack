@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreData
 
 enum EditarBebidaMode {
     case nueva
@@ -153,12 +154,4 @@ extension EditarBebidaMode {
         if case .nueva = self { return true }
         return false
     }
-}
-
-#Preview("Nueva") {
-    EditarBebidaView(mode: .nueva) { _ in }
-}
-
-#Preview("Editar") {
-    EditarBebidaView(mode: .editar(Bebida())) { _ in }
 }
