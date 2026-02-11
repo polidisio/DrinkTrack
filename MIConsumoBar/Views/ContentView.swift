@@ -51,7 +51,7 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingAddBebida) {
                 AddConsumicionView(onSave: {
-                    viewModel.refreshTodayData()
+                    viewModel.loadData()
                 })
             }
         }
