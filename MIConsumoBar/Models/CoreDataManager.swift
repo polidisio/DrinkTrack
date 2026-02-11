@@ -113,6 +113,24 @@ class CoreDataManager {
         save()
     }
     
+    func cleanupOldConsumiciones() {
+        let calendar = Calendar.current
+        let startOfToday = calendar.startOfDay(for: Date())
+        
+        let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
+        request.predicate = NSPredicate(format: "timestamp < %@", startOfToday as NSDate)
+        
+        do {
+            let oldConsumiciones = try context.fetch(request)
+            for consumicion in oldConsumiciones {
+                context.delete(consumicion)
+            }
+            save()
+        } catch {
+            print("Error cleaning up old consumiciones: \(error)")
+        }
+    }
+    
     // MARK: - Statistics
     
     func getTotalToday() -> (cantidad: Int, coste: Double) {

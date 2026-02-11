@@ -16,9 +16,9 @@ class ConsumicionViewModel {
     
     func loadData() {
         Task { @MainActor in
+            coreDataManager.cleanupOldConsumiciones()
             bebidas = coreDataManager.fetchBebidas()
             
-            // Create default beverages if needed
             if bebidas.isEmpty {
                 coreDataManager.createDefaultBebidas()
                 bebidas = coreDataManager.fetchBebidas()
