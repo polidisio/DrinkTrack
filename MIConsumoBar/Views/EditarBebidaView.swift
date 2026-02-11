@@ -9,7 +9,7 @@ enum EditarBebidaMode {
 struct EditarBebidaView: View {
     @Environment(\.dismiss) var dismiss
     let mode: EditarBebidaMode
-    let onSave: () -> Void
+    let onSave: (Bebida) -> Void
     
     @State private var nombre: String = ""
     @State private var emoji: String = "📦"
@@ -24,7 +24,7 @@ struct EditarBebidaView: View {
     
     private var bebidaID: UUID?
     
-    init(mode: EditarBebidaMode, onSave: @escaping () -> Void) {
+    init(mode: EditarBebidaMode, onSave: @escaping (Bebida) -> Void) {
         self.mode = mode
         self.onSave = onSave
         
@@ -108,13 +108,16 @@ struct EditarBebidaView: View {
             print("  Nuevo precio: \(precioDouble)")
             print("  Nueva categoría: \(categoria)")
             CoreDataManager.shared.updateBebidaByID(id, nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
+            if let bebidaActualizada = CoreDataManager.shared.fetchBebidaByID(id) {
+                onSave(bebidaActualizada)
+            }
         } else {
             print("CREANDO NUEVA BEBIDA")
-            _ = CoreDataManager.shared.createBebida(nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
+            let nuevaBebida = CoreDataManager.shared.createBebida(nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
+            print("  Nueva bebida ID: \(nuevaBebida.id?.uuidString ?? "nil")")
+            onSave(nuevaBebida)
         }
         
-        print("LLAMANDO onSave()")
-        onSave()
         print("DESPACHO dismiss()")
         dismiss()
     }
