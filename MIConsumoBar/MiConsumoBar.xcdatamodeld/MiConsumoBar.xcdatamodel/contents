@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24512" systemVersion="25C56" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Bebida" representedClassName="Bebida" syncable="YES" codeGenerationType="class">
+        <attribute name="categoria" attributeType="String"/>
+        <attribute name="emoji" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="nombre" attributeType="String"/>
+        <attribute name="orden" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="precioBase" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <fetchedProperty name="fetchedProperty" optional="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Bebida"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="Consumicion" representedClassName="Consumicion" syncable="YES" codeGenerationType="class">
+        <attribute name="bebidaID" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="cantidad" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="notas" optional="YES" attributeType="String"/>
+        <attribute name="precioUnitario" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+</model>
