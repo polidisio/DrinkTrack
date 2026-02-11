@@ -99,7 +99,7 @@ struct EditarBebidaView: View {
         if case .editar = mode, let id = bebidaID {
             CoreDataManager.shared.updateBebidaByID(id, nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
         } else {
-            CoreDataManager.shared.createBebida(nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
+            _ = CoreDataManager.shared.createBebida(nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
         }
         
         onSave()
