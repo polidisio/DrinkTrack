@@ -94,17 +94,20 @@ class CoreDataManager {
     
     func updateBebida(_ bebida: Bebida, nombre: String, emoji: String, precio: Double, categoria: String) {
         guard let bebidaID = bebida.id else { return }
-        
+        updateBebidaByID(bebidaID, nombre: nombre, emoji: emoji, precio: precio, categoria: categoria)
+    }
+    
+    func updateBebidaByID(_ id: UUID, nombre: String, emoji: String, precio: Double, categoria: String) {
         let request: NSFetchRequest<Bebida> = Bebida.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %@", bebidaID as CVarArg)
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         request.fetchLimit = 1
         
         do {
-            if let bebidaActual = try context.fetch(request).first {
-                bebidaActual.nombre = nombre
-                bebidaActual.emoji = emoji
-                bebidaActual.precioBase = precio
-                bebidaActual.categoria = categoria
+            if let bebida = try context.fetch(request).first {
+                bebida.nombre = nombre
+                bebida.emoji = emoji
+                bebida.precioBase = precio
+                bebida.categoria = categoria
                 save()
             }
         } catch {

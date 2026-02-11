@@ -7,8 +7,6 @@ struct GestionarBebidasView: View {
     @State private var bebidaToEdit: Bebida?
     @State private var showingNueva = false
     
-    private let viewModel = ConsumicionViewModel()
-    
     var body: some View {
         NavigationView {
             List {
@@ -19,12 +17,13 @@ struct GestionarBebidasView: View {
                         VStack(alignment: .leading) {
                             Text(bebida.nombre ?? "")
                                 .font(.headline)
-                            Text("\(String(format: "%.2f", getFreshPrecio(bebida: bebida))) €")
+                            Text("\(String(format: "%.2f", bebida.precioBase)) €")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }
                         Spacer()
-                        if !viewModel.isBebidaDefault(bebida) {
+                        let isDefault = isBebidaDefault(bebida)
+                        if !isDefault {
                             Image(systemName: "chevron.right")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
@@ -32,16 +31,15 @@ struct GestionarBebidasView: View {
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        if !viewModel.isBebidaDefault(bebida) {
+                        if !isBebidaDefault(bebida) {
                             bebidaToEdit = bebida
                             showingEditar = true
                         }
                     }
                     .swipeActions(edge: .trailing) {
-                        if !viewModel.isBebidaDefault(bebida) {
+                        if !isBebidaDefault(bebida) {
                             Button(role: .destructive) {
-                                viewModel.deleteBebidaPersonalizada(bebida)
-                                reloadData()
+                                deleteBebida(bebida)
                             } label: {
                                 Label("Eliminar", systemImage: "trash")
                             }
@@ -50,7 +48,6 @@ struct GestionarBebidasView: View {
                 }
             }
             .navigationTitle("Mis Productos")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cerrar") {
@@ -66,13 +63,13 @@ struct GestionarBebidasView: View {
                 }
             }
             .sheet(isPresented: $showingNueva) {
-                EditarBebidaView(viewModel: viewModel, mode: .nueva) { _ in
+                EditarBebidaView(mode: .nueva) {
                     reloadData()
                 }
             }
             .sheet(isPresented: $showingEditar) {
                 if let bebida = bebidaToEdit {
-                    EditarBebidaView(viewModel: viewModel, mode: .editar(bebida)) { _ in
+                    EditarBebidaView(mode: .editar(bebida)) {
                         reloadData()
                     }
                 }
@@ -83,11 +80,14 @@ struct GestionarBebidasView: View {
         }
     }
     
-    private func getFreshPrecio(bebida: Bebida) -> Double {
-        if let id = bebida.id {
-            return CoreDataManager.shared.fetchBebidas().first { $0.id == id }?.precioBase ?? bebida.precioBase
-        }
-        return bebida.precioBase
+    private func isBebidaDefault(_ bebida: Bebida) -> Bool {
+        let defaultNombres = ["Cebra", "Refresco", "Agua", "Vino", "Copa", "Café"]
+        return defaultNombres.contains(bebida.nombre ?? "")
+    }
+    
+    private func deleteBebida(_ bebida: Bebida) {
+        CoreDataManager.shared.deleteBebida(bebida)
+        reloadData()
     }
     
     private func reloadData() {

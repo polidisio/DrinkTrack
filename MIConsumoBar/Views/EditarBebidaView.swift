@@ -8,9 +8,8 @@ enum EditarBebidaMode {
 
 struct EditarBebidaView: View {
     @Environment(\.dismiss) var dismiss
-    let viewModel: ConsumicionViewModel
     let mode: EditarBebidaMode
-    let onSave: (Bebida) -> Void
+    let onSave: () -> Void
     
     @State private var nombre: String = ""
     @State private var emoji: String = "📦"
@@ -21,6 +20,21 @@ struct EditarBebidaView: View {
     
     private var isFormValid: Bool {
         !nombre.trimmingCharacters(in: .whitespaces).isEmpty && (Double(precio) ?? 0) > 0
+    }
+    
+    private var bebidaID: UUID?
+    
+    init(mode: EditarBebidaMode, onSave: @escaping () -> Void) {
+        self.mode = mode
+        self.onSave = onSave
+        
+        if case .editar(let bebida) = mode {
+            _nombre = State(initialValue: bebida.nombre ?? "")
+            _emoji = State(initialValue: bebida.emoji ?? "📦")
+            _precio = State(initialValue: String(format: "%.2f", bebida.precioBase))
+            _categoria = State(initialValue: bebida.categoria ?? "Alcohol")
+            bebidaID = bebida.id
+        }
     }
     
     var body: some View {
@@ -57,7 +71,6 @@ struct EditarBebidaView: View {
                 }
             }
             .navigationTitle(mode.isNueva ? "Nuevo Producto" : "Editar Producto")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancelar") {
@@ -74,36 +87,22 @@ struct EditarBebidaView: View {
             .sheet(isPresented: $showingEmojiPicker) {
                 EmojiPickerView(selectedEmoji: $emoji)
             }
-            .onAppear {
-                if case .editar(let bebida) = mode {
-                    if let freshBebida = getFreshBebida(bebida: bebida) {
-                        nombre = freshBebida.nombre ?? ""
-                        emoji = freshBebida.emoji ?? "📦"
-                        precio = String(format: "%.2f", freshBebida.precioBase)
-                        categoria = freshBebida.categoria ?? "Alcohol"
-                    }
-                }
-            }
         }
     }
     
     @State private var showingEmojiPicker = false
     
-    private func getFreshBebida(bebida: Bebida) -> Bebida? {
-        return viewModel.bebidas.first { $0.id == bebida.id }
-    }
-    
     private func save() {
         guard let precioDouble = Double(precio), precioDouble > 0 else { return }
         let nombreTrimmed = nombre.trimmingCharacters(in: .whitespaces)
         
-        if case .editar(let bebida) = mode {
-            viewModel.updateBebida(bebida, nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
+        if case .editar = mode, let id = bebidaID {
+            CoreDataManager.shared.updateBebidaByID(id, nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
         } else {
-            _ = viewModel.createBebidaPersonalizada(nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
+            CoreDataManager.shared.createBebida(nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
         }
         
-        onSave(Bebida())
+        onSave()
         dismiss()
     }
 }
@@ -143,7 +142,6 @@ struct EmojiPickerView: View {
                 .padding()
             }
             .navigationTitle("Emoji")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Cerrar") {
