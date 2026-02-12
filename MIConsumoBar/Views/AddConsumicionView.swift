@@ -81,8 +81,12 @@ struct AddConsumicionView: View {
                     Button {
                         showingGestionar = true
                     } label: {
-                        Text("Gestionar")
-                            .font(.subheadline)
+                        HStack(spacing: 4) {
+                            Image(systemName: "gear")
+                            Text("Gestionar")
+                        }
+                        .font(.subheadline)
+                        .foregroundColor(.orange)
                     }
                 }
                 
