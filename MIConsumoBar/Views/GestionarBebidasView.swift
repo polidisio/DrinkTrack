@@ -19,7 +19,7 @@ struct GestionarBebidasView: View {
                             Text(bebida.emoji ?? "")
                                 .font(.title2)
                             VStack(alignment: .leading) {
-                                Text(bebida.nombre ?? "")
+                                Text(CoreDataManager.shared.localizedNombre(for: bebida.nombre ?? ""))
                                     .font(.headline)
                                 Text(bebida.precioBase, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                                     .font(.subheadline)

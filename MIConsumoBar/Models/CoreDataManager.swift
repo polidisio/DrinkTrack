@@ -66,6 +66,28 @@ class CoreDataManager {
         save()
     }
     
+    func localizedNombre(for nombre: String) -> String {
+        let nameMap: [String: String] = [
+            "Cerveza": "bebida_cerveza",
+            "Refresco": "bebida_refresco",
+            "Agua": "bebida_agua",
+            "Vino": "bebida_vino",
+            "Copa": "bebida_copa",
+            "Café": "bebida_cafe"
+        ]
+        guard let key = nameMap[nombre] else { return nombre }
+        return NSLocalizedString(key, comment: "Drink name")
+    }
+    
+    func localizedCategoria(for categoria: String) -> String {
+        let catMap: [String: String] = [
+            "Alcohol": "categoria_alcohol",
+            "Sin Alcohol": "categoria_sin_alcohol"
+        ]
+        guard let key = catMap[categoria] else { return categoria }
+        return NSLocalizedString(key, comment: "Category")
+    }
+    
     func fetchBebidas() -> [Bebida] {
         let request: NSFetchRequest<Bebida> = Bebida.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "orden", ascending: true)]

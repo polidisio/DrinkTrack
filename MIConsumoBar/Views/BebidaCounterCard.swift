@@ -13,10 +13,10 @@ struct BebidaCounterCard: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(bebida.emoji ?? "")
                     .font(.system(size: 32))
-                Text(bebida.nombre ?? "bebida_desconocida")
+                Text(CoreDataManager.shared.localizedNombre(for: bebida.nombre ?? ""))
                     .font(.headline)
                     .fontWeight(.semibold)
-                Text(bebida.categoria ?? "categoria_sin_categoria")
+                Text(CoreDataManager.shared.localizedCategoria(for: bebida.categoria ?? ""))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

@@ -23,7 +23,7 @@ struct AddConsumicionView: View {
                     Picker("tipo_label", selection: $selectedBebidaIndex) {
                         ForEach(0..<bebidas.count, id: \.self) { index in
                             let bebida = bebidas[index]
-                            Text((bebida.emoji ?? "") + " " + (bebida.nombre ?? ""))
+                            Text((bebida.emoji ?? "") + " " + CoreDataManager.shared.localizedNombre(for: bebida.nombre ?? ""))
                         }
                     }
                 } header: {

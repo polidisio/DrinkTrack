@@ -14,7 +14,7 @@ struct ConsumicionRowView: View {
                 HStack(spacing: 8) {
                     Text(bebida?.emoji ?? "🥤")
                         .font(.title2)
-                    Text(bebida?.nombre ?? "bebida_desconocida")
+                    Text(coreDataManager.localizedNombre(for: bebida?.nombre ?? ""))
                         .font(.headline)
                 }
                 
