@@ -20,7 +20,7 @@ struct AddConsumicionView: View {
         NavigationView {
             Form {
                 Section {
-                    Picker("Tipo", selection: $selectedBebidaIndex) {
+                    Picker("tipo_label", selection: $selectedBebidaIndex) {
                         ForEach(0..<bebidas.count, id: \.self) { index in
                             let bebida = bebidas[index]
                             Text((bebida.emoji ?? "") + " " + (bebida.nombre ?? ""))

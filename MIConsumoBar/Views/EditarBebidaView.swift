@@ -16,7 +16,17 @@ struct EditarBebidaView: View {
     @State private var precio: String = ""
     @State private var categoria: String = "Alcohol"
     
-    private let categorias = ["Alcohol", "Sin Alcohol"]
+    private let categorias: [(key: String, value: String)] = [
+        ("categoria_alcohol", "Alcohol"),
+        ("categoria_sin_alcohol", "Sin Alcohol")
+    ]
+    
+    private var localizedCategoria: String {
+        guard let pair = categorias.first(where: { $0.value == categoria }) else {
+            return categoria
+        }
+        return NSLocalizedString(pair.key, comment: "")
+    }
     
     private var isFormValid: Bool {
         !nombre.trimmingCharacters(in: .whitespaces).isEmpty && (Double(precio) ?? 0) > 0
@@ -76,8 +86,9 @@ struct EditarBebidaView: View {
                 
                 Section {
                     Picker("categoria_section", selection: $categoria) {
-                        ForEach(categorias, id: \.self) { cat in
-                            Text(cat).tag(cat)
+                        ForEach(categorias, id: \.value) { cat in
+                            Text(NSLocalizedString(cat.key, comment: ""))
+                                .tag(cat.value as String)
                         }
                     }
                     .pickerStyle(.segmented)
