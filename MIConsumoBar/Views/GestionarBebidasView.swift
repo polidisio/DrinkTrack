@@ -21,7 +21,7 @@ struct GestionarBebidasView: View {
                             VStack(alignment: .leading) {
                                 Text(bebida.nombre ?? "")
                                     .font(.headline)
-                                Text("\(String(format: "%.2f", bebida.precioBase)) €")
+                                Text(bebida.precioBase, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                             }
@@ -33,15 +33,15 @@ struct GestionarBebidasView: View {
                         Button(role: .destructive) {
                             deleteBebida(bebida)
                         } label: {
-                            Label("Eliminar", systemImage: "trash")
+                            Label("eliminar_button", systemImage: "trash")
                         }
                     }
                 }
             }
-            .navigationTitle("Mis Productos")
+            .navigationTitle("mis_productos_title")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cerrar") {
+                    Button("cerrar_button") {
                         onDismiss()
                         dismiss()
                     }

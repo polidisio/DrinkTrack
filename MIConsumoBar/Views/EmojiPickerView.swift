@@ -151,10 +151,10 @@ struct EmojiPickerView: View {
                     }
                 }
             }
-            .navigationTitle("Emoji")
+            .navigationTitle("emoji_picker_title")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Cerrar") {
+                    Button("cerrar_button") {
                         dismiss()
                     }
                 }

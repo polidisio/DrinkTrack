@@ -13,10 +13,10 @@ struct BebidaCounterCard: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(bebida.emoji ?? "")
                     .font(.system(size: 32))
-                Text(bebida.nombre ?? "Bebida")
+                Text(bebida.nombre ?? "bebida_desconocida")
                     .font(.headline)
                     .fontWeight(.semibold)
-                Text(bebida.categoria ?? "Sin categoría")
+                Text(bebida.categoria ?? "categoria_sin_categoria")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -53,7 +53,7 @@ struct BebidaCounterCard: View {
                     }
                 }
                 
-                Text("€\(String(format: "%.2f", cost))")
+                Text(cost, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                     .font(.subheadline)
                     .foregroundColor(.orange)
                     .fontWeight(.medium)

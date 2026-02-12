@@ -12,21 +12,19 @@ struct HistorialView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                // Date selector
                 dateSelectorView
                 
-                // Lista de consumiciones
                 if consumiciones.isEmpty {
                     emptyStateView
                 } else {
                     consumicionesListView
                 }
             }
-            .navigationTitle("Historial")
+            .navigationTitle("historial_title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cerrar") {
+                    Button("cerrar_button") {
                         onDismiss()
                         dismiss()
                     }
@@ -58,20 +56,18 @@ struct HistorialView: View {
             }
             .buttonStyle(PlainButtonStyle())
             
-            // Quick date buttons
             HStack(spacing: 8) {
-                Button("Hoy") {
+                Button("filtro_hoy") {
                     selectedDate = Date()
                 }
                 .buttonStyle(DateButtonStyle(isSelected: Calendar.current.isDateInToday(selectedDate)))
                 
-                Button("Ayer") {
+                Button("filtro_ayer") {
                     selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
                 }
                 .buttonStyle(DateButtonStyle(isSelected: isYesterday(selectedDate)))
                 
-                Button("Últimos 7 días") {
-                    // Implementar vista de 7 días
+                Button("filtro_ultimos_7_dias") {
                 }
                 .buttonStyle(DateButtonStyle(isSelected: false))
             }
@@ -85,10 +81,10 @@ struct HistorialView: View {
             Image(systemName: "cup.and.saucer")
                 .font(.system(size: 60))
                 .foregroundColor(.secondary)
-            Text("No hay consumiciones")
+            Text("no_hay_consumiciones")
                 .font(.headline)
                 .foregroundColor(.secondary)
-            Text("No has registrado ninguna bebida para esta fecha")
+            Text("no_hay_consumiciones_fecha")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -121,7 +117,7 @@ struct HistorialView: View {
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
-        formatter.locale = Locale(identifier: "es_ES")
+        formatter.locale = Locale.current
         return formatter.string(from: date)
     }
     

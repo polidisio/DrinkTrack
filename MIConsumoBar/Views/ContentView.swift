@@ -38,7 +38,7 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Historial") {
+                    Button("historial_title") {
                         showingHistorial = true
                     }
                 }
@@ -147,10 +147,10 @@ struct ContentView: View {
         VStack(spacing: 12) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Total Hoy")
+                    Text("total_hoy")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    Text("\(totalHoy.cantidad) bebidas")
+                    Text(LocalizedStringKey("bebidas_count"), value: totalHoy.cantidad, format: .number)
                         .font(.title2)
                         .fontWeight(.bold)
                 }
@@ -158,10 +158,10 @@ struct ContentView: View {
                 Spacer()
                 
                 VStack(alignment: .trailing, spacing: 4) {
-                    Text("Coste")
+                    Text("coste_label")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    Text("€\(String(format: "%.2f", totalHoy.coste))")
+                    Text(totalHoy.coste, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.orange)
@@ -183,7 +183,7 @@ struct ContentView: View {
             }) {
                 HStack {
                     Image(systemName: "plus.circle.fill")
-                    Text("Añadir Consumición")
+                    Text("anadir_consumicion_button")
                 }
                 .frame(maxWidth: .infinity)
                 .padding()

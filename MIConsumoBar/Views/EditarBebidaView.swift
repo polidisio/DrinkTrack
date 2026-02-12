@@ -42,11 +42,11 @@ struct EditarBebidaView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section("Información") {
+                Section {
                     TextField("Nombre", text: $nombre)
                     
                     HStack {
-                        Text("Emoji")
+                        Text("emoji_label")
                         Spacer()
                         Text(emoji)
                             .font(.title2)
@@ -54,11 +54,13 @@ struct EditarBebidaView: View {
                                 showingEmojiPicker = true
                             }
                     }
+                } header: {
+                    Text("informacion_section")
                 }
                 
-                Section("Precio") {
+                Section {
                     HStack {
-                        Text("€")
+                        Text(Locale.current.currencySymbol ?? "€")
                         TextField("0.00", text: $precio)
                             .keyboardType(.decimalPad)
                             .onChange(of: precio) { _, newValue in
@@ -68,26 +70,30 @@ struct EditarBebidaView: View {
                                 }
                             }
                     }
+                } header: {
+                    Text("precio_section")
                 }
                 
-                Section("Categoría") {
-                    Picker("Categoría", selection: $categoria) {
+                Section {
+                    Picker("categoria_section", selection: $categoria) {
                         ForEach(categorias, id: \.self) { cat in
                             Text(cat).tag(cat)
                         }
                     }
                     .pickerStyle(.segmented)
+                } header: {
+                    Text("categoria_section")
                 }
             }
-            .navigationTitle(mode.isNueva ? "Nuevo Producto" : "Editar Producto")
+            .navigationTitle(mode.isNueva ? "nuevo_producto_title" : "editar_producto_title")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancelar") {
+                    Button("cancelar_button") {
                         dismiss()
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Guardar") {
+                    Button("guardar_button") {
                         save()
                     }
                     .disabled(!isFormValid)

@@ -19,18 +19,20 @@ struct AddConsumicionView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section("Bebida") {
+                Section {
                     Picker("Tipo", selection: $selectedBebidaIndex) {
                         ForEach(0..<bebidas.count, id: \.self) { index in
                             let bebida = bebidas[index]
                             Text((bebida.emoji ?? "") + " " + (bebida.nombre ?? ""))
                         }
                     }
+                } header: {
+                    Text("bebida_section")
                 }
                 
-                Section("Detalles") {
+                Section {
                     HStack {
-                        Text("Cantidad")
+                        Text("cantidad_label")
                         Spacer()
                         TextField("1", text: $cantidad)
                             .frame(width: 50)
@@ -38,7 +40,7 @@ struct AddConsumicionView: View {
                     }
                     
                     HStack {
-                        Text("Precio unitario")
+                        Text("precio_unitario_label")
                         Spacer()
                         TextField("0.00", text: $precioUnitario)
                             .frame(width: 80)
@@ -52,27 +54,33 @@ struct AddConsumicionView: View {
                     }
                     
                     HStack {
-                        Text("Total")
+                        Text("total_label")
                         Spacer()
-                        Text("€\(String(format: "%.2f", totalCost))")
+                        Text(totalCost, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                             .fontWeight(.bold)
                             .foregroundColor(.orange)
                     }
+                } header: {
+                    Text("detalles_section")
                 }
                 
-                Section("Fecha y hora") {
-                    DatePicker("Fecha y hora", selection: $timestamp, displayedComponents: [.date, .hourAndMinute])
+                Section {
+                    DatePicker("fecha_hora_section", selection: $timestamp, displayedComponents: [.date, .hourAndMinute])
+                } header: {
+                    Text("fecha_hora_section")
                 }
                 
-                Section("Notas") {
-                    TextField("Notas opcionales", text: $notas)
+                Section {
+                    TextField("notas_placeholder", text: $notas)
                         .lineLimit(3...6)
+                } header: {
+                    Text("notas_section")
                 }
             }
-            .navigationTitle("Añadir Consumición")
+            .navigationTitle("add_consumption_title")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancelar") {
+                    Button("cancelar_button") {
                         dismiss()
                     }
                 }
@@ -83,7 +91,7 @@ struct AddConsumicionView: View {
                     } label: {
                         HStack(spacing: 4) {
                             Image(systemName: "gear")
-                            Text("Gestionar")
+                            Text("gestionar_button")
                         }
                         .font(.subheadline)
                         .foregroundColor(.orange)
@@ -91,7 +99,7 @@ struct AddConsumicionView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Guardar") {
+                    Button("guardar_button") {
                         saveConsumicion()
                     }
                     .disabled(!isFormValid)
@@ -173,7 +181,6 @@ struct AddConsumicionView: View {
         
         print("GUARDANDO CONSUMICION: bebidaID=\(bebidaID), cantidad=\(cantidadInt), precio=\(precioDouble)")
         
-        // ACTUALIZAR PRECIO DE LA BEBIDA
         let currentNombre = bebida.nombre ?? ""
         let currentEmoji = bebida.emoji ?? "📦"
         let currentCategoria = bebida.categoria ?? "Alcohol"
@@ -187,7 +194,6 @@ struct AddConsumicionView: View {
         )
         print("PRECIO DE BEBIDA ACTUALIZADO A: \(precioDouble)")
         
-        // GUARDAR CONSUMICION
         CoreDataManager.shared.addConsumicion(
             bebidaID: bebidaID,
             cantidad: cantidadInt,

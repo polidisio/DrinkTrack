@@ -10,12 +10,11 @@ struct ConsumicionRowView: View {
     
     var body: some View {
         HStack(spacing: 12) {
-            // Bebida emoji y nombre
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 8) {
                     Text(bebida?.emoji ?? "🥤")
                         .font(.title2)
-                    Text(bebida?.nombre ?? "Bebida desconocida")
+                    Text(bebida?.nombre ?? "bebida_desconocida")
                         .font(.headline)
                 }
                 
@@ -35,13 +34,13 @@ struct ConsumicionRowView: View {
             
             Spacer()
             
-            // Cantidad y precio
             VStack(alignment: .trailing, spacing: 2) {
                 Text("x\(consumicion.cantidad)")
                     .font(.subheadline)
                     .fontWeight(.semibold)
                 
-                Text("€\(String(format: "%.2f", Double(consumicion.cantidad) * consumicion.precioUnitario))")
+                let total = Double(consumicion.cantidad) * consumicion.precioUnitario
+                Text(total, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                     .font(.subheadline)
                     .foregroundColor(.orange)
                     .fontWeight(.medium)
@@ -53,7 +52,7 @@ struct ConsumicionRowView: View {
     private func formatTime(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
-        formatter.locale = Locale(identifier: "es_ES")
+        formatter.locale = Locale.current
         return formatter.string(from: date)
     }
 }
