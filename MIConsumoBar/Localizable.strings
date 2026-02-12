@@ -1,48 +1,48 @@
 // MARK: - Navigation
 "DrinkTrack" = "DrinkTrack";
-"add_consumption_title" = "Añadir Consumición";
-"historial_title" = "Historial";
-"mis_productos_title" = "Mis Productos";
+"add_consumption_title" = "Add Drink";
+"historial_title" = "History";
+"mis_productos_title" = "My Products";
 "emoji_picker_title" = "Emoji";
-"nuevo_producto_title" = "Nuevo Producto";
-"editar_producto_title" = "Editar Producto";
+"nuevo_producto_title" = "New Product";
+"editar_producto_title" = "Edit Product";
 
 // MARK: - Sections
-"bebida_section" = "Bebida";
-"detalles_section" = "Detalles";
-"informacion_section" = "Información";
-"precio_section" = "Precio";
-"categoria_section" = "Categoría";
-"fecha_hora_section" = "Fecha y hora";
-"notas_section" = "Notas";
+"bebida_section" = "Drink";
+"detalles_section" = "Details";
+"informacion_section" = "Information";
+"precio_section" = "Price";
+"categoria_section" = "Category";
+"fecha_hora_section" = "Date and Time";
+"notas_section" = "Notes";
 
 // MARK: - Labels
-"cantidad_label" = "Cantidad";
-"precio_unitario_label" = "Precio unitario";
+"cantidad_label" = "Quantity";
+"precio_unitario_label" = "Unit Price";
 "total_label" = "Total";
-"coste_label" = "Coste";
+"coste_label" = "Cost";
 "emoji_label" = "Emoji";
-"notas_placeholder" = "Notas opcionales";
-"bebida_desconocida" = "Bebida desconocida";
-"categoria_sin_categoria" = "Sin categoría";
+"notas_placeholder" = "Optional notes";
+"bebida_desconocida" = "Unknown drink";
+"categoria_sin_categoria" = "Uncategorized";
 
 // MARK: - Buttons
-"cancelar_button" = "Cancelar";
-"guardar_button" = "Guardar";
-"gestionar_button" = "Gestionar";
-"cerrar_button" = "Cerrar";
-"eliminar_button" = "Eliminar";
-"anadir_consumicion_button" = "Añadir Consumición";
+"cancelar_button" = "Cancel";
+"guardar_button" = "Save";
+"gestionar_button" = "Manage";
+"cerrar_button" = "Close";
+"eliminar_button" = "Delete";
+"anadir_consumicion_button" = "Add Drink";
 
 // MARK: - Filters
-"filtro_hoy" = "Hoy";
-"filtro_ayer" = "Ayer";
-"filtro_ultimos_7_dias" = "Últimos 7 días";
+"filtro_hoy" = "Today";
+"filtro_ayer" = "Yesterday";
+"filtro_ultimos_7_dias" = "Last 7 Days";
 
 // MARK: - Empty States
-"no_hay_consumiciones" = "No hay consumiciones";
-"no_hay_consumiciones_fecha" = "No has registrado ninguna bebida para esta fecha";
+"no_hay_consumiciones" = "No drinks recorded";
+"no_hay_consumiciones_fecha" = "You haven't registered any drinks for this date";
 
 // MARK: - Stats
-"total_hoy" = "Total Hoy";
-"bebidas_count" = "%d bebidas";
+"total_hoy" = "Today's Total";
+"bebidas_count" = "%d drinks";
