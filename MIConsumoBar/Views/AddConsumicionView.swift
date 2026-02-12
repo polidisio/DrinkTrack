@@ -43,6 +43,12 @@ struct AddConsumicionView: View {
                         TextField("0.00", text: $precioUnitario)
                             .frame(width: 80)
                             .keyboardType(.decimalPad)
+                            .onChange(of: precioUnitario) { _, newValue in
+                                let filtered = newValue.replacingOccurrences(of: ",", with: ".")
+                                if filtered != newValue {
+                                    precioUnitario = filtered
+                                }
+                            }
                     }
                     
                     HStack {

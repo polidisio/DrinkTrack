@@ -60,6 +60,13 @@ struct EditarBebidaView: View {
                     HStack {
                         Text("€")
                         TextField("0.00", text: $precio)
+                            .keyboardType(.decimalPad)
+                            .onChange(of: precio) { _, newValue in
+                                let filtered = newValue.replacingOccurrences(of: ",", with: ".")
+                                if filtered != newValue {
+                                    precio = filtered
+                                }
+                            }
                     }
                 }
                 
