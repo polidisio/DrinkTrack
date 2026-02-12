@@ -60,8 +60,10 @@ struct GestionarBebidasView: View {
                 }
             }
             .sheet(item: $editingBebida) { bebida in
-                EditarBebidaView(mode: .editar(bebida)) { _ in
-                    reloadData()
+                if let bebidaID = bebida.id {
+                    EditarBebidaView(mode: .editar(bebidaID)) { _ in
+                        reloadData()
+                    }
                 }
             }
         }
