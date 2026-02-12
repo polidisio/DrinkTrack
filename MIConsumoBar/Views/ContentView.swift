@@ -150,7 +150,7 @@ struct ContentView: View {
                     Text("total_hoy")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    Text(LocalizedStringKey("bebidas_count"), value: totalHoy.cantidad, format: .number)
+                    Text("\(totalHoy.cantidad) \(totalHoy.cantidad == 1 ? "drink" : "drinks")")
                         .font(.title2)
                         .fontWeight(.bold)
                 }
