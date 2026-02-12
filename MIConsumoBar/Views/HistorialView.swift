@@ -4,6 +4,7 @@ struct HistorialView: View {
     @Environment(\.dismiss) var dismiss
     @State private var selectedDate = Date()
     @State private var consumiciones: [Consumicion] = []
+    @State private var bebidas: [Bebida] = []
     @State private var showingDatePicker = false
     let onDismiss: () -> Void
     
@@ -12,6 +13,7 @@ struct HistorialView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
+                chartsView
                 dateSelectorView
                 
                 if consumiciones.isEmpty {
@@ -31,12 +33,19 @@ struct HistorialView: View {
                 }
             }
             .onAppear {
-                loadConsumiciones()
+                loadData()
             }
             .onChange(of: selectedDate) { _, _ in
                 loadConsumiciones()
             }
         }
+    }
+    
+    private var chartsView: some View {
+        ConsumptionChartView(
+            consumiciones: consumiciones,
+            bebidas: bebidas
+        )
     }
     
     private var dateSelectorView: some View {
@@ -51,7 +60,7 @@ struct HistorialView: View {
                     Image(systemName: "chevron.down")
                 }
                 .padding()
-                .background(Color(.systemGray6))
+                .background(Color(uiColor: .systemGray6))
                 .cornerRadius(8)
             }
             .buttonStyle(PlainButtonStyle())
@@ -102,6 +111,11 @@ struct HistorialView: View {
         .listStyle(PlainListStyle())
     }
     
+    private func loadData() {
+        bebidas = coreDataManager.fetchBebidas()
+        loadConsumiciones()
+    }
+    
     private func loadConsumiciones() {
         consumiciones = coreDataManager.fetchConsumiciones(for: selectedDate)
     }
@@ -135,7 +149,7 @@ struct DateButtonStyle: ButtonStyle {
         configuration.label
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
-            .background(isSelected ? Color.orange : Color(.systemGray5))
+            .background(isSelected ? Color.orange : Color(uiColor: .systemGray5))
             .foregroundColor(isSelected ? .white : .primary)
             .cornerRadius(8)
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
