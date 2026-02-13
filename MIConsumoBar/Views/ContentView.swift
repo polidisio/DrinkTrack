@@ -61,7 +61,7 @@ struct ContentView: View {
                     reloadData()
                 })
             }
-            .sheet(isPresented: $showingShareBebidas) {
+            .fullScreenCover(isPresented: $showingShareBebidas) {
                 ShareBebidasView(bebidas: prepareBebidasForShare())
             }
         }
