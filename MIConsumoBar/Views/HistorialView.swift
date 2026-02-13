@@ -12,14 +12,16 @@ struct HistorialView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                chartsView
-                dateSelectorView
-                
-                if consumiciones.isEmpty {
-                    emptyStateView
-                } else {
-                    consumicionesListView
+            ScrollView {
+                VStack(spacing: 0) {
+                    chartsView
+                    dateSelectorView
+                    
+                    if consumiciones.isEmpty {
+                        emptyStateView
+                    } else {
+                        consumicionesListView
+                    }
                 }
             }
             .navigationTitle("historial_title")
