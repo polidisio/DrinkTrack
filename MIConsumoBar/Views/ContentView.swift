@@ -61,18 +61,31 @@ struct ContentView: View {
     
     private func reloadData() {
         let context = CoreDataManager.shared.context
-        let request: NSFetchRequest<Bebida> = Bebida.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "orden", ascending: false)]
-        bebidas = (try? context.fetch(request)) ?? []
+        let bebidasRequest: NSFetchRequest<Bebida> = Bebida.fetchRequest()
+        let allBebidas = (try? context.fetch(bebidasRequest)) ?? []
+        
+        let consumicionRequest: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
+        let allConsumiciones = (try? context.fetch(consumicionRequest)) ?? []
+        
+        let bebidasTotales: [(bebida: Bebida, total: Int)] = allBebidas.map { bebida in
+            let total = allConsumiciones
+                .filter { $0.bebidaID == bebida.id }
+                .reduce(0) { $0 + Int($1.cantidad) }
+            return (bebida, total)
+        }
+        
+        bebidas = bebidasTotales
+            .sorted { $0.total > $1.total }
+            .map { $0.bebida }
         
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: Date())
         let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
         
-        let consumicionRequest: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
-        consumicionRequest.predicate = NSPredicate(format: "timestamp >= %@ AND timestamp < %@", startOfDay as NSDate, endOfDay as NSDate)
-        consumicionRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
-        consumicionesHoy = (try? context.fetch(consumicionRequest)) ?? []
+        let consumicionHoyRequest: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
+        consumicionHoyRequest.predicate = NSPredicate(format: "timestamp >= %@ AND timestamp < %@", startOfDay as NSDate, endOfDay as NSDate)
+        consumicionHoyRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        consumicionesHoy = (try? context.fetch(consumicionHoyRequest)) ?? []
         
         totalHoy = calculateTotal()
     }
