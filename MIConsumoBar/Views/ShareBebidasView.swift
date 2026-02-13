@@ -11,7 +11,7 @@ struct ShareBebidasView: View {
     let bebidas: [BebidaExportItem]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section {
                     HStack {
@@ -45,10 +45,14 @@ struct ShareBebidasView: View {
                 }
             }
             .navigationTitle("share_bebidas_title")
-            .navigationBarItems(
-                leading: Button("cancelar") { dismiss() },
-                trailing: shareButton
-            )
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("cancelar") { dismiss() }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    shareButton
+                }
+            }
             .sheet(isPresented: $showingShareSheet) {
                 if let url = shareURL {
                     ShareActivityView(activityItems: [url])
