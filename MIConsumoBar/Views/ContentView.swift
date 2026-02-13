@@ -1,16 +1,16 @@
 import SwiftUI
 import CoreData
+import UniformTypeIdentifiers
 
 struct ContentView: View {
     @State private var showingHistorial = false
     @State private var showingAddBebida = false
-    @State private var showingShareBebidas = false
     @State private var bebidas: [Bebida] = []
     @State private var consumicionesHoy: [Consumicion] = []
     @State private var totalHoy: (cantidad: Int, coste: Double) = (0, 0.0)
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 headerView
                 
@@ -26,6 +26,65 @@ struct ContentView: View {
                                 onReset: { resetCounters(for: bebida) }
                             )
                         }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 8)
+                }
+                
+                Spacer()
+                
+                bottomActionsView
+            }
+            .navigationTitle("DrinkTrack")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if let shareData = createShareData() {
+                        ShareLink(
+                            item: shareData,
+                            subject: Text("Exportación de Bebidas"),
+                            message: Text("Mis bebidas de DrinkTrack")
+                        ) {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("historial_title") {
+                        showingHistorial = true
+                    }
+                }
+            }
+            .sheet(isPresented: $showingHistorial) {
+                HistorialView {
+                    reloadData()
+                }
+            }
+            .sheet(isPresented: $showingAddBebida) {
+                AddConsumicionView(onSave: {
+                    reloadData()
+                })
+            }
+        }
+        .onAppear {
+            reloadData()
+        }
+    }
+    
+    private func createShareData() -> Data? {
+        let exportItems = bebidas.map { bebida in
+            BebidaExportItem(
+                id: bebida.id ?? UUID(),
+                nombre: bebida.nombre ?? "",
+                emoji: bebida.emoji ?? "",
+                precioBase: bebida.precioBase,
+                categoria: bebida.categoria ?? "",
+                orden: bebida.orden
+            )
+        }
+        let exportData = BebidaExportData(version: "1.0", exportDate: Date(), bebidas: exportItems)
+        return try? JSONEncoder().encode(exportData)
+    }
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 8)
