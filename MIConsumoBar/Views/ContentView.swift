@@ -4,6 +4,7 @@ import CoreData
 struct ContentView: View {
     @State private var showingHistorial = false
     @State private var showingAddBebida = false
+    @State private var showingShareBebidas = false
     @State private var bebidas: [Bebida] = []
     @State private var consumicionesHoy: [Consumicion] = []
     @State private var totalHoy: (cantidad: Int, coste: Double) = (0, 0.0)
@@ -37,6 +38,13 @@ struct ContentView: View {
             .navigationTitle("DrinkTrack")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        showingShareBebidas = true
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("historial_title") {
                         showingHistorial = true
@@ -53,9 +61,25 @@ struct ContentView: View {
                     reloadData()
                 })
             }
+            .sheet(isPresented: $showingShareBebidas) {
+                ShareBebidasView(bebidas: prepareBebidasForShare())
+            }
         }
         .onAppear {
             reloadData()
+        }
+    }
+    
+    private func prepareBebidasForShare() -> [BebidaExportItem] {
+        return bebidas.map { bebida in
+            BebidaExportItem(
+                id: bebida.id ?? UUID(),
+                nombre: bebida.nombre ?? "",
+                emoji: bebida.emoji ?? "",
+                precioBase: bebida.precioBase,
+                categoria: bebida.categoria ?? "",
+                orden: bebida.orden
+            )
         }
     }
     
