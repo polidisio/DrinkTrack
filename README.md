@@ -102,4 +102,4 @@ Desarrollado por [polidisio](https://github.com/polidisio)
 
 ---
 
-⭐️ Si te gusta este proyecto, no olvides给它 una estrella en GitHub!
+⭐️ Si te gusta este proyecto, no olvides una estrella en GitHub!
