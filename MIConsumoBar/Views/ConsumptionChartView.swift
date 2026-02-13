@@ -121,10 +121,6 @@ struct ConsumptionChartView: View {
             } else {
                 summaryView
                 
-                if !dailyData.isEmpty {
-                    dailyConsumptionChart
-                }
-                
                 if !typeData.isEmpty {
                     typeConsumptionChart
                 }
