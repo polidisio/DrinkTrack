@@ -17,7 +17,7 @@ struct AddConsumicionView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     Picker("tipo_label", selection: $selectedBebidaIndex) {

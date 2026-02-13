@@ -183,7 +183,7 @@ struct EmojiPickerView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section {
                     TextField("Buscar emoji...", text: $searchText)

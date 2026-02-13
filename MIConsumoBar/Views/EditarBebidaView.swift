@@ -50,7 +50,7 @@ struct EditarBebidaView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     TextField("Nombre", text: $nombre)

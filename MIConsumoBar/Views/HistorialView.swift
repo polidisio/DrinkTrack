@@ -11,7 +11,7 @@ struct HistorialView: View {
     private let coreDataManager = CoreDataManager.shared
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 chartsView
                 dateSelectorView

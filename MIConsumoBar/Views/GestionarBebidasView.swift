@@ -9,7 +9,7 @@ struct GestionarBebidasView: View {
     let onDismiss: () -> Void
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(bebidas) { bebida in
                     Button(action: {
