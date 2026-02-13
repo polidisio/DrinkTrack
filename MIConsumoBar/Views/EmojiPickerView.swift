@@ -1,5 +1,67 @@
 import SwiftUI
 
+let emojiNames: [String: String] = [
+    "🍺": "cerveza beer",
+    "🍻": "cerveza jarra beer mug",
+    "🥂": "copas brindar champagne",
+    "🍷": "vino wine",
+    "🥃": "whisky bourbon",
+    "🍸": "cóctel cocktail",
+    "🍹": "cóctel tropical",
+    "🧉": "mate",
+    "☕": "café coffee",
+    "🧃": "zumo juice",
+    "🥤": "refresco soda",
+    "🧋": "bubble tea",
+    "🍶": "sake",
+    "🥛": "leche milk",
+    "🍼": "biberón",
+    "🍔": "hamburguesa burger",
+    "🍕": "pizza",
+    "🌮": "taco",
+    "🍟": "patatas fries",
+    "🍿": "palomitas popcorn",
+    "🥨": "galleta pretzel",
+    "🧀": "queso cheese",
+    "🥗": "ensalada salad",
+    "🍝": "pasta",
+    "🍣": "sushi",
+    "🥘": "paella",
+    "🍲": "guiso stew",
+    "🍏": "manzana green apple",
+    "🍎": "manzana red apple",
+    "🍐": "pera pear",
+    "🍊": "naranja orange",
+    "🍋": "limón lemon",
+    "🍌": "plátano banana",
+    "🍉": "sandía watermelon",
+    "🍇": "uvas grapes",
+    "🍓": "fresa strawberry",
+    "🍒": "cereza cherry",
+    "🥝": "kiwi",
+    "🍅": "tomato tomato",
+    "💶": "euro dinero money cash",
+    "💰": "dinero money cash",
+    "📊": "gráfico chart",
+    "📱": "teléfono phone",
+    "👤": "persona user",
+    "👥": "grupo people",
+    "🍾": "champán champagne cava",
+    "🍵": "té verde tea",
+    "🌭": "perrito hotdog",
+    "🥪": "bocadillo sandwich",
+    "🥐": "croissant",
+    "🥯": "bagel",
+    "🥞": "crepes pancakes",
+    "🍰": "tarta pastel cake",
+    "🧁": "cupcake",
+    "🍩": "dona donut",
+    "🍪": "galleta cookie",
+    "🍫": "chocolate",
+    "🍬": "caramelo candy",
+    "🍭": "piruleta lollipop",
+]
+
 struct EmojiCategory: Identifiable {
     let id = UUID()
     let name: String
@@ -103,8 +165,20 @@ struct EmojiPickerView: View {
         if searchText.isEmpty {
             return categories
         }
-        return categories.map { category in
-            EmojiCategory(name: category.name, emojis: category.emojis)
+        
+        let searchLower = searchText.lowercased()
+        
+        return categories.compactMap { category in
+            let filteredEmojis = category.emojis.filter { emoji in
+                guard let name = emojiNames[emoji] else { return false }
+                return name.contains(searchLower)
+            }
+            
+            if filteredEmojis.isEmpty {
+                return nil
+            }
+            
+            return EmojiCategory(name: category.name, emojis: filteredEmojis)
         }
     }
     
