@@ -39,14 +39,16 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if let shareData = createShareData() {
+                    if let shareURL = createShareURL() {
                         ShareLink(
-                            item: shareData,
+                            item: shareURL,
                             subject: Text("Exportación de Bebidas"),
                             message: Text("Mis bebidas de DrinkTrack")
                         ) {
                             Image(systemName: "square.and.arrow.up")
                         }
+                    } else {
+                        EmptyView()
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -71,7 +73,7 @@ struct ContentView: View {
         }
     }
     
-    private func createShareData() -> Data? {
+    private func createShareURL() -> URL? {
         let exportItems = bebidas.map { bebida in
             BebidaExportItem(
                 id: bebida.id ?? UUID(),
@@ -83,62 +85,19 @@ struct ContentView: View {
             )
         }
         let exportData = BebidaExportData(version: "1.0", exportDate: Date(), bebidas: exportItems)
-        return try? JSONEncoder().encode(exportData)
-    }
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
-                }
-                
-                Spacer()
-                
-                bottomActionsView
-            }
-            .navigationTitle("DrinkTrack")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        showingShareBebidas = true
-                    }) {
-                        Image(systemName: "square.and.arrow.up")
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("historial_title") {
-                        showingHistorial = true
-                    }
-                }
-            }
-            .sheet(isPresented: $showingHistorial) {
-                HistorialView {
-                    reloadData()
-                }
-            }
-            .sheet(isPresented: $showingAddBebida) {
-                AddConsumicionView(onSave: {
-                    reloadData()
-                })
-            }
-            .fullScreenCover(isPresented: $showingShareBebidas) {
-                ShareBebidasView(bebidas: prepareBebidasForShare())
-            }
+        
+        guard let jsonData = try? JSONEncoder().encode(exportData) else {
+            return nil
         }
-        .onAppear {
-            reloadData()
-        }
-    }
-    
-    private func prepareBebidasForShare() -> [BebidaExportItem] {
-        return bebidas.map { bebida in
-            BebidaExportItem(
-                id: bebida.id ?? UUID(),
-                nombre: bebida.nombre ?? "",
-                emoji: bebida.emoji ?? "",
-                precioBase: bebida.precioBase,
-                categoria: bebida.categoria ?? "",
-                orden: bebida.orden
-            )
+        
+        let tempDir = FileManager.default.temporaryDirectory
+        let fileURL = tempDir.appendingPathComponent("bebidas.json")
+        
+        do {
+            try jsonData.write(to: fileURL)
+            return fileURL
+        } catch {
+            return nil
         }
     }
     
