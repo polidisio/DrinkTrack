@@ -13,6 +13,7 @@ struct HistorialView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
+                chartsView
                 dateSelectorView
                 
                 if consumiciones.isEmpty {
