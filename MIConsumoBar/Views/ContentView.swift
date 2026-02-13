@@ -62,7 +62,7 @@ struct ContentView: View {
     private func reloadData() {
         let context = CoreDataManager.shared.context
         let request: NSFetchRequest<Bebida> = Bebida.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "orden", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "orden", ascending: false)]
         bebidas = (try? context.fetch(request)) ?? []
         
         let calendar = Calendar.current
