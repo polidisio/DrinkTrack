@@ -14,7 +14,7 @@ class BebidaExporter {
         }
         
         let tempDir = FileManager.default.temporaryDirectory
-        let fileURL = tempDir.appendingPathComponent("bebidas.drinktrack")
+        let fileURL = tempDir.appendingPathComponent("bebidas.json")
         
         do {
             try jsonData.write(to: fileURL)
