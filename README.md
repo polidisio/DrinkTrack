@@ -4,102 +4,102 @@
 [![Swift](https://img.shields.io/badge/Swift-5.0+-orange.svg)](https://swift.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-iOS app to track your drink consumption. Monitor your daily intake, manage your favorite drinks, and analyze your spending.
+App iOS para seguir el consumo de bebidas. Controla tu consumo diario, gestiona tus bebidas favoritas y analiza tus gastos.
 
-## Features
+## Características
 
-- ✅ **Daily consumption tracking** - Record every drink you consume
-- ✅ **Drink management** - Add, edit and delete drinks with name, emoji and price
-- ✅ **Spending statistics** - View how much you spend on drinks
-- ✅ **Charts by type** - Analysis of consumption by drink category
-- ✅ **Export/Import** - Share your drinks via JSON and AirDrop
-- ✅ **Multilingual** - Support for Spanish and English
-- ✅ **History** - Review your consumption by date
+- ✅ **Control de consumo diario** - Registra cada bebida que consumes
+- ✅ **Gestión de bebidas** - Añade, edita y elimina bebidas con nombre, emoji y precio
+- ✅ **Estadísticas de gasto** - Visualiza cuánto gastas en bebidas
+- ✅ **Gráficos por tipo** - Análisis de consumo por categoría de bebida
+- ✅ **Exportar/Importar** - Comparte tus bebidas via JSON y AirDrop
+- ✅ **Multiidioma** - Soporte para Español e Inglés
+- ✅ **Historial** - Revisa tu consumo por fecha
 
-## Screenshots
+## Capturas de Pantalla
 
-| Main Screen | History | Manage Drinks |
-|-------------|---------|---------------|
+| Pantalla Principal | Historial | Gestión de Bebidas |
+|-------------------|-----------|-------------------|
 | ![Main](screenshots/main.png) | ![History](screenshots/history.png) | ![Manage](screenshots/manage.png) |
 
-*(Add your screenshots to the `screenshots/` folder)*
+*(Agrega tus capturas de pantalla en la carpeta `screenshots/`)*
 
-## Requirements
+## Requisitos
 
 - iOS 15.0+
 - Xcode 15.0+
 - Swift 5.0+
 
-## Installation
+## Instalación
 
-1. **Clone the repository:**
+1. **Clona el repositorio:**
    ```bash
    git clone https://github.com/polidisio/DrinkTrack.git
    cd DrinkTrack
    ```
 
-2. **Open in Xcode:**
+2. **Abre en Xcode:**
    ```bash
    open DrinkTrack.xcodeproj
    ```
 
-3. **Select a simulator or device** and press `Cmd + R` to run.
+3. **Selecciona un simulador o dispositivo** y presiona `Cmd + R` para ejecutar.
 
-## Project Structure
+## Estructura del Proyecto
 
 ```
 DrinkTrack/
 ├── MIConsumoBar/
 │   ├── Models/
-│   │   ├── CoreDataManager.swift
-│   │   └── DrinkTrackExportTypes.swift
+│   │   ├── CoreDataManager.swift      # Gestor de CoreData
+│   │   └── DrinkTrackExportTypes.swift # Tipos de exportación
 │   ├── Views/
-│   │   ├── ContentView.swift
-│   │   ├── HistorialView.swift
-│   │   ├── AddConsumicionView.swift
-│   │   ├── ConsumptionChartView.swift
+│   │   ├── ContentView.swift          # Vista principal
+│   │   ├── HistorialView.swift        # Historial de consumo
+│   │   ├── AddConsumicionView.swift   # Añadir consumición
+│   │   ├── ConsumptionChartView.swift  # Gráficos
 │   │   └── ...
 │   ├── ViewModels/
 │   │   ├── ConsumicionViewModel.swift
 │   │   └── BebidaListViewModel.swift
 │   └── Utils/
-│       ├── BebidaExporter.swift
-│       └── BebidaImporter.swift
+│       ├── BebidaExporter.swift       # Exportar JSON
+│       └── BebidaImporter.swift       # Importar JSON
 ├── DrinkTrack-Info.plist
 └── README.md
 ```
 
-## Technologies
+## Tecnologías
 
-- **SwiftUI** - Modern user interface
-- **CoreData** - Persistent local storage
-- **Swift Charts** - Consumption charts
-- **Combine** - Reactive programming
+- **SwiftUI** - Interfaz de usuario moderna
+- **CoreData** - Almacenamiento local persistente
+- **Swift Charts** - Gráficos de consumo
+- **Combine** - Programación reactiva
 
-## Export/Import Drinks
+## Exportar/Importar Bebidas
 
-The app allows you to export your drinks as a JSON file and share them via AirDrop:
+La app permite exportar tus bebidas como archivo JSON y compartirlas via AirDrop:
 
-1. Tap the share button (arrow up icon)
-2. Select AirDrop or another app to send
-3. To import, receive the JSON file in the app
+1. Toca el botón de compartir (icono de flecha arriba)
+2. Selecciona AirDrop u otra app para enviar
+3. Para importar, recibe el archivo JSON en la app
 
-## Contributing
+## Contribuir
 
-1. Fork the repository
-2. Create a branch (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature/new-feature`)
-5. Open a Pull Request
+1. Haz fork del repositorio
+2. Crea una rama (`git checkout -b feature/nueva-caracteristica`)
+3. Haz commit de tus cambios (`git commit -m 'Agrega nueva característica'`)
+4. Push a la rama (`git push origin feature/nueva-caracteristica`)
+5. Abre un Pull Request
 
-## License
+## Licencia
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Este proyecto está bajo la licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
-## Author
+## Autor
 
-Developed by [polidisio](https://github.com/polidisio)
+Desarrollado por [polidisio](https://github.com/polidisio)
 
 ---
 
-⭐️ If you like this project, don't forget to give it a star on GitHub!
+⭐️ Si te gusta este proyecto, no olvides una estrella en GitHub!
