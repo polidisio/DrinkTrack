@@ -179,10 +179,13 @@ class CoreDataManager {
         save()
     }
     
-    func fetchConsumiciones(for date: Date? = nil) -> [Consumicion] {
+    func fetchConsumiciones(for date: Date? = nil, last7Days: Bool = false) -> [Consumicion] {
         let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
         
-        if let date = date {
+        if last7Days {
+            let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
+            request.predicate = NSPredicate(format: "timestamp >= %@", startDate as NSDate)
+        } else if let date = date {
             let calendar = Calendar.current
             let startOfDay = calendar.startOfDay(for: date)
             let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!

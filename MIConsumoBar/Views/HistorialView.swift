@@ -3,10 +3,15 @@ import SwiftUI
 struct HistorialView: View {
     @Environment(\.dismiss) var dismiss
     @State private var selectedDate = Date()
+    @State private var filterMode: FilterMode = .today
     @State private var consumiciones: [Consumicion] = []
     @State private var bebidas: [Bebida] = []
     @State private var showingDatePicker = false
     let onDismiss: () -> Void
+    
+    enum FilterMode {
+        case today, yesterday, last7Days
+    }
     
     private let coreDataManager = CoreDataManager.shared
     
@@ -38,6 +43,11 @@ struct HistorialView: View {
                 loadData()
             }
             .onChange(of: selectedDate) { _, _ in
+                if filterMode != .last7Days {
+                    loadConsumiciones()
+                }
+            }
+            .onChange(of: filterMode) { _, _ in
                 loadConsumiciones()
             }
         }
@@ -70,17 +80,20 @@ struct HistorialView: View {
             HStack(spacing: 8) {
                 Button("filtro_hoy") {
                     selectedDate = Date()
+                    filterMode = .today
                 }
-                .buttonStyle(DateButtonStyle(isSelected: Calendar.current.isDateInToday(selectedDate)))
+                .buttonStyle(DateButtonStyle(isSelected: filterMode == .today))
                 
                 Button("filtro_ayer") {
                     selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+                    filterMode = .yesterday
                 }
-                .buttonStyle(DateButtonStyle(isSelected: isYesterday(selectedDate)))
+                .buttonStyle(DateButtonStyle(isSelected: filterMode == .yesterday))
                 
                 Button("filtro_ultimos_7_dias") {
+                    filterMode = .last7Days
                 }
-                .buttonStyle(DateButtonStyle(isSelected: false))
+                .buttonStyle(DateButtonStyle(isSelected: filterMode == .last7Days))
             }
             .padding(.horizontal)
         }
@@ -119,7 +132,11 @@ struct HistorialView: View {
     }
     
     private func loadConsumiciones() {
-        consumiciones = coreDataManager.fetchConsumiciones(for: selectedDate)
+        if filterMode == .last7Days {
+            consumiciones = coreDataManager.fetchConsumiciones(last7Days: true)
+        } else {
+            consumiciones = coreDataManager.fetchConsumiciones(for: selectedDate)
+        }
     }
     
     private func deleteConsumiciones(at offsets: IndexSet) {
