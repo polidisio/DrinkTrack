@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import Combine
 
 struct BebidaCounter: Identifiable {
     let id = UUID()
@@ -8,10 +9,9 @@ struct BebidaCounter: Identifiable {
     var totalCost: Double
 }
 
-@Observable
-class BebidaListViewModel {
-    var bebidas: [Bebida] = []
-    var contadores: [BebidaCounter] = []
+class BebidaListViewModel: ObservableObject {
+    @Published var bebidas: [Bebida] = []
+    @Published var contadores: [BebidaCounter] = []
     
     init() {
         loadBebidas()
