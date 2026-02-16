@@ -22,8 +22,7 @@ struct AddConsumicionView: View {
                 Section {
                     Picker("tipo_label", selection: $selectedBebidaIndex) {
                         ForEach(0..<bebidas.count, id: \.self) { index in
-                            let bebida = bebidas[index]
-                            Text((bebida.emoji ?? "") + " " + CoreDataManager.shared.localizedNombre(for: bebida.nombre ?? ""))
+                            Text(bebidaDisplayName(for: index))
                         }
                     }
                 } header: {
@@ -45,7 +44,7 @@ struct AddConsumicionView: View {
                         TextField("0.00", text: $precioUnitario)
                             .frame(width: 80)
                             .keyboardType(.decimalPad)
-                            .onChange(of: precioUnitario) { _, newValue in
+                            .onChange(of: precioUnitario) { newValue in
                                 let filtered = newValue.replacingOccurrences(of: ",", with: ".")
                                 if filtered != newValue {
                                     precioUnitario = filtered
@@ -113,10 +112,18 @@ struct AddConsumicionView: View {
             .onAppear {
                 reloadBebidas()
             }
-            .onChange(of: selectedBebidaIndex) { _, _ in
+            .onChange(of: selectedBebidaIndex) { _ in
                 updatePrecioUnitario()
             }
         }
+    }
+    
+    private func bebidaDisplayName(for index: Int) -> String {
+        guard bebidas.indices.contains(index) else { return "" }
+        let bebida = bebidas[index]
+        let emoji = bebida.emoji ?? ""
+        let nombre = CoreDataManager.shared.localizedNombre(for: bebida.nombre ?? "")
+        return emoji + " " + nombre
     }
     
     private var totalCost: Double {

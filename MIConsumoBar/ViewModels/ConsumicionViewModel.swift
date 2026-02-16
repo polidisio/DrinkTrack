@@ -1,14 +1,14 @@
 import Foundation
 import CoreData
-import Observation
+import Combine
+import SwiftUI
 
-@Observable
-class ConsumicionViewModel {
+class ConsumicionViewModel: ObservableObject {
     private let coreDataManager = CoreDataManager.shared
     
-    var bebidas: [Bebida] = []
-    var consumicionesHoy: [Consumicion] = []
-    var totalHoy: (cantidad: Int, coste: Double) = (0, 0.0)
+    @Published var bebidas: [Bebida] = []
+    @Published var consumicionesHoy: [Consumicion] = []
+    @Published var totalHoy: (cantidad: Int, coste: Double) = (0, 0.0)
     
     init() {
         loadData()

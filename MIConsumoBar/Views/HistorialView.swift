@@ -42,12 +42,12 @@ struct HistorialView: View {
             .onAppear {
                 loadData()
             }
-            .onChange(of: selectedDate) { _, _ in
+            .onChange(of: selectedDate) { _ in
                 if filterMode != .last7Days {
                     loadConsumiciones()
                 }
             }
-            .onChange(of: filterMode) { _, _ in
+            .onChange(of: filterMode) { _ in
                 loadConsumiciones()
             }
         }
