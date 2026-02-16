@@ -8,6 +8,7 @@ struct ContentView: View {
     @State private var bebidas: [Bebida] = []
     @State private var consumicionesHoy: [Consumicion] = []
     @State private var totalHoy: (cantidad: Int, coste: Double) = (0, 0.0)
+    @State private var refreshTrigger = UUID()
     
     var body: some View {
         NavigationStack {
@@ -27,6 +28,7 @@ struct ContentView: View {
                             )
                         }
                     }
+                    .id(refreshTrigger)
                     .padding(.horizontal, 16)
                     .padding(.top, 8)
                 }
@@ -120,9 +122,12 @@ struct ContentView: View {
             .sorted { $0.total > $1.total }
             .map { $0.bebida }
         
-        consumicionesHoy = allConsumiciones
+        consumicionesHoy = allConsumiciones.filter {
+            let calendar = Calendar.current
+            return calendar.isDateInToday($0.timestamp ?? Date())
+        }
         
-        totalHoy = calculateTotal()
+        totalHoy = CoreDataManager.shared.getTotalToday()
     }
     
     private func calculateTotal() -> (Int, Double) {
@@ -155,6 +160,7 @@ struct ContentView: View {
         
         do {
             try CoreDataManager.shared.context.save()
+            refreshTrigger = UUID()
             reloadData()
         } catch {
             print("Error adding consumicion: \(error)")
@@ -171,6 +177,7 @@ struct ContentView: View {
             }
             do {
                 try CoreDataManager.shared.context.save()
+                refreshTrigger = UUID()
                 reloadData()
             } catch {
                 print("Error decrementing consumicion: \(error)")
