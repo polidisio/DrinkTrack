@@ -120,14 +120,7 @@ struct ContentView: View {
             .sorted { $0.total > $1.total }
             .map { $0.bebida }
         
-        let calendar = Calendar.current
-        let startOfDay = calendar.startOfDay(for: Date())
-        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
-        
-        let consumicionHoyRequest: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
-        consumicionHoyRequest.predicate = NSPredicate(format: "timestamp >= %@ AND timestamp < %@", startOfDay as NSDate, endOfDay as NSDate)
-        consumicionHoyRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
-        consumicionesHoy = (try? context.fetch(consumicionHoyRequest)) ?? []
+        consumicionesHoy = allConsumiciones
         
         totalHoy = calculateTotal()
     }
