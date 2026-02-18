@@ -66,7 +66,7 @@
 			name = DrinkTrack;
 			packageProductDependencies = (
 			);
-			productName = MIConsumoBar;
+			productName = MyBarTrack;
 			productReference = D271D1C92F3BC58B00BE33AA /* DrinkTrack.app */;
 			productType = "com.apple.product-type.application";
 		};

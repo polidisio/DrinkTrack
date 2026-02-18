@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D271D1C82F3BC58B00BE33AA"
-               BuildableName = "DrinkTrack.app"
-               BlueprintName = "DrinkTrack"
-               ReferencedContainer = "container:DrinkTrack.xcodeproj">
+               BuildableName = "MyBarTrack.app"
+               BlueprintName = "MyBarTrack"
+               ReferencedContainer = "container:MyBarTrack.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D271D1C82F3BC58B00BE33AA"
-            BuildableName = "DrinkTrack.app"
-            BlueprintName = "DrinkTrack"
-            ReferencedContainer = "container:DrinkTrack.xcodeproj">
+            BuildableName = "MyBarTrack.app"
+            BlueprintName = "MyBarTrack"
+            ReferencedContainer = "container:MyBarTrack.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <LocationScenarioReference
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D271D1C82F3BC58B00BE33AA"
-            BuildableName = "DrinkTrack.app"
-            BlueprintName = "DrinkTrack"
-            ReferencedContainer = "container:DrinkTrack.xcodeproj">
+            BuildableName = "MyBarTrack.app"
+            BlueprintName = "MyBarTrack"
+            ReferencedContainer = "container:MyBarTrack.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
