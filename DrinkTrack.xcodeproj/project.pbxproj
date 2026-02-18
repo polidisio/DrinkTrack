@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		D271D1C92F3BC58B00BE33AA /* DrinkTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D271D1C92F3BC58B00BE33AA /* MyBarTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBarTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		D271D1CA2F3BC58B00BE33AA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D271D1C92F3BC58B00BE33AA /* DrinkTrack.app */,
+				D271D1C92F3BC58B00BE33AA /* MyBarTrack.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D271D1C82F3BC58B00BE33AA /* DrinkTrack */ = {
+		D271D1C82F3BC58B00BE33AA /* MyBarTrack */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D271D1D92F3BC58C00BE33AA /* Build configuration list for PBXNativeTarget "DrinkTrack" */;
+			buildConfigurationList = D271D1D92F3BC58C00BE33AA /* Build configuration list for PBXNativeTarget "MyBarTrack" */;
 			buildPhases = (
 				D271D1C52F3BC58B00BE33AA /* Sources */,
 				D271D1C62F3BC58B00BE33AA /* Frameworks */,
@@ -63,11 +63,11 @@
 			fileSystemSynchronizedGroups = (
 				D271D1CB2F3BC58B00BE33AA /* MIConsumoBar */,
 			);
-			name = DrinkTrack;
+			name = MyBarTrack;
 			packageProductDependencies = (
 			);
 			productName = MyBarTrack;
-			productReference = D271D1C92F3BC58B00BE33AA /* DrinkTrack.app */;
+			productReference = D271D1C92F3BC58B00BE33AA /* MyBarTrack.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D271D1C42F3BC58B00BE33AA /* Build configuration list for PBXProject "DrinkTrack" */;
+			buildConfigurationList = D271D1C42F3BC58B00BE33AA /* Build configuration list for PBXProject "MyBarTrack" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -100,7 +100,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D271D1C82F3BC58B00BE33AA /* DrinkTrack */,
+				D271D1C82F3BC58B00BE33AA /* MyBarTrack */,
 			);
 		};
 /* End PBXProject section */
@@ -270,7 +270,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.DrinkTrack;
+				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -305,7 +305,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.DrinkTrack;
+				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -320,7 +320,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D271D1C42F3BC58B00BE33AA /* Build configuration list for PBXProject "DrinkTrack" */ = {
+		D271D1C42F3BC58B00BE33AA /* Build configuration list for PBXProject "MyBarTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D271D1D72F3BC58C00BE33AA /* Debug */,
@@ -329,7 +329,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D271D1D92F3BC58C00BE33AA /* Build configuration list for PBXNativeTarget "DrinkTrack" */ = {
+		D271D1D92F3BC58C00BE33AA /* Build configuration list for PBXNativeTarget "MyBarTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D271D1DA2F3BC58C00BE33AA /* Debug */,
