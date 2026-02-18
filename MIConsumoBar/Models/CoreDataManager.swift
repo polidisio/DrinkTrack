@@ -221,11 +221,15 @@ class CoreDataManager {
     }
     
     func cleanupOldConsumiciones() {
+        let retentionDays = UserDefaults.standard.integer(forKey: "retentionDays")
+        
+        guard retentionDays > 0 else { return }
+        
         let calendar = Calendar.current
-        let startOfToday = calendar.startOfDay(for: Date())
+        let cutoffDate = calendar.date(byAdding: .day, value: -retentionDays, to: Date())!
         
         let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
-        request.predicate = NSPredicate(format: "timestamp < %@", startOfToday as NSDate)
+        request.predicate = NSPredicate(format: "timestamp < %@", cutoffDate as NSDate)
         
         do {
             let oldConsumiciones = try context.fetch(request)

@@ -14,6 +14,9 @@ struct MiConsumoBarApp: App {
                 .onOpenURL { url in
                     handleIncomingURL(url)
                 }
+                .onAppear {
+                    CoreDataManager.shared.cleanupOldConsumiciones()
+                }
                 .alert("Importar Bebidas", isPresented: $showingImportAlert) {
                     Button("Combinar") {
                         importViewModel.importMode = .merge

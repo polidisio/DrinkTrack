@@ -5,6 +5,7 @@ import UniformTypeIdentifiers
 struct ContentView: View {
     @State private var showingHistorial = false
     @State private var showingAddBebida = false
+    @State private var showingSettings = false
     @State private var bebidas: [Bebida] = []
     @State private var consumicionesHoy: [Consumicion] = []
     @State private var totalHoy: (cantidad: Int, coste: Double) = (0, 0.0)
@@ -54,8 +55,17 @@ struct ContentView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("historial_title") {
-                        showingHistorial = true
+                    HStack(spacing: 16) {
+                        Button {
+                            showingSettings = true
+                        } label: {
+                            Image(systemName: "gear")
+                                .foregroundColor(.orange)
+                        }
+                        
+                        Button("historial_title") {
+                            showingHistorial = true
+                        }
                     }
                 }
             }
@@ -68,6 +78,9 @@ struct ContentView: View {
                 AddConsumicionView(onSave: {
                     reloadData()
                 })
+            }
+            .sheet(isPresented: $showingSettings) {
+                SettingsView()
             }
         }
         .onAppear {
