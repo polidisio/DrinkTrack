@@ -122,10 +122,7 @@ struct ContentView: View {
             .sorted { $0.total > $1.total }
             .map { $0.bebida }
         
-        consumicionesHoy = allConsumiciones.filter {
-            let calendar = Calendar.current
-            return calendar.isDateInToday($0.timestamp ?? Date())
-        }
+        consumicionesHoy = allConsumiciones
         
         totalHoy = CoreDataManager.shared.getTotalToday()
     }
