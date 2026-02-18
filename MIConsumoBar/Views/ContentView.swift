@@ -38,7 +38,7 @@ struct ContentView: View {
                 
                 bottomActionsView
             }
-            .navigationTitle("DrinkTrack")
+            .navigationTitle("MyBarTrack")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -46,7 +46,7 @@ struct ContentView: View {
                         ShareLink(
                             item: shareURL,
                             subject: Text("Exportación de Bebidas"),
-                            message: Text("Mis bebidas de DrinkTrack")
+                            message: Text("Mis bebidas de MyBarTrack")
                         ) {
                             Image(systemName: "square.and.arrow.up")
                         }
