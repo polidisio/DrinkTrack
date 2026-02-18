@@ -42,6 +42,11 @@ struct HistorialView: View {
             .onAppear {
                 loadData()
             }
+            .sheet(isPresented: $showingDatePicker) {
+                DatePicker("Seleccionar fecha", selection: $selectedDate, displayedComponents: .date)
+                    .datePickerStyle(.graphical)
+                    .padding()
+            }
             .onChange(of: selectedDate) { _ in
                 if filterMode != .last7Days {
                     loadConsumiciones()
