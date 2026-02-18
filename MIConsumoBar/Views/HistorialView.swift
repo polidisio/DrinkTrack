@@ -43,9 +43,20 @@ struct HistorialView: View {
                 loadData()
             }
             .sheet(isPresented: $showingDatePicker) {
-                DatePicker("Seleccionar fecha", selection: $selectedDate, displayedComponents: .date)
-                    .datePickerStyle(.graphical)
-                    .padding()
+                NavigationStack {
+                    DatePicker("Seleccionar fecha", selection: $selectedDate, displayedComponents: .date)
+                        .datePickerStyle(.graphical)
+                        .padding()
+                        .navigationTitle("Seleccionar fecha")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .confirmationAction) {
+                                Button("Aceptar") {
+                                    showingDatePicker = false
+                                }
+                            }
+                        }
+                }
             }
             .onChange(of: selectedDate) { _ in
                 if filterMode != .last7Days {
