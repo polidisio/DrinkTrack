@@ -183,7 +183,10 @@ class CoreDataManager {
         let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
         
         if last7Days {
-            let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
+            // Normalize to the start of day 6 days ago so we include today and the previous 6 days
+            // (7 full calendar days: today + 6 previous days)
+            let calendar = Calendar.current
+            let startDate = calendar.startOfDay(for: calendar.date(byAdding: .day, value: -6, to: Date())!)
             request.predicate = NSPredicate(format: "timestamp >= %@", startDate as NSDate)
         } else if let date = date {
             let calendar = Calendar.current

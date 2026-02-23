@@ -10,6 +10,7 @@ struct ContentView: View {
     @State private var consumicionesHoy: [Consumicion] = []
     @State private var totalHoy: (cantidad: Int, coste: Double) = (0, 0.0)
     @State private var refreshTrigger = UUID()
+    @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
         NavigationStack {
@@ -86,6 +87,11 @@ struct ContentView: View {
         .onAppear {
             reloadData()
         }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                reloadData()
+            }
+        }
     }
     
     private func createShareURL() -> URL? {
@@ -121,23 +127,27 @@ struct ContentView: View {
         let bebidasRequest: NSFetchRequest<Bebida> = Bebida.fetchRequest()
         let allBebidas = (try? context.fetch(bebidasRequest)) ?? []
         
-        let consumicionRequest: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
-        let allConsumiciones = (try? context.fetch(consumicionRequest)) ?? []
-        
+        // Fetch all consumiciones (histórico) so counters remain accumulated until the user resets them
+        let allConsumiciones = CoreDataManager.shared.fetchAllConsumiciones()
+
+        // Calculate totals per bebida using the historical consumiciones so header and cards remain stable
         let bebidasTotales: [(bebida: Bebida, total: Int)] = allBebidas.map { bebida in
             let total = allConsumiciones
                 .filter { $0.bebidaID == bebida.id }
                 .reduce(0) { $0 + Int($1.cantidad) }
             return (bebida, total)
         }
-        
+
         bebidas = bebidasTotales
             .sorted { $0.total > $1.total }
             .map { $0.bebida }
-        
+
+        // Keep consumicionesHoy as the full history (naming kept for compatibility), compute totals from it
         consumicionesHoy = allConsumiciones
-        
-        totalHoy = CoreDataManager.shared.getTotalToday()
+
+        let cantidad = consumicionesHoy.reduce(0) { $0 + Int($1.cantidad) }
+        let coste = consumicionesHoy.reduce(0.0) { $0 + (Double($1.cantidad) * $1.precioUnitario) }
+        totalHoy = (cantidad, coste)
     }
     
     private func calculateTotal() -> (Int, Double) {

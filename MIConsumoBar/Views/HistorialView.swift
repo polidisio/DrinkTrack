@@ -6,6 +6,7 @@ struct HistorialView: View {
     @State private var filterMode: FilterMode = .today
     @State private var consumiciones: [Consumicion] = []
     @State private var bebidas: [Bebida] = []
+    @State private var consumicionesUltimos7: [Consumicion] = []
     @State private var showingDatePicker = false
     let onDismiss: () -> Void
     
@@ -70,8 +71,9 @@ struct HistorialView: View {
     }
     
     private var chartsView: some View {
+        // Charts should always show last 7 days history, regardless of the selected date for the list
         ConsumptionChartView(
-            consumiciones: consumiciones,
+            consumiciones: consumicionesUltimos7,
             bebidas: bebidas
         )
     }
@@ -144,12 +146,15 @@ struct HistorialView: View {
     
     private func loadData() {
         bebidas = coreDataManager.fetchBebidas()
+        // Load both the consumiciones for the list (based on filterMode/selectedDate)
+        // and the consumiciones for the charts (always the last 7 days)
+        consumicionesUltimos7 = coreDataManager.fetchConsumiciones(last7Days: true)
         loadConsumiciones()
     }
     
     private func loadConsumiciones() {
         if filterMode == .last7Days {
-            consumiciones = coreDataManager.fetchConsumiciones(last7Days: true)
+            consumiciones = consumicionesUltimos7
         } else {
             consumiciones = coreDataManager.fetchConsumiciones(for: selectedDate)
         }
@@ -160,6 +165,8 @@ struct HistorialView: View {
             let consumicion = consumiciones[index]
             coreDataManager.deleteConsumicion(consumicion)
         }
+        // Refresh both list and chart data after deletion
+        consumicionesUltimos7 = coreDataManager.fetchConsumiciones(last7Days: true)
         loadConsumiciones()
     }
     
