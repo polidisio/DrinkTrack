@@ -1,10 +1,19 @@
 import SwiftUI
 import CoreData
+import UniformTypeIdentifiers
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @AppStorage("retentionDays") private var retentionDays: Int = 0
     @State private var showingClearAlert = false
+    @State private var showingImportPicker = false
+    @State private var showingImportAlert = false
+    @State private var pendingImportURL: URL?
+    @State private var hasSecurityAccess = false
+    @State private var importError: String?
+    @State private var importSuccess = false
+    
+    var onDismiss: (() -> Void)?
     
     private let retentionOptions: [(key: String, days: Int)] = [
         ("retention_0", 0),
@@ -34,6 +43,22 @@ struct SettingsView: View {
                     Text("retention_section")
                 } footer: {
                     Text("retention_footer")
+                }
+                
+                Section {
+                    Button {
+                        showingImportPicker = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "square.and.arrow.down")
+                                .foregroundColor(.orange)
+                            Text("import_drinks_button")
+                        }
+                    }
+                } header: {
+                    Text("data_section")
+                } footer: {
+                    Text("import_drinks_footer")
                 }
                 
                 Section {
@@ -79,6 +104,24 @@ struct SettingsView: View {
             } message: {
                 Text("clear_all_message")
             }
+            .alert("import_drinks_title", isPresented: $showingImportAlert) {
+                Button("merge_button") {
+                    processImport(mode: .merge)
+                }
+                Button("replace_button") {
+                    processImport(mode: .overwrite)
+                }
+                Button("cancel_button", role: .cancel) {}
+            } message: {
+                Text("import_drinks_message")
+            }
+            .fileImporter(
+                isPresented: $showingImportPicker,
+                allowedContentTypes: [.json],
+                allowsMultipleSelection: false
+            ) { result in
+                handleImportResult(result)
+            }
         }
     }
     
@@ -102,6 +145,70 @@ struct SettingsView: View {
             try context.save()
         } catch {
             print("Error clearing consumiciones: \(error)")
+        }
+    }
+    
+    private func handleImportResult(_ result: Result<[URL], Error>) {
+        switch result {
+        case .success(let urls):
+            guard let url = urls.first else { return }
+            
+            guard url.startAccessingSecurityScopedResource() else {
+                importError = "access_denied"
+                return
+            }
+            
+            hasSecurityAccess = true
+            pendingImportURL = url
+            showingImportAlert = true
+            
+        case .failure(let error):
+            importError = error.localizedDescription
+        }
+    }
+    
+    private func processImport(mode: BebidaImporter.ImportMode) {
+        guard let url = pendingImportURL else { return }
+        
+        print("DEBUG: Starting import with URL: \(url)")
+        print("DEBUG: Import mode: \(mode == .overwrite ? "OVERWRITE" : "MERGE")")
+        
+        if let exportData = BebidaImporter.shared.parseExportData(from: url) {
+            print("DEBUG: Parsed export data with \(exportData.bebidas.count) drinks")
+            
+            let context = CoreDataManager.shared.context
+            
+            // Check current bebidas before import
+            let bebidasRequest: NSFetchRequest<Bebida> = Bebida.fetchRequest()
+            let currentBebidas = (try? context.fetch(bebidasRequest)) ?? []
+            print("DEBUG: Current bebidas count BEFORE import: \(currentBebidas.count)")
+            
+            switch mode {
+            case .merge:
+                BebidaImporter.shared.mergeBebidasSync(exportData.bebidas, context: context)
+            case .overwrite:
+                BebidaImporter.shared.overwriteBebidasSync(exportData.bebidas, context: context)
+            case .cancel:
+                break
+            }
+            
+            // Check bebidas after import
+            let bebidasAfter = (try? context.fetch(bebidasRequest)) ?? []
+            print("DEBUG: Bebidas count AFTER import: \(bebidasAfter.count)")
+            
+            print("DEBUG: Import completed!")
+            importSuccess = true
+            let callback = self.onDismiss
+            dismiss()
+            callback?()
+        } else {
+            print("DEBUG: Failed to parse export data")
+            importError = "parse_error"
+        }
+        
+        if hasSecurityAccess, let url = pendingImportURL {
+            url.stopAccessingSecurityScopedResource()
+            hasSecurityAccess = false
         }
     }
 }

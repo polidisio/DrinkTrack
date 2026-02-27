@@ -19,7 +19,7 @@ struct ContentView: View {
                 
                 ScrollView {
                     LazyVStack(spacing: 16) {
-                        ForEach(bebidas, id: \.id) { bebida in
+                        ForEach(bebidas, id: \.objectID) { bebida in
                             BebidaCounterCard(
                                 bebida: bebida,
                                 count: getConsumicionCount(for: bebida),
@@ -81,7 +81,11 @@ struct ContentView: View {
                 })
             }
             .sheet(isPresented: $showingSettings) {
-                SettingsView()
+                SettingsView(onDismiss: {
+                    print("DEBUG: Settings dismissed, reloading data")
+                    self.refreshTrigger = UUID()
+                    reloadData()
+                })
             }
         }
         .onAppear {
@@ -96,13 +100,15 @@ struct ContentView: View {
     
     private func createShareURL() -> URL? {
         let exportItems = bebidas.map { bebida in
-            BebidaExportItem(
+            let cantidad = getConsumicionCount(for: bebida)
+            return BebidaExportItem(
                 id: bebida.id ?? UUID(),
                 nombre: bebida.nombre ?? "",
                 emoji: bebida.emoji ?? "",
                 precioBase: bebida.precioBase,
                 categoria: bebida.categoria ?? "",
-                orden: bebida.orden
+                orden: bebida.orden,
+                cantidad: cantidad
             )
         }
         let exportData = BebidaExportData(version: "1.0", exportDate: Date(), bebidas: exportItems)
@@ -125,15 +131,17 @@ struct ContentView: View {
     private func reloadData() {
         let context = CoreDataManager.shared.context
         let bebidasRequest: NSFetchRequest<Bebida> = Bebida.fetchRequest()
+        bebidasRequest.predicate = NSPredicate(format: "id != nil")
         let allBebidas = (try? context.fetch(bebidasRequest)) ?? []
         
         // Fetch all consumiciones (histórico) so counters remain accumulated until the user resets them
         let allConsumiciones = CoreDataManager.shared.fetchAllConsumiciones()
 
         // Calculate totals per bebida using the historical consumiciones so header and cards remain stable
-        let bebidasTotales: [(bebida: Bebida, total: Int)] = allBebidas.map { bebida in
+        let bebidasTotales: [(bebida: Bebida, total: Int)] = allBebidas.compactMap { bebida in
+            guard let bebidaID = bebida.id else { return nil }
             let total = allConsumiciones
-                .filter { $0.bebidaID == bebida.id }
+                .filter { $0.bebidaID == bebidaID }
                 .reduce(0) { $0 + Int($1.cantidad) }
             return (bebida, total)
         }

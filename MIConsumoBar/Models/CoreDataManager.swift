@@ -90,6 +90,7 @@ class CoreDataManager {
     
     func fetchBebidas() -> [Bebida] {
         let request: NSFetchRequest<Bebida> = Bebida.fetchRequest()
+        request.predicate = NSPredicate(format: "id != nil")
         request.sortDescriptors = [NSSortDescriptor(key: "orden", ascending: true)]
         
         do {

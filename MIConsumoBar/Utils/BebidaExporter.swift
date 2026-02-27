@@ -9,7 +9,10 @@ class BebidaExporter {
     func exportBebidas(_ bebidas: [BebidaExportItem]) -> URL? {
         let data = BebidaExportData(version: exportVersion, exportDate: Date(), bebidas: bebidas)
         
-        guard let jsonData = try? JSONEncoder().encode(data) else {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        
+        guard let jsonData = try? encoder.encode(data) else {
             return nil
         }
         
@@ -25,14 +28,15 @@ class BebidaExporter {
         }
     }
     
-    func createExportItem(from bebida: Bebida) -> BebidaExportItem {
+    func createExportItem(from bebida: Bebida, cantidad: Int) -> BebidaExportItem {
         BebidaExportItem(
             id: bebida.id ?? UUID(),
             nombre: bebida.nombre ?? "",
             emoji: bebida.emoji ?? "",
             precioBase: bebida.precioBase,
             categoria: bebida.categoria ?? "",
-            orden: bebida.orden
+            orden: bebida.orden,
+            cantidad: cantidad
         )
     }
 }

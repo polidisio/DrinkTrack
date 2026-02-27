@@ -13,4 +13,5 @@ struct BebidaExportItem: Codable, Identifiable {
     let precioBase: Double
     let categoria: String
     let orden: Int32
+    let cantidad: Int?
 }

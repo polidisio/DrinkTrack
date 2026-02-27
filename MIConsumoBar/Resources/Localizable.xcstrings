@@ -639,6 +639,22 @@
         }
       }
     },
+    "data_section" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datos"
+          }
+        }
+      }
+    },
     "detalles_section" : {
       "localizations" : {
         "en" : {
@@ -877,6 +893,71 @@
         }
       }
     },
+    "import_drinks_button" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import Drinks"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar Bebidas"
+          }
+        }
+      }
+    },
+    "import_drinks_footer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import from a JSON file exported from another device"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar desde un archivo JSON exportado de otro dispositivo"
+          }
+        }
+      }
+    },
+    "import_drinks_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How do you want to import the drinks?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cómo quieres importar las bebidas?"
+          }
+        }
+      }
+    },
+    "import_drinks_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import Drinks"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar Bebidas"
+          }
+        }
+      }
+    },
     "informacion_section" : {
       "localizations" : {
         "en" : {
@@ -889,6 +970,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Información"
+          }
+        }
+      }
+    },
+    "merge_button" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merge"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Combinar"
           }
         }
       }
@@ -1024,6 +1122,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Precio unitario"
+          }
+        }
+      }
+    },
+    "replace_button" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replace"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reemplazar"
           }
         }
       }

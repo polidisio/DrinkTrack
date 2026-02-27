@@ -46,19 +46,19 @@ class ImportViewModel: ObservableObject {
     func processImport(url: URL?) {
         guard let url = url else { return }
         
-        Task { @MainActor in
-            if let exportData = BebidaImporter.shared.parseExportData(from: url) {
-                do {
-                    try await BebidaImporter.shared.importBebidas(
-                        from: exportData,
-                        mode: importMode,
-                        context: CoreDataManager.shared.context
-                    )
-                    print("Bebidas importadas exitosamente")
-                } catch {
-                    print("Error importando bebidas: \(error)")
-                }
+        if let exportData = BebidaImporter.shared.parseExportData(from: url) {
+            let context = CoreDataManager.shared.context
+            
+            switch importMode {
+            case .merge:
+                BebidaImporter.shared.mergeBebidasSync(exportData.bebidas, context: context)
+            case .overwrite:
+                BebidaImporter.shared.overwriteBebidasSync(exportData.bebidas, context: context)
+            case .cancel:
+                break
             }
+            
+            print("Bebidas importadas exitosamente")
         }
     }
 }
