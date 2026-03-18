@@ -21,29 +21,36 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                headerView
-                
-                ScrollView {
-                    LazyVStack(spacing: 16) {
-                        ForEach(sortedBebidas, id: \.objectID) { bebida in
-                            BebidaCounterCard(
-                                bebida: bebida,
-                                count: viewModel.getConsumicionCount(for: bebida),
-                                cost: viewModel.getConsumicionCost(for: bebida),
-                                onAdd: { viewModel.addConsumicion(bebida: bebida) },
-                                onRemove: { viewModel.decrementConsumicion(bebida: bebida) },
-                                onReset: { viewModel.resetCounters(for: bebida) }
-                            )
+                if viewModel.isLoading {
+                    Spacer()
+                    ProgressView()
+                        .scaleEffect(1.5)
+                    Spacer()
+                } else {
+                    headerView
+                    
+                    ScrollView {
+                        LazyVStack(spacing: 16) {
+                            ForEach(sortedBebidas, id: \.objectID) { bebida in
+                                BebidaCounterCard(
+                                    bebida: bebida,
+                                    count: viewModel.getConsumicionCount(for: bebida),
+                                    cost: viewModel.getConsumicionCost(for: bebida),
+                                    onAdd: { viewModel.addConsumicion(bebida: bebida) },
+                                    onRemove: { viewModel.decrementConsumicion(bebida: bebida) },
+                                    onReset: { viewModel.resetCounters(for: bebida) }
+                                )
+                            }
                         }
+                        .id(refreshTrigger)
+                        .padding(.horizontal, 16)
+                        .padding(.top, 8)
                     }
-                    .id(refreshTrigger)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
+                    
+                    Spacer()
+                    
+                    bottomActionsView
                 }
-                
-                Spacer()
-                
-                bottomActionsView
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

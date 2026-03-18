@@ -8,6 +8,7 @@ struct HistorialView: View {
     @State private var bebidas: [Bebida] = []
     @State private var consumicionesUltimos7: [Consumicion] = []
     @State private var showingDatePicker = false
+    @State private var isLoading = false
     let onDismiss: () -> Void
     
     enum FilterMode {
@@ -18,30 +19,38 @@ struct HistorialView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 0) {
-                    chartsView
-                    dateSelectorView
-                    
-                    if consumiciones.isEmpty {
-                        emptyStateView
-                    } else {
-                        consumicionesListView
+            ZStack {
+                ScrollView {
+                    VStack(spacing: 0) {
+                        chartsView
+                        dateSelectorView
+                        
+                        if consumiciones.isEmpty {
+                            emptyStateView
+                        } else {
+                            consumicionesListView
+                        }
                     }
                 }
-            }
-            .navigationTitle("historial_title")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("cerrar_button") {
-                        onDismiss()
-                        dismiss()
+                .navigationTitle("historial_title")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("cerrar_button") {
+                            onDismiss()
+                            dismiss()
+                        }
                     }
                 }
-            }
-            .onAppear {
-                loadData()
+                .onAppear {
+                    loadData()
+                }
+                
+                if isLoading {
+                    ProgressView()
+                        .scaleEffect(1.5)
+                        .background(Color(uiColor: .systemBackground).opacity(0.8))
+                }
             }
             .sheet(isPresented: $showingDatePicker) {
                 NavigationStack {

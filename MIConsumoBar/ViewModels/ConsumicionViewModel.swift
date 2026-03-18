@@ -9,6 +9,7 @@ class ConsumicionViewModel: ObservableObject {
     @Published var bebidas: [Bebida] = []
     @Published var consumicionesHoy: [Consumicion] = []
     @Published var totalHoy: (cantidad: Int, coste: Double) = (0, 0.0)
+    @Published var isLoading = false
     
     init() {
         loadData()
@@ -16,8 +17,8 @@ class ConsumicionViewModel: ObservableObject {
     
     func loadData() {
         Task { @MainActor in
-            // TEMPORARILY DISABLED: cleanupOldConsumiciones()
-            // coreDataManager.cleanupOldConsumiciones()
+            isLoading = true
+            
             bebidas = coreDataManager.fetchBebidas()
             
             if bebidas.isEmpty {
@@ -26,6 +27,8 @@ class ConsumicionViewModel: ObservableObject {
             }
             
             refreshTodayData()
+            
+            isLoading = false
         }
     }
     

@@ -12,6 +12,7 @@ struct SettingsView: View {
     @State private var hasSecurityAccess = false
     @State private var importError: String?
     @State private var importSuccess = false
+    @State private var isImporting = false
     
     var onDismiss: (() -> Void)?
     
@@ -25,7 +26,16 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationStack {
-            List {
+            if isImporting {
+                VStack(spacing: 16) {
+                    ProgressView()
+                        .scaleEffect(1.5)
+                    Text("importing_label")
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                List {
                 Section {
                     Picker(selection: $retentionDays) {
                         ForEach(retentionOptions, id: \.days) { option in
@@ -122,6 +132,7 @@ struct SettingsView: View {
             ) { result in
                 handleImportResult(result)
             }
+            }
         }
     }
     
@@ -160,6 +171,7 @@ struct SettingsView: View {
             
             hasSecurityAccess = true
             pendingImportURL = url
+            isImporting = true
             showingImportAlert = true
             
         case .failure(let error):
@@ -205,12 +217,14 @@ struct SettingsView: View {
             
             print("DEBUG: Import completed!")
             importSuccess = true
+            isImporting = false
             let callback = self.onDismiss
             dismiss()
             callback?()
         } else {
             print("DEBUG: Failed to parse export data")
             importError = "parse_error"
+            isImporting = false
         }
     }
 }
