@@ -15,7 +15,9 @@ struct MiConsumoBarApp: App {
                     handleIncomingURL(url)
                 }
                 .onAppear {
-                    CoreDataManager.shared.cleanupOldConsumiciones()
+                    // NOTE: Automatic cleanup is DISABLED to preserve user data
+                    // Consumption history should only be reset manually by the user
+                    // CoreDataManager.shared.cleanupOldConsumiciones()
                 }
                 .alert("Importar Bebidas", isPresented: $showingImportAlert) {
                     Button("Combinar") {

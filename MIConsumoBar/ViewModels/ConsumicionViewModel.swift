@@ -31,7 +31,10 @@ class ConsumicionViewModel: ObservableObject {
     
     func refreshTodayData() {
         consumicionesHoy = coreDataManager.fetchAllConsumiciones()
-        totalHoy = coreDataManager.getTotalToday()
+        
+        let cantidad = consumicionesHoy.reduce(0) { $0 + Int($1.cantidad) }
+        let coste = consumicionesHoy.reduce(0.0) { $0 + (Double($1.cantidad) * $1.precioUnitario) }
+        totalHoy = (cantidad, coste)
     }
     
     func addConsumicion(bebida: Bebida, cantidad: Int = 1, precioUnitario: Double? = nil) {
