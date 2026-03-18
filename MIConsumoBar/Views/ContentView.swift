@@ -6,11 +6,17 @@ struct ContentView: View {
     @State private var showingHistorial = false
     @State private var showingAddBebida = false
     @State private var showingSettings = false
-    @State private var bebidas: [Bebida] = []
-    @State private var consumicionesHoy: [Consumicion] = []
-    @State private var totalHoy: (cantidad: Int, coste: Double) = (0, 0.0)
     @State private var refreshTrigger = UUID()
+    @StateObject private var viewModel = ConsumicionViewModel()
     @Environment(\.scenePhase) private var scenePhase
+    
+    private var sortedBebidas: [Bebida] {
+        viewModel.bebidas.sorted { bebida1, bebida2 in
+            let count1 = viewModel.getConsumicionCount(for: bebida1)
+            let count2 = viewModel.getConsumicionCount(for: bebida2)
+            return count1 > count2
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -19,14 +25,14 @@ struct ContentView: View {
                 
                 ScrollView {
                     LazyVStack(spacing: 16) {
-                        ForEach(bebidas, id: \.objectID) { bebida in
+                        ForEach(sortedBebidas, id: \.objectID) { bebida in
                             BebidaCounterCard(
                                 bebida: bebida,
-                                count: getConsumicionCount(for: bebida),
-                                cost: getConsumicionCost(for: bebida),
-                                onAdd: { addConsumicion(bebida: bebida) },
-                                onRemove: { decrementConsumicion(bebida: bebida) },
-                                onReset: { resetCounters(for: bebida) }
+                                count: viewModel.getConsumicionCount(for: bebida),
+                                cost: viewModel.getConsumicionCost(for: bebida),
+                                onAdd: { viewModel.addConsumicion(bebida: bebida) },
+                                onRemove: { viewModel.decrementConsumicion(bebida: bebida) },
+                                onReset: { viewModel.resetCounters(for: bebida) }
                             )
                         }
                     }
@@ -70,35 +76,35 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingHistorial) {
                 HistorialView {
-                    reloadData()
+                    viewModel.loadData()
                 }
             }
             .sheet(isPresented: $showingAddBebida) {
                 AddConsumicionView(onSave: {
-                    reloadData()
+                    viewModel.loadData()
                 })
             }
             .sheet(isPresented: $showingSettings) {
                 SettingsView(onDismiss: {
                     print("DEBUG: Settings dismissed, reloading data")
                     self.refreshTrigger = UUID()
-                    reloadData()
+                    viewModel.loadData()
                 })
             }
         }
         .onAppear {
-            reloadData()
+            viewModel.loadData()
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
-                reloadData()
+                viewModel.loadData()
             }
         }
     }
     
     private func createShareURL() -> URL? {
-        let exportItems = bebidas.map { bebida in
-            let cantidad = getConsumicionCount(for: bebida)
+        let exportItems = sortedBebidas.map { bebida in
+            let cantidad = viewModel.getConsumicionCount(for: bebida)
             return BebidaExportItem(
                 id: bebida.id ?? UUID(),
                 nombre: bebida.nombre ?? "",
@@ -126,104 +132,6 @@ struct ContentView: View {
         }
     }
     
-    private func reloadData() {
-        let context = CoreDataManager.shared.context
-        let bebidasRequest: NSFetchRequest<Bebida> = Bebida.fetchRequest()
-        bebidasRequest.predicate = NSPredicate(format: "id != nil")
-        let allBebidas = (try? context.fetch(bebidasRequest)) ?? []
-        
-        // Fetch all consumiciones (histórico) so counters remain accumulated until the user resets them
-        let allConsumiciones = CoreDataManager.shared.fetchAllConsumiciones()
-
-        // Calculate totals per bebida using the historical consumiciones so header and cards remain stable
-        let bebidasTotales: [(bebida: Bebida, total: Int)] = allBebidas.compactMap { bebida in
-            guard let bebidaID = bebida.id else { return nil }
-            let total = allConsumiciones
-                .filter { $0.bebidaID == bebidaID }
-                .reduce(0) { $0 + Int($1.cantidad) }
-            return (bebida, total)
-        }
-
-        bebidas = bebidasTotales
-            .sorted { $0.total > $1.total }
-            .map { $0.bebida }
-
-        // Keep consumicionesHoy as the full history (naming kept for compatibility), compute totals from it
-        consumicionesHoy = allConsumiciones
-
-        let cantidad = consumicionesHoy.reduce(0) { $0 + Int($1.cantidad) }
-        let coste = consumicionesHoy.reduce(0.0) { $0 + (Double($1.cantidad) * $1.precioUnitario) }
-        totalHoy = (cantidad, coste)
-    }
-    
-    private func calculateTotal() -> (Int, Double) {
-        let cantidad = consumicionesHoy.reduce(0) { $0 + Int($1.cantidad) }
-        let coste = consumicionesHoy.reduce(0.0) { $0 + (Double($1.cantidad) * $1.precioUnitario) }
-        return (cantidad, coste)
-    }
-    
-    private func getConsumicionCount(for bebida: Bebida) -> Int {
-        return consumicionesHoy
-            .filter { $0.bebidaID == bebida.id }
-            .reduce(0) { $0 + Int($1.cantidad) }
-    }
-    
-    private func getConsumicionCost(for bebida: Bebida) -> Double {
-        return consumicionesHoy
-            .filter { $0.bebidaID == bebida.id }
-            .reduce(0.0) { $0 + (Double($1.cantidad) * $1.precioUnitario) }
-    }
-    
-    private func addConsumicion(bebida: Bebida) {
-        guard let bebidaID = bebida.id else { return }
-        
-        let consumicion = Consumicion(context: CoreDataManager.shared.context)
-        consumicion.id = UUID()
-        consumicion.bebidaID = bebidaID
-        consumicion.cantidad = 1
-        consumicion.precioUnitario = bebida.precioBase
-        consumicion.timestamp = Date()
-        
-        do {
-            try CoreDataManager.shared.context.save()
-            refreshTrigger = UUID()
-            reloadData()
-        } catch {
-            print("Error adding consumicion: \(error)")
-        }
-    }
-    
-    private func decrementConsumicion(bebida: Bebida) {
-        let consumicionesBebida = consumicionesHoy.filter { $0.bebidaID == bebida.id }
-        if let primera = consumicionesBebida.first {
-            if primera.cantidad > 1 {
-                primera.cantidad -= 1
-            } else {
-                CoreDataManager.shared.context.delete(primera)
-            }
-            do {
-                try CoreDataManager.shared.context.save()
-                refreshTrigger = UUID()
-                reloadData()
-            } catch {
-                print("Error decrementing consumicion: \(error)")
-            }
-        }
-    }
-    
-    private func resetCounters(for bebida: Bebida) {
-        let consumicionesBebida = consumicionesHoy.filter { $0.bebidaID == bebida.id }
-        for consumicion in consumicionesBebida {
-            CoreDataManager.shared.context.delete(consumicion)
-        }
-        do {
-            try CoreDataManager.shared.context.save()
-            reloadData()
-        } catch {
-            print("Error resetting counters: \(error)")
-        }
-    }
-    
     private var headerView: some View {
         VStack(spacing: 12) {
             HStack {
@@ -231,7 +139,7 @@ struct ContentView: View {
                     Text("total_hoy")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    Text("\(totalHoy.cantidad) \(totalHoy.cantidad == 1 ? "drink" : "drinks")")
+                    Text("\(viewModel.totalHoy.cantidad) \(viewModel.totalHoy.cantidad == 1 ? "drink" : "drinks")")
                         .font(.title2)
                         .fontWeight(.bold)
                 }
@@ -242,7 +150,7 @@ struct ContentView: View {
                     Text("coste_label")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    Text(totalHoy.coste, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
+                    Text(viewModel.totalHoy.coste, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.orange)
