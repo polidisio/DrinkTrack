@@ -39,8 +39,7 @@ struct ConsumicionRowView: View {
                     .font(.subheadline)
                     .fontWeight(.semibold)
                 
-                let total = Double(consumicion.cantidad) * consumicion.precioUnitario
-                Text(total, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
+                Text(formatCurrency())
                     .font(.subheadline)
                     .foregroundColor(.orange)
                     .fontWeight(.medium)
@@ -54,5 +53,13 @@ struct ConsumicionRowView: View {
         formatter.timeStyle = .short
         formatter.locale = Locale.current
         return formatter.string(from: date)
+    }
+    
+    private func formatCurrency() -> String {
+        let total = Double(consumicion.cantidad) * consumicion.precioUnitario
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencyCode = Locale.current.currency?.identifier ?? "EUR"
+        return formatter.string(from: NSNumber(value: total)) ?? "\(total) €"
     }
 }

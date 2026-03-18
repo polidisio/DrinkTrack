@@ -39,8 +39,6 @@ struct ContentView: View {
                 
                 bottomActionsView
             }
-            .navigationTitle("MyBarTrack")
-            .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     if let shareURL = createShareURL() {

@@ -49,7 +49,7 @@ class BebidaImporter {
         let existingIDs = Set(existingBebidas.compactMap { $0.id })
         
         for item in items {
-            let drinkID = item.id ?? UUID()
+            let drinkID = item.id
             
             if existingIDs.contains(drinkID) {
                 // Update existing drink info
@@ -128,7 +128,7 @@ class BebidaImporter {
         
         // Create new bebidas from import + their consumiciones
         for item in items {
-            let drinkID = item.id ?? UUID()
+            let drinkID = item.id
             let newBebida = Bebida(context: context)
             newBebida.id = drinkID
             newBebida.nombre = item.nombre

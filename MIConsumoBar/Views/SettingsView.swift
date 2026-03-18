@@ -170,6 +170,13 @@ struct SettingsView: View {
     private func processImport(mode: BebidaImporter.ImportMode) {
         guard let url = pendingImportURL else { return }
         
+        defer {
+            if hasSecurityAccess {
+                url.stopAccessingSecurityScopedResource()
+                hasSecurityAccess = false
+            }
+        }
+        
         print("DEBUG: Starting import with URL: \(url)")
         print("DEBUG: Import mode: \(mode == .overwrite ? "OVERWRITE" : "MERGE")")
         
@@ -204,11 +211,6 @@ struct SettingsView: View {
         } else {
             print("DEBUG: Failed to parse export data")
             importError = "parse_error"
-        }
-        
-        if hasSecurityAccess, let url = pendingImportURL {
-            url.stopAccessingSecurityScopedResource()
-            hasSecurityAccess = false
         }
     }
 }
