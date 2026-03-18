@@ -1,5 +1,5 @@
 import XCTest
-@testable import MIConsumoBar
+@testable import MyBarTrack
 
 final class ConsumicionViewModelTests: XCTestCase {
     

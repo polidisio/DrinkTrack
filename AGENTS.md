@@ -1,6 +1,6 @@
-# AGENTS.md - DrinkTrack Development Guide
+# AGENTS.md - MyBarTrack Development Guide
 
-This file provides guidelines for agentic coding agents working on the DrinkTrack iOS app.
+This file provides guidelines for agentic coding agents working on the MyBarTrack iOS app.
 
 ## Project Overview
 
@@ -8,45 +8,45 @@ This file provides guidelines for agentic coding agents working on the DrinkTrac
 - **Swift Version**: 5.0+
 - **Xcode Version**: 15.0+
 - **Framework**: SwiftUI with CoreData
-- **Bundle ID**: com.polidisio.DrinkTrack
+- **Bundle ID**: com.polidisio.MyBarTrack
 - **Languages**: English (en), Spanish (es)
 
 ## Build Commands
 
 ### Build for Simulator
 ```bash
-xcodebuild -project DrinkTrack.xcodeproj -scheme MIConsumoBar -configuration debug -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
+xcodebuild -project MyBarTrack.xcodeproj -scheme MyBarTrack -configuration debug -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
 ```
 
 ### Build for Device
 ```bash
-xcodebuild -project DrinkTrack.xcodeproj -scheme MIConsumoBar -configuration Release -destination 'generic/platform=iOS' build
+xcodebuild -project MyBarTrack.xcodeproj -scheme MyBarTrack -configuration Release -destination 'generic/platform=iOS' build
 ```
 
 ### Build for TestFlight
 ```bash
-xcodebuild -project DrinkTrack.xcodeproj -scheme MIConsumoBar -configuration Release -archive -archive-path ./DrinkTrack.xcarchive
+xcodebuild -project MyBarTrack.xcodeproj -scheme MyBarTrack -configuration Release -archive -archive-path ./MyBarTrack.xcarchive
 ```
 
 ### Run All Tests
 ```bash
-xcodebuild test -project DrinkTrack.xcodeproj -scheme MIConsumoBar -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
+xcodebuild test -project MyBarTrack.xcodeproj -scheme MyBarTrack -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
 ```
 
 ### Run Single Test
 ```bash
-xcodebuild test -project DrinkTrack.xcodeproj -scheme MIConsumoBar -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -only-testing:DrinkTrackTests/DrinkTrackExportTypesTests/testBebidaExportDataCodable
+xcodebuild test -project MyBarTrack.xcodeproj -scheme MyBarTrack -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -only-testing:DrinkTrackTests/DrinkTrackExportTypesTests/testBebidaExportDataCodable
 ```
 
 ### Open in Xcode
 ```bash
-open DrinkTrack.xcodeproj
+open MyBarTrack.xcodeproj
 ```
 
 ## Code Structure
 
 ```
-DrinkTrack/
+MyBarTrack/
 ├── MIConsumoBar/
 │   ├── Models/
 │   │   ├── CoreDataManager.swift      # CoreData singleton
@@ -62,10 +62,11 @@ DrinkTrack/
 │   │   └── BebidaListViewModel.swift
 │   ├── Utils/
 │   │   ├── BebidaExporter.swift        # JSON export
-│   │   └── BebidaImporter.swift         # JSON import
+│   │   ├── BebidaImporter.swift         # JSON import
+│   │   └── BebidaConstants.swift        # Constants
 │   └── Resources/
 │       └── Localizable.xcstrings       # Translations
-└── DrinkTrack.xcodeproj
+└── MyBarTrack.xcodeproj
 ```
 
 ## Code Style Guidelines

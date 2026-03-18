@@ -1,0 +1,548 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		022F1CABD4CE186C39A592B1 /* AddConsumicionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293BE421587716F9232C3667 /* AddConsumicionView.swift */; };
+		089EFD81C52EB197B6FC64F2 /* DrinkTrackExportTypesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBE5AA3CB6F59AF8CADAEC2 /* DrinkTrackExportTypesTests.swift */; };
+		187D9676032722BB60B7F2D8 /* BebidaListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EBF54A9F926401E5B1DE4 /* BebidaListViewModel.swift */; };
+		1B6574BE33F7E7BDC610B28B /* ConsumicionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35400A945377120DB6BCE501 /* ConsumicionViewModelTests.swift */; };
+		2D44081D2E420C4CEC95E06F /* GestionarBebidasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919F50CE4296C876946A7489 /* GestionarBebidasView.swift */; };
+		2E272CFBA48C19AAC2CE6DD9 /* BebidaImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51249624601C4C590776AE4F /* BebidaImporter.swift */; };
+		45DEB972AAACB79E5D16D17F /* ConsumicionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FF0B2B6BFBBA522FEC934 /* ConsumicionViewModel.swift */; };
+		57BC8D85879C5B26531112F1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD47D0CB35D318B49FA5A1B4 /* CoreDataManager.swift */; };
+		671FD0FB99343BD8756BBE5E /* BebidaExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9C4D2A7BB679B949256A9 /* BebidaExporter.swift */; };
+		6ABF5637682BFB62A8066CBE /* EditarBebidaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C06E642F88BB2755C4B36 /* EditarBebidaView.swift */; };
+		6C3C322B603637B59B780A42 /* BebidaExporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D91345F17597922BF1CE9 /* BebidaExporterTests.swift */; };
+		6EC2842F82FD7A894CAC4D98 /* HistorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2F8A7ABAE6E63677320A5 /* HistorialView.swift */; };
+		924B814F58B74D7711DA75DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C24FF21E0FE1FA364FBBB66F /* Assets.xcassets */; };
+		9AFABBB04DF22C3154428857 /* ConsumptionChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66B9C099E81064DFEACB679 /* ConsumptionChartView.swift */; };
+		A0414300A4DD5D3E9AE9F5CB /* MiConsumoBar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C300DCE86201D5E1CD154279 /* MiConsumoBar.xcdatamodeld */; };
+		AE03BC79B2BD2EA5F700DEB8 /* ConsumicionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15DA57DD267B7F2365E794F /* ConsumicionRowView.swift */; };
+		BA4B18C78380705FC5627CD3 /* MiConsumoBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324D43BFC29C4E0B6E76B2AB /* MiConsumoBarApp.swift */; };
+		C6763A145EF0CA4E929D6105 /* BebidaConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8848D6339E7464CE6E4149E8 /* BebidaConstants.swift */; };
+		CBF2F01E6F02EA75BF222EBA /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 62844B7740FB6FEBC733532F /* Localizable.xcstrings */; };
+		CCDEB069063F178E5C39D7E9 /* DrinkTrackExportTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B164A02A61353AAEF3378 /* DrinkTrackExportTypes.swift */; };
+		D978093A02A7251D8BE323EB /* EmojiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD7E16FEFE85D53469AD0F /* EmojiPickerView.swift */; };
+		DE2B6281C2F5DAE066A018C9 /* BebidaCounterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09930B9CD649E37ABA726899 /* BebidaCounterCard.swift */; };
+		E8EFE29ECD09E5C9A708D8F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC2EEBB759A7603EF8AD69C7 /* LaunchScreen.storyboard */; };
+		EA645590B818199DC264FA90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA84A8572D76FA19A27F676 /* ContentView.swift */; };
+		EC16C0A0C3DFF1AC335205DE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F97DA842183BD3B22AA9B3 /* SettingsView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		76C65F7F6E40B9F125A6747A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 356B6DCFDEA30C0E307C8189 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FC806FD735966E918995490C;
+			remoteInfo = MyBarTrack;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02A2F8A7ABAE6E63677320A5 /* HistorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorialView.swift; sourceTree = "<group>"; };
+		09930B9CD649E37ABA726899 /* BebidaCounterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaCounterCard.swift; sourceTree = "<group>"; };
+		12F97DA842183BD3B22AA9B3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		1CF32520949F4F7376A0CC55 /* MiConsumoBar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MiConsumoBar.xcdatamodel; sourceTree = "<group>"; };
+		293BE421587716F9232C3667 /* AddConsumicionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConsumicionView.swift; sourceTree = "<group>"; };
+		324D43BFC29C4E0B6E76B2AB /* MiConsumoBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiConsumoBarApp.swift; sourceTree = "<group>"; };
+		35400A945377120DB6BCE501 /* ConsumicionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumicionViewModelTests.swift; sourceTree = "<group>"; };
+		3A8D91345F17597922BF1CE9 /* BebidaExporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaExporterTests.swift; sourceTree = "<group>"; };
+		3C2EBF54A9F926401E5B1DE4 /* BebidaListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaListViewModel.swift; sourceTree = "<group>"; };
+		490B164A02A61353AAEF3378 /* DrinkTrackExportTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackExportTypes.swift; sourceTree = "<group>"; };
+		51249624601C4C590776AE4F /* BebidaImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaImporter.swift; sourceTree = "<group>"; };
+		62844B7740FB6FEBC733532F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		65692E239A7EBED19C46A896 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7AA84A8572D76FA19A27F676 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8848D6339E7464CE6E4149E8 /* BebidaConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaConstants.swift; sourceTree = "<group>"; };
+		919F50CE4296C876946A7489 /* GestionarBebidasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestionarBebidasView.swift; sourceTree = "<group>"; };
+		954FF0B2B6BFBBA522FEC934 /* ConsumicionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumicionViewModel.swift; sourceTree = "<group>"; };
+		9DBE5AA3CB6F59AF8CADAEC2 /* DrinkTrackExportTypesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackExportTypesTests.swift; sourceTree = "<group>"; };
+		C15DA57DD267B7F2365E794F /* ConsumicionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumicionRowView.swift; sourceTree = "<group>"; };
+		C2329B9CD347DE822143392C /* DrinkTrackTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DrinkTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C24FF21E0FE1FA364FBBB66F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CD47D0CB35D318B49FA5A1B4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		CD9659E5CAAD068B8175DBD8 /* MyBarTrack.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MyBarTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA9C4D2A7BB679B949256A9 /* BebidaExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaExporter.swift; sourceTree = "<group>"; };
+		DEDD7E16FEFE85D53469AD0F /* EmojiPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerView.swift; sourceTree = "<group>"; };
+		E66B9C099E81064DFEACB679 /* ConsumptionChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionChartView.swift; sourceTree = "<group>"; };
+		EC2EEBB759A7603EF8AD69C7 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FA8C06E642F88BB2755C4B36 /* EditarBebidaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditarBebidaView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1B759DAD2E38DB421B41206D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CD47D0CB35D318B49FA5A1B4 /* CoreDataManager.swift */,
+				490B164A02A61353AAEF3378 /* DrinkTrackExportTypes.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2386B0244F44AC32EC9A8D0B /* MIConsumoBarTests */ = {
+			isa = PBXGroup;
+			children = (
+				3A8D91345F17597922BF1CE9 /* BebidaExporterTests.swift */,
+				35400A945377120DB6BCE501 /* ConsumicionViewModelTests.swift */,
+				9DBE5AA3CB6F59AF8CADAEC2 /* DrinkTrackExportTypesTests.swift */,
+				65692E239A7EBED19C46A896 /* Info.plist */,
+			);
+			path = MIConsumoBarTests;
+			sourceTree = "<group>";
+		};
+		75A7B5620D10FC6D4B660FD1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				62844B7740FB6FEBC733532F /* Localizable.xcstrings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		95E9689D5CAFDF56AB1EA0F2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C2329B9CD347DE822143392C /* DrinkTrackTests.xctest */,
+				CD9659E5CAAD068B8175DBD8 /* MyBarTrack.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		99229B0400505E9921A079D6 = {
+			isa = PBXGroup;
+			children = (
+				F8F69CD535D5D3AD761EF1A9 /* MIConsumoBar */,
+				2386B0244F44AC32EC9A8D0B /* MIConsumoBarTests */,
+				95E9689D5CAFDF56AB1EA0F2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B8DF0EF3C300E82B025B50B4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3C2EBF54A9F926401E5B1DE4 /* BebidaListViewModel.swift */,
+				954FF0B2B6BFBBA522FEC934 /* ConsumicionViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C1FE2EA999AB89C78FE8C6AA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				293BE421587716F9232C3667 /* AddConsumicionView.swift */,
+				09930B9CD649E37ABA726899 /* BebidaCounterCard.swift */,
+				C15DA57DD267B7F2365E794F /* ConsumicionRowView.swift */,
+				E66B9C099E81064DFEACB679 /* ConsumptionChartView.swift */,
+				7AA84A8572D76FA19A27F676 /* ContentView.swift */,
+				FA8C06E642F88BB2755C4B36 /* EditarBebidaView.swift */,
+				DEDD7E16FEFE85D53469AD0F /* EmojiPickerView.swift */,
+				919F50CE4296C876946A7489 /* GestionarBebidasView.swift */,
+				02A2F8A7ABAE6E63677320A5 /* HistorialView.swift */,
+				12F97DA842183BD3B22AA9B3 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C52D6A9A837946534F03A511 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8848D6339E7464CE6E4149E8 /* BebidaConstants.swift */,
+				DCA9C4D2A7BB679B949256A9 /* BebidaExporter.swift */,
+				51249624601C4C590776AE4F /* BebidaImporter.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F8F69CD535D5D3AD761EF1A9 /* MIConsumoBar */ = {
+			isa = PBXGroup;
+			children = (
+				C24FF21E0FE1FA364FBBB66F /* Assets.xcassets */,
+				EC2EEBB759A7603EF8AD69C7 /* LaunchScreen.storyboard */,
+				C300DCE86201D5E1CD154279 /* MiConsumoBar.xcdatamodeld */,
+				324D43BFC29C4E0B6E76B2AB /* MiConsumoBarApp.swift */,
+				1B759DAD2E38DB421B41206D /* Models */,
+				75A7B5620D10FC6D4B660FD1 /* Resources */,
+				C52D6A9A837946534F03A511 /* Utils */,
+				B8DF0EF3C300E82B025B50B4 /* ViewModels */,
+				C1FE2EA999AB89C78FE8C6AA /* Views */,
+			);
+			path = MIConsumoBar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5482D705C86FC7F084D36FC8 /* DrinkTrackTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E507182794C03643F7C0A44E /* Build configuration list for PBXNativeTarget "DrinkTrackTests" */;
+			buildPhases = (
+				05CC7AF31BFD10E12CAC4E59 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37098EE8AD54A59F16E9150A /* PBXTargetDependency */,
+			);
+			name = DrinkTrackTests;
+			packageProductDependencies = (
+			);
+			productName = DrinkTrackTests;
+			productReference = C2329B9CD347DE822143392C /* DrinkTrackTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FC806FD735966E918995490C /* MyBarTrack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA985068BB1C0E6D9201D446 /* Build configuration list for PBXNativeTarget "MyBarTrack" */;
+			buildPhases = (
+				95D361416FE8967FC5C2E64B /* Sources */,
+				B8810C2145996A4F90025218 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyBarTrack;
+			packageProductDependencies = (
+			);
+			productName = MyBarTrack;
+			productReference = CD9659E5CAAD068B8175DBD8 /* MyBarTrack.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		356B6DCFDEA30C0E307C8189 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					FC806FD735966E918995490C = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1B5F5A91C0FD98C166CC805B /* Build configuration list for PBXProject "MyBarTrack" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				es,
+			);
+			mainGroup = 99229B0400505E9921A079D6;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5482D705C86FC7F084D36FC8 /* DrinkTrackTests */,
+				FC806FD735966E918995490C /* MyBarTrack */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B8810C2145996A4F90025218 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				924B814F58B74D7711DA75DF /* Assets.xcassets in Resources */,
+				E8EFE29ECD09E5C9A708D8F9 /* LaunchScreen.storyboard in Resources */,
+				CBF2F01E6F02EA75BF222EBA /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05CC7AF31BFD10E12CAC4E59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C3C322B603637B59B780A42 /* BebidaExporterTests.swift in Sources */,
+				1B6574BE33F7E7BDC610B28B /* ConsumicionViewModelTests.swift in Sources */,
+				089EFD81C52EB197B6FC64F2 /* DrinkTrackExportTypesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95D361416FE8967FC5C2E64B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				022F1CABD4CE186C39A592B1 /* AddConsumicionView.swift in Sources */,
+				C6763A145EF0CA4E929D6105 /* BebidaConstants.swift in Sources */,
+				DE2B6281C2F5DAE066A018C9 /* BebidaCounterCard.swift in Sources */,
+				671FD0FB99343BD8756BBE5E /* BebidaExporter.swift in Sources */,
+				2E272CFBA48C19AAC2CE6DD9 /* BebidaImporter.swift in Sources */,
+				187D9676032722BB60B7F2D8 /* BebidaListViewModel.swift in Sources */,
+				AE03BC79B2BD2EA5F700DEB8 /* ConsumicionRowView.swift in Sources */,
+				45DEB972AAACB79E5D16D17F /* ConsumicionViewModel.swift in Sources */,
+				9AFABBB04DF22C3154428857 /* ConsumptionChartView.swift in Sources */,
+				EA645590B818199DC264FA90 /* ContentView.swift in Sources */,
+				57BC8D85879C5B26531112F1 /* CoreDataManager.swift in Sources */,
+				CCDEB069063F178E5C39D7E9 /* DrinkTrackExportTypes.swift in Sources */,
+				6ABF5637682BFB62A8066CBE /* EditarBebidaView.swift in Sources */,
+				D978093A02A7251D8BE323EB /* EmojiPickerView.swift in Sources */,
+				2D44081D2E420C4CEC95E06F /* GestionarBebidasView.swift in Sources */,
+				6EC2842F82FD7A894CAC4D98 /* HistorialView.swift in Sources */,
+				A0414300A4DD5D3E9AE9F5CB /* MiConsumoBar.xcdatamodeld in Sources */,
+				BA4B18C78380705FC5627CD3 /* MiConsumoBarApp.swift in Sources */,
+				EC16C0A0C3DFF1AC335205DE /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		37098EE8AD54A59F16E9150A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FC806FD735966E918995490C /* MyBarTrack */;
+			targetProxy = 76C65F7F6E40B9F125A6747A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0A45570FEE05065C06B2AC71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6625751261B41E94EA9B9B30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6CD6858A29890B8C0CD5F81C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MIConsumoBarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrackTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBarTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyBarTrack";
+			};
+			name = Release;
+		};
+		79EC149C7A7CB1A241A41E2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "MyBarTrack-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		805FD9686682819807101511 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MIConsumoBarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrackTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBarTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyBarTrack";
+			};
+			name = Debug;
+		};
+		A7DDC259995467CCA03B75D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "MyBarTrack-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1B5F5A91C0FD98C166CC805B /* Build configuration list for PBXProject "MyBarTrack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A45570FEE05065C06B2AC71 /* Debug */,
+				6625751261B41E94EA9B9B30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E507182794C03643F7C0A44E /* Build configuration list for PBXNativeTarget "DrinkTrackTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				805FD9686682819807101511 /* Debug */,
+				6CD6858A29890B8C0CD5F81C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EA985068BB1C0E6D9201D446 /* Build configuration list for PBXNativeTarget "MyBarTrack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7DDC259995467CCA03B75D3 /* Debug */,
+				79EC149C7A7CB1A241A41E2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C300DCE86201D5E1CD154279 /* MiConsumoBar.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1CF32520949F4F7376A0CC55 /* MiConsumoBar.xcdatamodel */,
+			);
+			currentVersion = 1CF32520949F4F7376A0CC55 /* MiConsumoBar.xcdatamodel */;
+			path = MiConsumoBar.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 356B6DCFDEA30C0E307C8189 /* Project object */;
+}
