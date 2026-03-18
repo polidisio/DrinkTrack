@@ -14,11 +14,11 @@ struct EditarBebidaView: View {
     @State private var nombre: String = ""
     @State private var emoji: String = "📦"
     @State private var precio: String = ""
-    @State private var categoria: String = "Alcohol"
+    @State private var categoria: String = BebidaCategoria.alcohol.rawValue
     
     private let categorias: [(key: String, value: String)] = [
-        ("categoria_alcohol", "Alcohol"),
-        ("categoria_sin_alcohol", "Sin Alcohol")
+        (BebidaCategoria.alcohol.localizedKey, BebidaCategoria.alcohol.rawValue),
+        (BebidaCategoria.sinAlcohol.localizedKey, BebidaCategoria.sinAlcohol.rawValue)
     ]
     
     private var localizedCategoria: String {
@@ -43,7 +43,7 @@ struct EditarBebidaView: View {
                 _nombre = State(initialValue: bebida.nombre ?? "")
                 _emoji = State(initialValue: bebida.emoji ?? "📦")
                 _precio = State(initialValue: String(format: "%.2f", bebida.precioBase))
-                _categoria = State(initialValue: bebida.categoria ?? "Alcohol")
+                _categoria = State(initialValue: bebida.categoria ?? BebidaCategoria.alcohol.rawValue)
                 bebidaID = id
             }
         }

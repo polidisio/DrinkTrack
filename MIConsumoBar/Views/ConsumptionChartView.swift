@@ -46,7 +46,7 @@ struct ConsumptionChartView: View {
             let dayConsumiciones = filterConsumiciones(for: date)
             let hasAlcohol = dayConsumiciones.contains { consumicion in
                 guard let bebida = bebidas.first(where: { $0.id == consumicion.bebidaID }) else { return false }
-                return bebida.categoria == "Alcohol"
+                return bebida.categoria == BebidaCategoria.alcohol.rawValue
             }
             
             return DailyConsumption(

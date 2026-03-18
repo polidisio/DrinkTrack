@@ -38,16 +38,7 @@ class CoreDataManager {
         let existingBebidas = fetchBebidas()
         guard existingBebidas.isEmpty else { return }
         
-        let bebidasPredeterminadas: [(nombre: String, emoji: String, precio: Double, categoria: String)] = [
-            ("Cerveza", "🍺", 3.5, "Alcohol"),
-            ("Refresco", "🥤", 2.0, "Sin Alcohol"),
-            ("Agua", "💧", 1.5, "Sin Alcohol"),
-            ("Vino", "🍷", 4.0, "Alcohol"),
-            ("Copa", "🍸", 6.0, "Alcohol"),
-            ("Café", "☕", 1.8, "Sin Alcohol")
-        ]
-        
-        for (index, bebidaData) in bebidasPredeterminadas.enumerated() {
+        for (index, bebidaData) in BebidaConstants.defaultBebidas.enumerated() {
             let request: NSFetchRequest<Bebida> = Bebida.fetchRequest()
             request.predicate = NSPredicate(format: "nombre == %@", bebidaData.nombre)
             
@@ -58,7 +49,7 @@ class CoreDataManager {
                 bebida.nombre = bebidaData.nombre
                 bebida.emoji = bebidaData.emoji
                 bebida.precioBase = bebidaData.precio
-                bebida.categoria = bebidaData.categoria
+                bebida.categoria = bebidaData.categoria.rawValue
                 bebida.orden = Int32(index + 1)
             }
         }
@@ -80,11 +71,7 @@ class CoreDataManager {
     }
     
     func localizedCategoria(for categoria: String) -> String {
-        let catMap: [String: String] = [
-            "Alcohol": "categoria_alcohol",
-            "Sin Alcohol": "categoria_sin_alcohol"
-        ]
-        guard let key = catMap[categoria] else { return categoria }
+        guard let key = BebidaConstants.categoriaMapping[categoria] else { return categoria }
         return NSLocalizedString(key, comment: "Category")
     }
     

@@ -190,7 +190,7 @@ struct AddConsumicionView: View {
         
         let currentNombre = bebida.nombre ?? ""
         let currentEmoji = bebida.emoji ?? "📦"
-        let currentCategoria = bebida.categoria ?? "Alcohol"
+        let currentCategoria = bebida.categoria ?? BebidaCategoria.alcohol.rawValue
         
         CoreDataManager.shared.updateBebidaByID(
             bebidaID,
