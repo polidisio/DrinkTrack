@@ -1,5 +1,11 @@
 import SwiftUI
 
+extension Array {
+    subscript(safe index: Index) -> Element? {
+        indices.contains(index) ? self[index] : nil
+    }
+}
+
 struct AddConsumicionView: View {
     @Environment(\.dismiss) var dismiss
     let onSave: () -> Void
@@ -145,28 +151,28 @@ struct AddConsumicionView: View {
             bebidas = []
             return
         }
-        
+
+        let previousID = selectedBebida?.id
         bebidas = freshBebidas
-        
-        if selectedBebidaIndex >= bebidas.count {
+
+        if let prevID = previousID, let index = bebidas.firstIndex(where: { $0.id == prevID }) {
+            selectedBebidaIndex = index
+        } else if selectedBebidaIndex >= bebidas.count {
             selectedBebidaIndex = 0
         }
-        
-        if let index = bebidas.indices.contains(selectedBebidaIndex) ? selectedBebidaIndex : nil {
-            let currentBebida = bebidas[index]
-            if let freshBebida = CoreDataManager.shared.fetchBebidas().first(where: { $0.id == currentBebida.id }) {
-                precioUnitario = String(format: "%.2f", freshBebida.precioBase)
-            }
+
+        if let currentBebida = bebidas[safe: selectedBebidaIndex],
+           let freshBebida = CoreDataManager.shared.fetchBebidas().first(where: { $0.id == currentBebida.id }) {
+            precioUnitario = String(format: "%.2f", freshBebida.precioBase)
         }
     }
-    
+
     private func updatePrecioUnitario() {
-        if let index = bebidas.indices.contains(selectedBebidaIndex) ? selectedBebidaIndex : nil {
-            let currentBebida = bebidas[index]
-            if let freshBebida = CoreDataManager.shared.fetchBebidas().first(where: { $0.id == currentBebida.id }) {
-                precioUnitario = String(format: "%.2f", freshBebida.precioBase)
-            }
+        guard let currentBebida = bebidas[safe: selectedBebidaIndex],
+              let freshBebida = CoreDataManager.shared.fetchBebidas().first(where: { $0.id == currentBebida.id }) else {
+            return
         }
+        precioUnitario = String(format: "%.2f", freshBebida.precioBase)
     }
     
     private func saveConsumicion() {
