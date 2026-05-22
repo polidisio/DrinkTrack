@@ -59,12 +59,7 @@ class ConsumicionViewModel: ObservableObject {
     func decrementConsumicion(bebida: Bebida) {
         let consumicionesBebida = consumicionesHoy.filter { $0.bebidaID == bebida.id }
         if let primera = consumicionesBebida.first {
-            if primera.cantidad > 1 {
-                primera.cantidad -= 1
-                coreDataManager.save()
-            } else {
-                coreDataManager.deleteConsumicion(primera)
-            }
+            coreDataManager.decrementConsumicionQuantity(primera)
             refreshTodayData()
         }
     }
