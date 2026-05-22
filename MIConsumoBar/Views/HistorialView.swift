@@ -185,12 +185,6 @@ struct HistorialView: View {
         formatter.locale = Locale.current
         return formatter.string(from: date)
     }
-    
-    private func isYesterday(_ date: Date) -> Bool {
-        let calendar = Calendar.current
-        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())!
-        return calendar.isDate(date, inSameDayAs: yesterday)
-    }
 }
 
 struct DateButtonStyle: ButtonStyle {

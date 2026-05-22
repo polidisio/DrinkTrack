@@ -210,6 +210,17 @@ class CoreDataManager {
         context.delete(consumicion)
         save()
     }
+
+    /// Decrements the quantity of a consumicion by 1, deleting it if quantity reaches 0.
+    /// Prefer this over direct property mutation to keep mutation and persistence together.
+    func decrementConsumicionQuantity(_ consumicion: Consumicion) {
+        if consumicion.cantidad > 1 {
+            consumicion.cantidad -= 1
+            save()
+        } else {
+            deleteConsumicion(consumicion)
+        }
+    }
     
     func cleanupOldConsumiciones() {
         let retentionDays = UserDefaults.standard.integer(forKey: "retentionDays")
