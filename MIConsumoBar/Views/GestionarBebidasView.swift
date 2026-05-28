@@ -5,7 +5,9 @@ struct GestionarBebidasView: View {
     @State private var bebidas: [Bebida] = []
     @State private var showingNueva = false
     @State private var editingBebida: Bebida?
-    
+    @State private var showingDeleteAlert = false
+    @State private var bebidaToDelete: Bebida?
+
     let onDismiss: () -> Void
     
     var body: some View {
@@ -31,7 +33,12 @@ struct GestionarBebidasView: View {
                     .buttonStyle(PlainButtonStyle())
                     .swipeActions(edge: .trailing) {
                         Button(role: .destructive) {
-                            deleteBebida(bebida)
+                            if CoreDataManager.shared.isBebidaDefault(bebida) {
+                                bebidaToDelete = bebida
+                                showingDeleteAlert = true
+                            } else {
+                                deleteBebida(bebida)
+                            }
                         } label: {
                             Label("eliminar_button", systemImage: "trash")
                         }
@@ -65,6 +72,14 @@ struct GestionarBebidasView: View {
                         reloadData()
                     }
                 }
+            }
+            .alert("eliminar_default_title", isPresented: $showingDeleteAlert, presenting: bebidaToDelete) { bebida in
+                Button("cancelar_button", role: .cancel) {}
+                Button("eliminar_button", role: .destructive) {
+                    deleteBebida(bebida)
+                }
+            } message: { bebida in
+                Text(String(format: NSLocalizedString("eliminar_default_message", comment: ""), bebida.nombre ?? ""))
             }
         }
         .onAppear {

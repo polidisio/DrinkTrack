@@ -2,10 +2,16 @@ import SwiftUI
 
 struct ConsumicionRowView: View {
     let consumicion: Consumicion
-    
-    private let coreDataManager = CoreDataManager.shared
+    let bebidasLookup: [UUID: Bebida]
+
+    init(consumicion: Consumicion, bebidasLookup: [UUID: Bebida] = [:]) {
+        self.consumicion = consumicion
+        self.bebidasLookup = bebidasLookup
+    }
+
     private var bebida: Bebida? {
-        coreDataManager.fetchBebidas().first { $0.id == consumicion.bebidaID }
+        guard let bebidaID = consumicion.bebidaID else { return nil }
+        return bebidasLookup[bebidaID]
     }
     
     var body: some View {
@@ -14,7 +20,7 @@ struct ConsumicionRowView: View {
                 HStack(spacing: 8) {
                     Text(bebida?.emoji ?? "🥤")
                         .font(.title2)
-                    Text(coreDataManager.localizedNombre(for: bebida?.nombre ?? ""))
+                    Text(CoreDataManager.shared.localizedNombre(for: bebida?.nombre ?? ""))
                         .font(.headline)
                 }
                 

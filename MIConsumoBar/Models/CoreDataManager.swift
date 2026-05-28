@@ -222,6 +222,23 @@ class CoreDataManager {
         }
     }
     
+    func fetchConsumiciones(lastDays: Int) -> [Consumicion] {
+        guard lastDays > 0 else { return fetchAllConsumiciones() }
+
+        let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
+        let calendar = Calendar.current
+        let startDate = calendar.startOfDay(for: calendar.date(byAdding: .day, value: -(lastDays - 1), to: Date())!)
+        request.predicate = NSPredicate(format: "timestamp >= %@", startDate as NSDate)
+        request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+
+        do {
+            return try context.fetch(request)
+        } catch {
+            print("Error fetching consumiciones for last \(lastDays) days: \(error)")
+            return []
+        }
+    }
+
     func cleanupOldConsumiciones() {
         let retentionDays = UserDefaults.standard.integer(forKey: "retentionDays")
         
@@ -246,6 +263,19 @@ class CoreDataManager {
     
     // MARK: - Statistics
     
+    func getTotalSpending(since date: Date) -> Double {
+        let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
+        request.predicate = NSPredicate(format: "timestamp >= %@", date as NSDate)
+
+        do {
+            let consumiciones = try context.fetch(request)
+            return consumiciones.reduce(0.0) { $0 + (Double($1.cantidad) * $1.precioUnitario) }
+        } catch {
+            print("Error fetching spending since date: \(error)")
+            return 0
+        }
+    }
+
     func getTotalToday() -> (cantidad: Int, coste: Double) {
         let today = Date()
         let consumiciones = fetchConsumiciones(for: today)

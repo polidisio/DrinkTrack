@@ -6,11 +6,18 @@ struct DailyConsumption: Identifiable {
     let date: Date
     let count: Int
     let hasAlcohol: Bool
-    
+
     var shortDayName: String {
         let formatter = DateFormatter()
         formatter.locale = Locale.current
         return formatter.shortWeekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
+    }
+
+    var shortDate: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.dateFormat = "d MMM"
+        return formatter.string(from: date)
     }
 }
 
@@ -25,30 +32,44 @@ struct DailySpending: Identifiable {
     let id = UUID()
     let date: Date
     let total: Double
-    
+
     var shortDayName: String {
         let formatter = DateFormatter()
         formatter.locale = Locale.current
         return formatter.shortWeekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
+    }
+
+    var shortDate: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.dateFormat = "d MMM"
+        return formatter.string(from: date)
     }
 }
 
 struct ConsumptionChartView: View {
     let consumiciones: [Consumicion]
     let bebidas: [Bebida]
-    
+    let dayRange: Int
+
+    init(consumiciones: [Consumicion], bebidas: [Bebida], dayRange: Int = 7) {
+        self.consumiciones = consumiciones
+        self.bebidas = bebidas
+        self.dayRange = max(1, dayRange)
+    }
+
     private var dailyData: [DailyConsumption] {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
-        
-        return (0..<7).map { dayOffset in
+
+        return (0..<dayRange).map { dayOffset in
             let date = calendar.date(byAdding: .day, value: -dayOffset, to: today)!
             let dayConsumiciones = filterConsumiciones(for: date)
             let hasAlcohol = dayConsumiciones.contains { consumicion in
                 guard let bebida = bebidas.first(where: { $0.id == consumicion.bebidaID }) else { return false }
                 return bebida.categoria == BebidaCategoria.alcohol.rawValue
             }
-            
+
             return DailyConsumption(
                 date: date,
                 count: dayConsumiciones.reduce(0) { $0 + Int($1.cantidad) },
@@ -56,16 +77,13 @@ struct ConsumptionChartView: View {
             )
         }.reversed()
     }
-    
+
     private var typeData: [TypeConsumption] {
-        let lastWeekStart = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
-        let lastWeekConsumiciones = consumiciones.filter { ($0.timestamp ?? Date()) >= lastWeekStart }
-        
-        return bebidas.map { bebida in
-            let count = lastWeekConsumiciones
+        bebidas.map { bebida in
+            let count = consumiciones
                 .filter { $0.bebidaID == bebida.id }
                 .reduce(0) { $0 + Int($1.cantidad) }
-            
+
             return TypeConsumption(
                 nombre: CoreDataManager.shared.localizedNombre(for: bebida.nombre ?? ""),
                 emoji: bebida.emoji ?? "",
@@ -73,70 +91,83 @@ struct ConsumptionChartView: View {
             )
         }.filter { $0.count > 0 }.sorted { $0.count > $1.count }
     }
-    
+
     private var spendingData: [DailySpending] {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
-        
-        return (0..<7).map { dayOffset in
+
+        return (0..<dayRange).map { dayOffset in
             let date = calendar.date(byAdding: .day, value: -dayOffset, to: today)!
             let dayConsumiciones = filterConsumiciones(for: date)
             let total = dayConsumiciones.reduce(0.0) {
                 $0 + (Double($1.cantidad) * $1.precioUnitario)
             }
-            
+
             return DailySpending(date: date, total: total)
         }.reversed()
     }
-    
+
     private var totalConsumption: Int {
         dailyData.reduce(0) { $0 + $1.count }
     }
-    
+
     private var totalSpending: Double {
         spendingData.reduce(0) { $0 + $1.total }
     }
-    
+
+    private var averagePerDay: Double {
+        guard dayRange > 0 else { return 0 }
+        return Double(totalConsumption) / Double(dayRange)
+    }
+
+    private var mostConsumedBebida: TypeConsumption? {
+        typeData.max(by: { $0.count < $1.count })
+    }
+
     private var currencySymbol: String {
         Locale.current.currencySymbol ?? "€"
     }
-    
+
     private func filterConsumiciones(for date: Date) -> [Consumicion] {
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: date)
         guard let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
             return []
         }
-        
+
         return consumiciones.filter { consumicion in
             guard let timestamp = consumicion.timestamp else { return false }
             return timestamp >= startOfDay && timestamp < endOfDay
         }
     }
-    
+
     var body: some View {
         VStack(spacing: 24) {
             if dailyData.allSatisfy({ $0.count == 0 }) && typeData.isEmpty {
                 emptyStateView
             } else {
                 summaryView
-                
+
+                if totalConsumption > 0 && dayRange <= 7 {
+                    statsRow
+                }
+
                 if !dailyData.isEmpty && dailyData.contains(where: { $0.count > 0 }) {
                     dailyConsumptionChart
                 }
-                
+
                 if !typeData.isEmpty {
                     typeConsumptionChart
                 }
-                
-                if !spendingData.isEmpty {
+
+                if !spendingData.isEmpty && spendingData.contains(where: { $0.total > 0 }) {
                     spendingChart
                 }
             }
         }
         .padding()
     }
-    
+
     private var emptyStateView: some View {
         VStack(spacing: 12) {
             Image(systemName: "chart.bar.xaxis")
@@ -149,7 +180,7 @@ struct ConsumptionChartView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 40)
     }
-    
+
     private var summaryView: some View {
         HStack(spacing: 16) {
             SummaryCard(
@@ -158,7 +189,7 @@ struct ConsumptionChartView: View {
                 icon: "cup.and.saucer.fill",
                 color: .orange
             )
-            
+
             SummaryCard(
                 title: "chart_total_spending",
                 value: String(format: "%.2f \(currencySymbol)", totalSpending),
@@ -167,20 +198,40 @@ struct ConsumptionChartView: View {
             )
         }
     }
-    
+
+    private var statsRow: some View {
+        HStack(spacing: 16) {
+            SummaryCard(
+                title: String(format: NSLocalizedString("chart_avg_day", comment: ""), dayRange),
+                value: String(format: "%.1f", averagePerDay),
+                icon: "chart.bar.fill",
+                color: .blue
+            )
+
+            if let top = mostConsumedBebida {
+                SummaryCard(
+                    title: NSLocalizedString("chart_most_drunk", comment: ""),
+                    value: "\(top.emoji) \(top.count)",
+                    icon: "star.fill",
+                    color: .yellow
+                )
+            }
+        }
+    }
+
     private var dailyConsumptionChart: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("chart_daily_consumption")
                 .font(.headline)
-            
+
             Chart(dailyData) { day in
                 BarMark(
                     x: .value("chart_quantity", day.count),
-                    y: .value("chart_day", day.shortDayName)
+                    y: .value("chart_day", dayRange <= 7 ? day.shortDayName : day.shortDate)
                 )
                 .foregroundStyle(day.hasAlcohol ? Color.orange : Color.blue)
             }
-            .frame(height: CGFloat(dailyData.count * 40))
+            .frame(height: max(150, CGFloat(dailyData.count * 30)))
             .chartXAxis {
                 AxisMarks(position: .bottom)
             }
@@ -189,12 +240,12 @@ struct ConsumptionChartView: View {
         .background(Color(uiColor: .secondarySystemBackground))
         .cornerRadius(12)
     }
-    
+
     private var typeConsumptionChart: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("chart_by_type")
                 .font(.headline)
-            
+
             if typeData.isEmpty {
                 Text("chart_no_drinks_yet")
                     .font(.subheadline)
@@ -215,20 +266,20 @@ struct ConsumptionChartView: View {
         .background(Color(uiColor: .secondarySystemBackground))
         .cornerRadius(12)
     }
-    
+
     private var spendingChart: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("chart_spending")
                 .font(.headline)
-            
+
             Chart(spendingData) { day in
                 BarMark(
-                    x: .value("chart_day", day.shortDayName),
+                    x: .value("chart_day", dayRange <= 7 ? day.shortDayName : day.shortDate),
                     y: .value("chart_amount", day.total)
                 )
                 .foregroundStyle(Color.green.gradient)
             }
-            .frame(height: 150)
+            .frame(height: max(150, CGFloat(spendingData.count * 30)))
             .chartYAxis {
                 AxisMarks(position: .leading) { value in
                     AxisValueLabel {
@@ -251,17 +302,17 @@ struct SummaryCard: View {
     let value: String
     let icon: String
     let color: Color
-    
+
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
                 .font(.title2)
                 .foregroundColor(color)
-            
+
             Text(value)
                 .font(.title2)
                 .fontWeight(.bold)
-            
+
             Text(title)
                 .font(.caption)
                 .foregroundColor(.secondary)

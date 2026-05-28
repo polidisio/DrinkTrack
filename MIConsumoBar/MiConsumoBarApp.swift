@@ -43,13 +43,18 @@ struct MiConsumoBarApp: App {
 
 class ImportViewModel: ObservableObject {
     var importMode: BebidaImporter.ImportMode = .merge
-    
+    private var hasSecurityAccess = false
+
     func processImport(url: URL?) {
         guard let url = url else { return }
-        
+
+        // Security-scoped resource access (needed for AirDrop, Files app, etc.)
+        let securityAccessed = url.startAccessingSecurityScopedResource()
+        hasSecurityAccess = securityAccessed
+
         if let exportData = BebidaImporter.shared.parseExportData(from: url) {
             let context = CoreDataManager.shared.context
-            
+
             switch importMode {
             case .merge:
                 BebidaImporter.shared.mergeBebidasSync(exportData.bebidas, context: context)
@@ -58,8 +63,13 @@ class ImportViewModel: ObservableObject {
             case .cancel:
                 break
             }
-            
+
             print("Bebidas importadas exitosamente")
+        }
+
+        if securityAccessed {
+            url.stopAccessingSecurityScopedResource()
+            hasSecurityAccess = false
         }
     }
 }

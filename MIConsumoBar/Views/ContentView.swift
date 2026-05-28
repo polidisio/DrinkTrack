@@ -1,6 +1,4 @@
 import SwiftUI
-import CoreData
-import UniformTypeIdentifiers
 
 struct ContentView: View {
     @State private var showingHistorial = false
@@ -9,7 +7,9 @@ struct ContentView: View {
     @State private var refreshTrigger = UUID()
     @StateObject private var viewModel = ConsumicionViewModel()
     @Environment(\.scenePhase) private var scenePhase
-    
+    @AppStorage("budgetAmount") private var budgetAmount: Double = 0
+    @AppStorage("budgetPeriod") private var budgetPeriod: String = "monthly"
+
     private var sortedBebidas: [Bebida] {
         viewModel.bebidas.sorted { bebida1, bebida2 in
             let count1 = viewModel.getConsumicionCount(for: bebida1)
@@ -54,7 +54,11 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if let shareURL = createShareURL() {
+                    let exportItems = sortedBebidas.map { bebida in
+                        let cantidad = viewModel.getConsumicionCount(for: bebida)
+                        return BebidaExporter.shared.createExportItem(from: bebida, cantidad: cantidad)
+                    }
+                    if let shareURL = BebidaExporter.shared.exportBebidas(exportItems) {
                         ShareLink(
                             item: shareURL,
                             subject: Text("Exportación de Bebidas"),
@@ -109,39 +113,35 @@ struct ContentView: View {
         }
     }
     
-    private func createShareURL() -> URL? {
-        let exportItems = sortedBebidas.map { bebida in
-            let cantidad = viewModel.getConsumicionCount(for: bebida)
-            return BebidaExportItem(
-                id: bebida.id ?? UUID(),
-                nombre: bebida.nombre ?? "",
-                emoji: bebida.emoji ?? "",
-                precioBase: bebida.precioBase,
-                categoria: bebida.categoria ?? "",
-                orden: bebida.orden,
-                cantidad: cantidad
-            )
+    private var periodStart: Date {
+        let calendar = Calendar.current
+        if budgetPeriod == "weekly" {
+            return calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())) ?? Date()
+        } else {
+            return calendar.date(from: calendar.dateComponents([.year, .month], from: Date())) ?? Date()
         }
-        let exportData = BebidaExportData(version: "1.0", exportDate: Date(), bebidas: exportItems)
-        
-        guard let jsonData = try? JSONEncoder().encode(exportData) else {
-            return nil
-        }
-        
-        let tempDir = FileManager.default.temporaryDirectory
-        let fileName = "bebidas_\(UUID().uuidString).json"
-        let fileURL = tempDir.appendingPathComponent(fileName)
-        
-        do {
-            try jsonData.write(to: fileURL)
-            return fileURL
-        } catch {
-            return nil
         }
     }
-    
+
+    private var periodSpending: Double {
+        CoreDataManager.shared.getTotalSpending(since: periodStart)
+    }
+
+    private var budgetProgress: Double {
+        guard budgetAmount > 0 else { return 0 }
+        return min(periodSpending / budgetAmount, 1.5)
+    }
+
+    private var budgetColor: Color {
+        guard budgetAmount > 0 else { return .clear }
+        let progress = periodSpending / budgetAmount
+        if progress >= 1.0 { return .red }
+        if progress >= 0.8 { return .orange }
+        return .green
+    }
+
     private var headerView: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 8) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("total_hoy")
@@ -151,9 +151,9 @@ struct ContentView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                 }
-                
+
                 Spacer()
-                
+
                 VStack(alignment: .trailing, spacing: 4) {
                     Text("coste_label")
                         .font(.subheadline)
@@ -165,11 +165,41 @@ struct ContentView: View {
                 }
             }
             .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .background(Color(uiColor: .secondarySystemBackground))
-            .cornerRadius(12)
+            .padding(.top, 12)
+
+            if budgetAmount > 0 {
+                budgetProgressView
+            }
+        }
+        .padding(.bottom, 8)
+        .padding(.horizontal, 16)
+        .background(Color(uiColor: .secondarySystemBackground))
+        .cornerRadius(12)
+        .padding(.horizontal, 16)
+        .padding(.top, 8)
+    }
+
+    private var budgetProgressView: some View {
+        VStack(spacing: 4) {
+            HStack {
+                Text(String(format: "%.1f %@ / %.1f %@",
+                    periodSpending,
+                    Locale.current.currencySymbol ?? "€",
+                    budgetAmount,
+                    Locale.current.currencySymbol ?? "€"))
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Spacer()
+                Text("\(Int(budgetProgress * 100))%")
+                    .font(.caption)
+                    .foregroundColor(budgetColor)
+                    .fontWeight(.semibold)
+            }
             .padding(.horizontal, 16)
-            .padding(.top, 8)
+
+            ProgressView(value: budgetProgress, total: 1.0)
+                .tint(budgetColor)
+                .padding(.horizontal, 16)
         }
     }
     

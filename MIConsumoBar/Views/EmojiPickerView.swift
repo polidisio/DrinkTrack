@@ -151,16 +151,7 @@ struct EmojiPickerView: View {
     private var allEmojis: [String] {
         categories.flatMap { $0.emojis }
     }
-    
-    private var filteredEmojis: [String] {
-        if searchText.isEmpty {
-            return allEmojis
-        }
-        return allEmojis.filter { _ in
-            true
-        }
-    }
-    
+
     private var filteredCategories: [EmojiCategory] {
         if searchText.isEmpty {
             return categories
@@ -208,7 +199,7 @@ struct EmojiPickerView: View {
                     }) {
                         if expandedCategories.contains(category.name) || !searchText.isEmpty {
                             LazyVGrid(columns: [GridItem(.adaptive(minimum: 44))], spacing: 8) {
-                                ForEach(searchText.isEmpty ? category.emojis : category.emojis.filter { _ in true }, id: \.self) { emoji in
+                                ForEach(category.emojis, id: \.self) { emoji in
                                     Text(emoji)
                                         .font(.system(size: 28))
                                         .frame(width: 44, height: 44)

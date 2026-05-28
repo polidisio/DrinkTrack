@@ -5,6 +5,8 @@ import UniformTypeIdentifiers
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @AppStorage("retentionDays") private var retentionDays: Int = 0
+    @AppStorage("budgetAmount") private var budgetAmount: Double = 0
+    @AppStorage("budgetPeriod") private var budgetPeriod: String = "monthly"
     @State private var showingClearAlert = false
     @State private var showingImportPicker = false
     @State private var showingImportAlert = false
@@ -54,6 +56,24 @@ struct SettingsView: View {
                 } footer: {
                     Text("retention_footer")
                 }
+
+                Section {
+                    HStack {
+                        Image(systemName: "target")
+                            .foregroundColor(.orange)
+                        TextField("budget_amount_placeholder", value: $budgetAmount, format: .number)
+                            .keyboardType(.decimalPad)
+                    }
+
+                    Picker("budget_period_label", selection: $budgetPeriod) {
+                        Text("budget_weekly").tag("weekly")
+                        Text("budget_monthly").tag("monthly")
+                    }
+                } header: {
+                    Text("budget_section")
+                } footer: {
+                    Text(budgetAmount > 0 ? "budget_footer_active" : "budget_footer_inactive")
+                }
                 
                 Section {
                     Button {
@@ -63,6 +83,16 @@ struct SettingsView: View {
                             Image(systemName: "square.and.arrow.down")
                                 .foregroundColor(.orange)
                             Text("import_drinks_button")
+                        }
+                    }
+
+                    if let csvURL = csvExportURL {
+                        ShareLink(item: csvURL, subject: Text("export_csv_title"), message: Text("export_csv_message")) {
+                            HStack {
+                                Image(systemName: "doc.text")
+                                    .foregroundColor(.orange)
+                                Text("export_csv_button")
+                            }
                         }
                     }
                 } header: {
@@ -136,6 +166,18 @@ struct SettingsView: View {
         }
     }
     
+    private var csvExportURL: URL? {
+        let bebidas = CoreDataManager.shared.fetchBebidas()
+        var lookup: [UUID: Bebida] = [:]
+        for bebida in bebidas {
+            if let id = bebida.id { lookup[id] = bebida }
+        }
+        let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        guard let allConsumiciones = try? CoreDataManager.shared.context.fetch(request) else { return nil }
+        return BebidaExporter.shared.exportToCSV(consumiciones: allConsumiciones, bebidasLookup: lookup)
+    }
+
     private func localizedRetention(key: String, days: Int) -> String {
         if days == 0 {
             return NSLocalizedString("retention_indefinite", comment: "")
