@@ -9,6 +9,11 @@ settings:
   base:
     SWIFT_VERSION: "5.0"
     IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    PRODUCT_NAME: "$(TARGET_NAME)"
+  configs:
+    Debug:
+      ENABLE_TESTABILITY: YES
+      SWIFT_OPTIMIZATION_LEVEL: "-Onone"
 
 targets:
   MyBarTrack:
@@ -18,6 +23,7 @@ targets:
       - path: MIConsumoBar
         excludes:
           - "**/*.md"
+      - path: Shared
     settings:
       base:
         INFOPLIST_FILE: MyBarTrack-Info.plist
@@ -26,6 +32,27 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: ""
+        CODE_SIGN_ENTITLEMENTS: MyBarTrack.entitlements
+    dependencies:
+      - target: DrinkTrackWidgetExtension
+        embed: true
+
+  DrinkTrackWidgetExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: DrinkTrackWidget
+      - path: Shared
+      - path: MIConsumoBar/Resources
+    settings:
+      base:
+        INFOPLIST_FILE: DrinkTrackWidget/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.polidisio.MyBarTrack.DrinkTrackWidget
+        TARGETED_DEVICE_FAMILY: "1,2"
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_ENTITLEMENTS: DrinkTrackWidget/DrinkTrackWidget.entitlements
+        SKIP_INSTALL: true
     dependencies: []
 
   DrinkTrackTests:

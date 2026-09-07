@@ -63,7 +63,7 @@ struct ConsumptionChartView: View {
         let today = calendar.startOfDay(for: Date())
 
         return (0..<dayRange).map { dayOffset in
-            let date = calendar.date(byAdding: .day, value: -dayOffset, to: today)!
+            let date = calendar.date(byAdding: .day, value: -dayOffset, to: today) ?? today
             let dayConsumiciones = filterConsumiciones(for: date)
             let hasAlcohol = dayConsumiciones.contains { consumicion in
                 guard let bebida = bebidas.first(where: { $0.id == consumicion.bebidaID }) else { return false }
@@ -97,7 +97,7 @@ struct ConsumptionChartView: View {
         let today = calendar.startOfDay(for: Date())
 
         return (0..<dayRange).map { dayOffset in
-            let date = calendar.date(byAdding: .day, value: -dayOffset, to: today)!
+            let date = calendar.date(byAdding: .day, value: -dayOffset, to: today) ?? today
             let dayConsumiciones = filterConsumiciones(for: date)
             let total = dayConsumiciones.reduce(0.0) {
                 $0 + (Double($1.cantidad) * $1.precioUnitario)

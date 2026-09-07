@@ -2,6 +2,7 @@ import Foundation
 import CoreData
 import Combine
 import SwiftUI
+import WidgetKit
 
 class ConsumicionViewModel: ObservableObject {
     private let coreDataManager = CoreDataManager.shared
@@ -34,10 +35,36 @@ class ConsumicionViewModel: ObservableObject {
     
     func refreshTodayData() {
         consumicionesHoy = coreDataManager.fetchAllConsumiciones()
-        
+
         let cantidad = consumicionesHoy.reduce(0) { $0 + Int($1.cantidad) }
         let coste = consumicionesHoy.reduce(0.0) { $0 + (Double($1.cantidad) * $1.precioUnitario) }
         totalHoy = (cantidad, coste)
+
+        updateWidgetSnapshot()
+    }
+
+    /// Pushes the current (cumulative, manual-reset-only) totals to the widget's
+    /// shared App Group storage and asks WidgetKit to refresh. Does not filter by
+    /// date — mirrors `totalHoy` exactly, same as the in-app counters.
+    private func updateWidgetSnapshot() {
+        let defaults = UserDefaults.standard
+        let budgetAmount = defaults.double(forKey: "budgetAmount")
+        let budgetPeriod = defaults.string(forKey: "budgetPeriod") ?? "monthly"
+
+        var budgetProgress: Double? = nil
+        if budgetAmount > 0 {
+            let periodStart = coreDataManager.periodStart(for: budgetPeriod)
+            let periodSpending = coreDataManager.getTotalSpending(since: periodStart)
+            budgetProgress = min(periodSpending / budgetAmount, 1.5)
+        }
+
+        WidgetSnapshot(
+            totalCantidad: totalHoy.cantidad,
+            totalCoste: totalHoy.coste,
+            currencyCode: Locale.current.currency?.identifier ?? "EUR",
+            budgetProgress: budgetProgress
+        ).save()
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     func addConsumicion(bebida: Bebida, cantidad: Int = 1, precioUnitario: Double? = nil) {

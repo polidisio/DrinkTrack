@@ -49,8 +49,12 @@ class BebidaImporter {
         let existingIDs = Set(existingBebidas.compactMap { $0.id })
         
         for item in items {
+            guard isValid(item) else {
+                print("Skipping invalid import item: \(item.nombre)")
+                continue
+            }
             let drinkID = item.id
-            
+
             if existingIDs.contains(drinkID) {
                 // Update existing drink info
                 if let existing = existingBebidas.first(where: { $0.id == drinkID }) {
@@ -128,6 +132,10 @@ class BebidaImporter {
         
         // Create new bebidas from import + their consumiciones
         for item in items {
+            guard isValid(item) else {
+                print("Skipping invalid import item: \(item.nombre)")
+                continue
+            }
             let drinkID = item.id
             let newBebida = Bebida(context: context)
             newBebida.id = drinkID
@@ -159,5 +167,9 @@ class BebidaImporter {
         } catch {
             print("DEBUG: Error saving overwritten bebidas: \(error)")
         }
+    }
+
+    private func isValid(_ item: BebidaExportItem) -> Bool {
+        !item.nombre.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && item.precioBase >= 0
     }
 }

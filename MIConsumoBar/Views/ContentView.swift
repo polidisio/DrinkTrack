@@ -114,13 +114,7 @@ struct ContentView: View {
     }
     
     private var periodStart: Date {
-        let calendar = Calendar.current
-        if budgetPeriod == "weekly" {
-            return calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())) ?? Date()
-        } else {
-            return calendar.date(from: calendar.dateComponents([.year, .month], from: Date())) ?? Date()
-        }
-        }
+        CoreDataManager.shared.periodStart(for: budgetPeriod)
     }
 
     private var periodSpending: Double {

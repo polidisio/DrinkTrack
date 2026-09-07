@@ -144,8 +144,25 @@ class CoreDataManager {
     }
     
     func deleteBebida(_ bebida: Bebida) {
+        if let bebidaID = bebida.id {
+            deleteConsumiciones(forBebidaID: bebidaID)
+        }
         context.delete(bebida)
         save()
+    }
+
+    func deleteConsumiciones(forBebidaID bebidaID: UUID) {
+        let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
+        request.predicate = NSPredicate(format: "bebidaID == %@", bebidaID as CVarArg)
+
+        do {
+            let consumiciones = try context.fetch(request)
+            for consumicion in consumiciones {
+                context.delete(consumicion)
+            }
+        } catch {
+            print("Error fetching consumiciones for bebidaID \(bebidaID): \(error)")
+        }
     }
     
     func isBebidaDefault(_ bebida: Bebida) -> Bool {
@@ -174,12 +191,12 @@ class CoreDataManager {
             // Normalize to the start of day 6 days ago so we include today and the previous 6 days
             // (7 full calendar days: today + 6 previous days)
             let calendar = Calendar.current
-            let startDate = calendar.startOfDay(for: calendar.date(byAdding: .day, value: -6, to: Date())!)
+            let startDate = calendar.startOfDay(for: calendar.date(byAdding: .day, value: -6, to: Date()) ?? Date())
             request.predicate = NSPredicate(format: "timestamp >= %@", startDate as NSDate)
         } else if let date = date {
             let calendar = Calendar.current
             let startOfDay = calendar.startOfDay(for: date)
-            let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+            let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) ?? startOfDay
             
             request.predicate = NSPredicate(format: "timestamp >= %@ AND timestamp < %@", startOfDay as NSDate, endOfDay as NSDate)
         }
@@ -227,7 +244,7 @@ class CoreDataManager {
 
         let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
         let calendar = Calendar.current
-        let startDate = calendar.startOfDay(for: calendar.date(byAdding: .day, value: -(lastDays - 1), to: Date())!)
+        let startDate = calendar.startOfDay(for: calendar.date(byAdding: .day, value: -(lastDays - 1), to: Date()) ?? Date())
         request.predicate = NSPredicate(format: "timestamp >= %@", startDate as NSDate)
         request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
 
@@ -245,7 +262,7 @@ class CoreDataManager {
         guard retentionDays > 0 else { return }
         
         let calendar = Calendar.current
-        let cutoffDate = calendar.date(byAdding: .day, value: -retentionDays, to: Date())!
+        let cutoffDate = calendar.date(byAdding: .day, value: -retentionDays, to: Date()) ?? Date()
         
         let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
         request.predicate = NSPredicate(format: "timestamp < %@", cutoffDate as NSDate)
@@ -262,7 +279,18 @@ class CoreDataManager {
     }
     
     // MARK: - Statistics
-    
+
+    /// Start date of the current budget period ("weekly" or "monthly"), shared by
+    /// ContentView's budget UI and the widget snapshot to avoid duplicating this logic.
+    func periodStart(for period: String) -> Date {
+        let calendar = Calendar.current
+        if period == "weekly" {
+            return calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())) ?? Date()
+        } else {
+            return calendar.date(from: calendar.dateComponents([.year, .month], from: Date())) ?? Date()
+        }
+    }
+
     func getTotalSpending(since date: Date) -> Double {
         let request: NSFetchRequest<Consumicion> = Consumicion.fetchRequest()
         request.predicate = NSPredicate(format: "timestamp >= %@", date as NSDate)
