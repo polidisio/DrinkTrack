@@ -197,16 +197,7 @@ struct AddConsumicionView: View {
         let currentNombre = bebida.nombre ?? ""
         let currentEmoji = bebida.emoji ?? "📦"
         let currentCategoria = bebida.categoria ?? BebidaCategoria.alcohol.rawValue
-        
-        CoreDataManager.shared.updateBebidaByID(
-            bebidaID,
-            nombre: currentNombre,
-            emoji: currentEmoji,
-            precio: precioDouble,
-            categoria: currentCategoria
-        )
-        print("PRECIO DE BEBIDA ACTUALIZADO A: \(precioDouble)")
-        
+
         CoreDataManager.shared.addConsumicion(
             bebidaID: bebidaID,
             cantidad: cantidadInt,
