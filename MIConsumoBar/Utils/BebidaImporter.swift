@@ -56,16 +56,7 @@ class BebidaImporter {
             let drinkID = item.id
 
             if existingIDs.contains(drinkID) {
-                // Update existing drink info
-                if let existing = existingBebidas.first(where: { $0.id == drinkID }) {
-                    existing.nombre = item.nombre
-                    existing.emoji = item.emoji
-                    existing.precioBase = item.precioBase
-                    existing.categoria = item.categoria
-                    existing.orden = item.orden
-                }
-                
-                // Add consumicion with the imported quantity
+                // Only add consumicion for existing drink — preserve all drink metadata
                 let qty = item.cantidad ?? 0
                 if qty > 0 {
                     let consumicion = Consumicion(context: context)

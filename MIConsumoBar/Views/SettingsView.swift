@@ -162,7 +162,6 @@ struct SettingsView: View {
             ) { result in
                 handleImportResult(result)
             }
-            }
         }
     }
     
