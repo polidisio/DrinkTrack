@@ -80,7 +80,7 @@
 		324D43BFC29C4E0B6E76B2AB /* MiConsumoBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiConsumoBarApp.swift; sourceTree = "<group>"; };
 		35400A945377120DB6BCE501 /* ConsumicionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumicionViewModelTests.swift; sourceTree = "<group>"; };
 		3A8D91345F17597922BF1CE9 /* BebidaExporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaExporterTests.swift; sourceTree = "<group>"; };
-		3D3CB26947454946E47863E0 /* DrinkTrackWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = DrinkTrackWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D3CB26947454946E47863E0 /* DrinkTrackWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DrinkTrackWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		490B164A02A61353AAEF3378 /* DrinkTrackExportTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackExportTypes.swift; sourceTree = "<group>"; };
 		50FB8EA9DA07DD8A13AD95FC /* DrinkTrackWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrinkTrackWidget.entitlements; sourceTree = "<group>"; };
 		51249624601C4C590776AE4F /* BebidaImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaImporter.swift; sourceTree = "<group>"; };
@@ -97,10 +97,10 @@
 		AE06C34EB01DF8160B7E836C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C1104F119C955933BBAF11BB /* DrinkTrackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackWidget.swift; sourceTree = "<group>"; };
 		C15DA57DD267B7F2365E794F /* ConsumicionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumicionRowView.swift; sourceTree = "<group>"; };
-		C2329B9CD347DE822143392C /* DrinkTrackTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DrinkTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2329B9CD347DE822143392C /* DrinkTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrinkTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C24FF21E0FE1FA364FBBB66F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD47D0CB35D318B49FA5A1B4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		CD9659E5CAAD068B8175DBD8 /* MyBarTrack.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MyBarTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD9659E5CAAD068B8175DBD8 /* MyBarTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBarTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA9C4D2A7BB679B949256A9 /* BebidaExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaExporter.swift; sourceTree = "<group>"; };
 		DEDD7E16FEFE85D53469AD0F /* EmojiPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerView.swift; sourceTree = "<group>"; };
 		E66B9C099E81064DFEACB679 /* ConsumptionChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionChartView.swift; sourceTree = "<group>"; };
@@ -223,7 +223,6 @@
 				324D43BFC29C4E0B6E76B2AB /* MiConsumoBarApp.swift */,
 				C300DCE86201D5E1CD154279 /* MiConsumoBar.xcdatamodeld */,
 				1B759DAD2E38DB421B41206D /* Models */,
-				75A7B5620D10FC6D4B660FD1 /* Resources */,
 				C52D6A9A837946534F03A511 /* Utils */,
 				B8DF0EF3C300E82B025B50B4 /* ViewModels */,
 				C1FE2EA999AB89C78FE8C6AA /* Views */,
@@ -297,14 +296,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					F9171E4CFBF76161B2895507 = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 					FC806FD735966E918995490C = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -420,12 +417,42 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.5;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -434,9 +461,10 @@
 		382369D92898EFAC60E91CDD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = DrinkTrackWidget/DrinkTrackWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DQ7D6387N8;
 				INFOPLIST_FILE = DrinkTrackWidget/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack.DrinkTrackWidget;
 				SKIP_INSTALL = YES;
@@ -447,9 +475,10 @@
 		422365C9FA10A9D3C35FE038 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = DrinkTrackWidget/DrinkTrackWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DQ7D6387N8;
 				INFOPLIST_FILE = DrinkTrackWidget/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack.DrinkTrackWidget;
 				SKIP_INSTALL = YES;
@@ -461,11 +490,41 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -474,6 +533,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				INFOPLIST_FILE = MIConsumoBarTests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrackTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBarTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyBarTrack";
@@ -484,9 +544,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = MyBarTrack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DQ7D6387N8;
 				INFOPLIST_FILE = "MyBarTrack-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -497,6 +558,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				DEVELOPMENT_TEAM = DQ7D6387N8;
 				INFOPLIST_FILE = MIConsumoBarTests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrackTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBarTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyBarTrack";
@@ -507,9 +570,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = MyBarTrack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DQ7D6387N8;
 				INFOPLIST_FILE = "MyBarTrack-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
