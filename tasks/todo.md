@@ -1,0 +1,45 @@
+# Apple Watch v1 — plan
+
+## Objetivo
+Apuntar bebidas desde la muñeca sin sacar el iPhone. iPhone = fuente de verdad (CoreData sin tocar); Watch = mando ligero.
+
+## Alcance v1
+1. Lista de bebidas top con emoji + contador; tap = +1, botón deshacer última.
+2. Resumen: cantidad, coste, progreso presupuesto (reusa `WidgetSnapshot`).
+3. Complicación WidgetKit (accessory circular/rectangular: contador + anillo presupuesto).
+4. Haptic al llegar a presupuesto ≥ 100 %.
+Fuera de v1: gráficos, HealthKit, CoreData/CloudKit en watch, analytics propio en watch.
+
+## Arquitectura
+- WatchConnectivity (`WCSession`), un `WatchSyncService` en `Shared/`:
+  - iPhone → Watch: `updateApplicationContext` con `WatchState { bebidas top N [id, emoji, count], snapshot }` (Codable, estado más reciente gana).
+  - Watch → iPhone: `transferUserInfo` con `WatchCommand { id: UUID, kind: add|undo, bebidaID, ts }` (cola fiable offline).
+- iPhone aplica el comando vía `ConsumicionViewModel`/`CoreDataManager.addConsumicion` (mismo camino → dispara `Analytics` y `updateWidgetSnapshot`). Idempotencia: guardar `command.id` procesados (Set en UserDefaults, cap 500) para descartar duplicados.
+- Tras cada cambio en iPhone (`refreshTodayData`) → push `WatchState`.
+- Complicación lee `WidgetSnapshot` copiada al App Group del watch (o recibida por WCSession y guardada en UserDefaults del watch; App Group no cruza dispositivos).
+
+## Pasos
+1. [ ] `project.yml`: target `MyBarTrackWatch` (type `application`, platform watchOS, deploy 9.0, bundle `com.polidisio.MyBarTrack.watchkitapp`, `WKCompanionAppBundleIdentifier`), embed en app iOS; target `DrinkTrackWatchWidget` (app-extension watchOS) para complicación. Regenerar con xcodegen. Probar que scheme iOS sigue compilando.
+2. [ ] `Shared/WatchModels.swift` (WatchState, WatchCommand) + tests de codificación en `DrinkTrackTests`.
+3. [ ] `Shared/WatchSyncService.swift` (WCSession delegate, iOS y watch con `#if os(watchOS)`).
+4. [ ] iOS: activar sesión en `MiConsumoBarApp.init`; hook en `ConsumicionViewModel.refreshTodayData` para push de estado; handler de comandos con idempotencia. Test unitario de idempotencia.
+5. [ ] watchOS UI: `WatchContentView` (List de bebidas, tap +1, toolbar undo, cabecera resumen), haptic `WKInterfaceDevice.current().play(.success)`.
+6. [ ] Complicación: reutilizar vista del widget iOS (`DrinkTrackWidget.swift`) adaptada a `accessory*` families.
+7. [ ] Strings es/en (`Localizable.xcstrings` compartido con el target watch).
+8. [ ] Privacy: watch no envía analytics; iPhone ya emite `consumption_added` al procesar comando (añadir prop `source=watch`).
+9. [ ] Docs: README/`Docs/WATCH.md`; actualizar CLAUDE.md estructura.
+
+## Riesgos
+- Extraer `ConsumicionViewModel` de la vista para llamarlo sin UI (hoy vive en `ContentView` como @StateObject) → usar `CoreDataManager` directo + notificar UI (`NotificationCenter`) — decidir en paso 4.
+- WCSession sólo entrega si app instalada en ambos; `updateApplicationContext` no funciona en simulador sin par emparejado (probar con par iPhone+Watch simulados).
+- Sin Apple Developer team configurado (`DEVELOPMENT_TEAM: ""`): firma manual necesaria para dispositivo real.
+- Revisión App Store: capturas watch obligatorias.
+
+## Verificación
+- `xcodebuild` iOS + watch schemes compilan; tests pasan.
+- Par simulado iPhone 17 + Apple Watch: tap +1 en watch → aparece en iPhone y contador watch se actualiza; modo avión watch → cola entrega al reconectar; comando duplicado no duplica consumo.
+- Complicación muestra contador tras cambios.
+- Flujo export/import sin regresión (regla CLAUDE.md).
+
+## Estimación
+Pasos 1–5 ≈ 3 días; 6–9 ≈ 1–2 días.
