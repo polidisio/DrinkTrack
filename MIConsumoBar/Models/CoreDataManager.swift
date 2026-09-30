@@ -117,6 +117,7 @@ class CoreDataManager {
         bebida.orden = maxOrden + 1
         
         save()
+        Analytics.track("drink_created", ["category": categoria])
         return bebida
     }
     
@@ -137,6 +138,7 @@ class CoreDataManager {
                 bebida.precioBase = precio
                 bebida.categoria = categoria
                 save()
+                Analytics.track("drink_edited", ["category": categoria])
             }
         } catch {
             print("Error updating bebida: \(error)")
@@ -147,8 +149,10 @@ class CoreDataManager {
         if let bebidaID = bebida.id {
             deleteConsumiciones(forBebidaID: bebidaID)
         }
+        let categoria = bebida.categoria ?? ""
         context.delete(bebida)
         save()
+        Analytics.track("drink_deleted", ["category": categoria])
     }
 
     func deleteConsumiciones(forBebidaID bebidaID: UUID) {
@@ -182,6 +186,11 @@ class CoreDataManager {
         consumicion.notas = notas
         
         save()
+        Analytics.track("consumption_added", [
+            "category": fetchBebidaByID(bebidaID)?.categoria ?? "",
+            "quantity": cantidad,
+            "has_notes": notas != nil
+        ])
     }
     
     func fetchConsumiciones(for date: Date? = nil, last7Days: Bool = false) -> [Consumicion] {
@@ -226,6 +235,7 @@ class CoreDataManager {
     func deleteConsumicion(_ consumicion: Consumicion) {
         context.delete(consumicion)
         save()
+        Analytics.track("consumption_removed")
     }
 
     /// Decrements the quantity of a consumicion by 1, deleting it if quantity reaches 0.

@@ -5,6 +5,15 @@ options:
     iOS: "16.0"
   xcodeVersion: "15.0"
 
+packages:
+  PostHog:
+    url: https://github.com/PostHog/posthog-ios
+    exactVersion: 3.86.0
+
+configFiles:
+  Debug: Secrets.xcconfig
+  Release: Secrets.xcconfig
+
 settings:
   base:
     SWIFT_VERSION: "5.0"
@@ -39,6 +48,7 @@ targets:
     dependencies:
       - target: DrinkTrackWidgetExtension
         embed: true
+      - package: PostHog
 
   DrinkTrackWidgetExtension:
     type: app-extension

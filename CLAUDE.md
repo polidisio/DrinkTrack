@@ -64,6 +64,7 @@ DrinkTrack/
 - ✅ Export/Import via JSON + AirDrop
 - ✅ Multi-language (Spanish/English)
 - ✅ History by date
+- ✅ Analytics opt-in (PostHog EU) — ver `Docs/ANALYTICS.md`; nunca enviar nombres/precios/importes
 
 ## Architecture
 

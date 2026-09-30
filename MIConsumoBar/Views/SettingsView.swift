@@ -7,6 +7,7 @@ struct SettingsView: View {
     @AppStorage("retentionDays") private var retentionDays: Int = 0
     @AppStorage("budgetAmount") private var budgetAmount: Double = 0
     @AppStorage("budgetPeriod") private var budgetPeriod: String = "monthly"
+    @AppStorage(Analytics.consentKey) private var analyticsEnabled = false
     @State private var showingClearAlert = false
     @State private var showingImportPicker = false
     @State private var showingImportAlert = false
@@ -117,6 +118,15 @@ struct SettingsView: View {
                 }
                 
                 Section {
+                    Toggle("analytics_toggle", isOn: $analyticsEnabled)
+                        .onChange(of: analyticsEnabled) { Analytics.setEnabled($0) }
+                } header: {
+                    Text("analytics_section")
+                } footer: {
+                    Text("analytics_footer")
+                }
+
+                Section {
                     HStack {
                         Text("version_label")
                         Spacer()
@@ -127,6 +137,7 @@ struct SettingsView: View {
                     Text("about_section")
                 }
             }
+            .onAppear { Analytics.screen("settings") }
             .navigationTitle("settings_title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -259,6 +270,7 @@ struct SettingsView: View {
             
             print("DEBUG: Import completed!")
             importSuccess = true
+            Analytics.track("import_done", ["mode": mode == .overwrite ? "overwrite" : "merge", "source": "settings"])
             isImporting = false
             let callback = self.onDismiss
             dismiss()

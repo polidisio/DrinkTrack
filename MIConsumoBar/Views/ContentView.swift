@@ -9,6 +9,7 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     @AppStorage("budgetAmount") private var budgetAmount: Double = 0
     @AppStorage("budgetPeriod") private var budgetPeriod: String = "monthly"
+    @AppStorage(Analytics.promptedKey) private var analyticsPrompted = false
 
     private var sortedBebidas: [Bebida] {
         viewModel.bebidas.sorted { bebida1, bebida2 in
@@ -102,6 +103,13 @@ struct ContentView: View {
                     viewModel.loadData()
                 })
             }
+        }
+        .sheet(isPresented: Binding(get: { !analyticsPrompted }, set: { _ in })) {
+            AnalyticsConsentView { enabled in
+                Analytics.setEnabled(enabled)
+                analyticsPrompted = true
+            }
+            .interactiveDismissDisabled()
         }
         .onAppear {
             viewModel.loadData()

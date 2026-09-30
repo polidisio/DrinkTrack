@@ -71,6 +71,7 @@ struct HistorialView: View {
                 }
                 .onAppear {
                     loadData()
+                    Analytics.screen("history")
                 }
 
                 if isLoading {
@@ -104,6 +105,7 @@ struct HistorialView: View {
                 loadConsumiciones()
             }
             .onChange(of: chartDayRange) { _ in
+                Analytics.track("history_range_changed", ["range_days": chartDayRange])
                 loadChartData()
             }
         }

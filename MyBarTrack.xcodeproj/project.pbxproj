@@ -15,13 +15,17 @@
 		2D44081D2E420C4CEC95E06F /* GestionarBebidasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919F50CE4296C876946A7489 /* GestionarBebidasView.swift */; };
 		2E272CFBA48C19AAC2CE6DD9 /* BebidaImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51249624601C4C590776AE4F /* BebidaImporter.swift */; };
 		3CDCEAD1EFB6E6F51715E71E /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74569D7FBA639F01EBEC6FCD /* WidgetSnapshot.swift */; };
+		42D8221CDE83DB613A8AB5EB /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 704ECC81E9CA12118F6BA5EA /* PrivacyInfo.xcprivacy */; };
 		45DEB972AAACB79E5D16D17F /* ConsumicionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FF0B2B6BFBBA522FEC934 /* ConsumicionViewModel.swift */; };
+		45F7E30DC595EB0B8C4D6CC4 /* AnalyticsConsentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34BC3A2A1A790E77C0882DD /* AnalyticsConsentView.swift */; };
 		57BC8D85879C5B26531112F1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD47D0CB35D318B49FA5A1B4 /* CoreDataManager.swift */; };
+		59D772727515AAA47863AED5 /* PostHog in Frameworks */ = {isa = PBXBuildFile; productRef = 00A2706A9AFCC941807D6A22 /* PostHog */; };
 		671FD0FB99343BD8756BBE5E /* BebidaExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9C4D2A7BB679B949256A9 /* BebidaExporter.swift */; };
 		6ABF5637682BFB62A8066CBE /* EditarBebidaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C06E642F88BB2755C4B36 /* EditarBebidaView.swift */; };
 		6C3C322B603637B59B780A42 /* BebidaExporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D91345F17597922BF1CE9 /* BebidaExporterTests.swift */; };
 		6EC2842F82FD7A894CAC4D98 /* HistorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2F8A7ABAE6E63677320A5 /* HistorialView.swift */; };
 		7439B375B0C15ABC4CD39586 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74569D7FBA639F01EBEC6FCD /* WidgetSnapshot.swift */; };
+		867282D7BCD24E12C98A578D /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBD61F9291116F1E5C6F09 /* Analytics.swift */; };
 		8831223F1FA20DC3C6109638 /* DrinkTrackWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3D3CB26947454946E47863E0 /* DrinkTrackWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		924B814F58B74D7711DA75DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C24FF21E0FE1FA364FBBB66F /* Assets.xcassets */; };
 		9AFABBB04DF22C3154428857 /* ConsumptionChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66B9C099E81064DFEACB679 /* ConsumptionChartView.swift */; };
@@ -33,6 +37,7 @@
 		C6763A145EF0CA4E929D6105 /* BebidaConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8848D6339E7464CE6E4149E8 /* BebidaConstants.swift */; };
 		CBF2F01E6F02EA75BF222EBA /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 62844B7740FB6FEBC733532F /* Localizable.xcstrings */; };
 		CCDEB069063F178E5C39D7E9 /* DrinkTrackExportTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B164A02A61353AAEF3378 /* DrinkTrackExportTypes.swift */; };
+		CE7F95FD0136056EDADCF39C /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 704ECC81E9CA12118F6BA5EA /* PrivacyInfo.xcprivacy */; };
 		D978093A02A7251D8BE323EB /* EmojiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD7E16FEFE85D53469AD0F /* EmojiPickerView.swift */; };
 		DE2B6281C2F5DAE066A018C9 /* BebidaCounterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09930B9CD649E37ABA726899 /* BebidaCounterCard.swift */; };
 		E8EFE29ECD09E5C9A708D8F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC2EEBB759A7603EF8AD69C7 /* LaunchScreen.storyboard */; };
@@ -74,19 +79,22 @@
 /* Begin PBXFileReference section */
 		02A2F8A7ABAE6E63677320A5 /* HistorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorialView.swift; sourceTree = "<group>"; };
 		09930B9CD649E37ABA726899 /* BebidaCounterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaCounterCard.swift; sourceTree = "<group>"; };
+		0AFA651B7786D6DE63A53D34 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		12F97DA842183BD3B22AA9B3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1CF32520949F4F7376A0CC55 /* MiConsumoBar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MiConsumoBar.xcdatamodel; sourceTree = "<group>"; };
 		293BE421587716F9232C3667 /* AddConsumicionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConsumicionView.swift; sourceTree = "<group>"; };
 		324D43BFC29C4E0B6E76B2AB /* MiConsumoBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiConsumoBarApp.swift; sourceTree = "<group>"; };
 		35400A945377120DB6BCE501 /* ConsumicionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumicionViewModelTests.swift; sourceTree = "<group>"; };
 		3A8D91345F17597922BF1CE9 /* BebidaExporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaExporterTests.swift; sourceTree = "<group>"; };
-		3D3CB26947454946E47863E0 /* DrinkTrackWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DrinkTrackWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D3CB26947454946E47863E0 /* DrinkTrackWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = DrinkTrackWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		490B164A02A61353AAEF3378 /* DrinkTrackExportTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackExportTypes.swift; sourceTree = "<group>"; };
 		50FB8EA9DA07DD8A13AD95FC /* DrinkTrackWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrinkTrackWidget.entitlements; sourceTree = "<group>"; };
 		51249624601C4C590776AE4F /* BebidaImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaImporter.swift; sourceTree = "<group>"; };
 		62844B7740FB6FEBC733532F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		65692E239A7EBED19C46A896 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		666E714C5978BB334568D99C /* DrinkTrackWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackWidgetBundle.swift; sourceTree = "<group>"; };
+		6DBBD61F9291116F1E5C6F09 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		704ECC81E9CA12118F6BA5EA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		74569D7FBA639F01EBEC6FCD /* WidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSnapshot.swift; sourceTree = "<group>"; };
 		7AA84A8572D76FA19A27F676 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8848D6339E7464CE6E4149E8 /* BebidaConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaConstants.swift; sourceTree = "<group>"; };
@@ -97,16 +105,28 @@
 		AE06C34EB01DF8160B7E836C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C1104F119C955933BBAF11BB /* DrinkTrackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackWidget.swift; sourceTree = "<group>"; };
 		C15DA57DD267B7F2365E794F /* ConsumicionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumicionRowView.swift; sourceTree = "<group>"; };
-		C2329B9CD347DE822143392C /* DrinkTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrinkTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2329B9CD347DE822143392C /* DrinkTrackTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DrinkTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C24FF21E0FE1FA364FBBB66F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD47D0CB35D318B49FA5A1B4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		CD9659E5CAAD068B8175DBD8 /* MyBarTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBarTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD9659E5CAAD068B8175DBD8 /* MyBarTrack.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MyBarTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA9C4D2A7BB679B949256A9 /* BebidaExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaExporter.swift; sourceTree = "<group>"; };
 		DEDD7E16FEFE85D53469AD0F /* EmojiPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerView.swift; sourceTree = "<group>"; };
+		E34BC3A2A1A790E77C0882DD /* AnalyticsConsentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentView.swift; sourceTree = "<group>"; };
 		E66B9C099E81064DFEACB679 /* ConsumptionChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionChartView.swift; sourceTree = "<group>"; };
 		EC2EEBB759A7603EF8AD69C7 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA8C06E642F88BB2755C4B36 /* EditarBebidaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditarBebidaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7A7CEC14E16C4CC18D35A2BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59D772727515AAA47863AED5 /* PostHog in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		1B759DAD2E38DB421B41206D /* Models */ = {
@@ -142,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				62844B7740FB6FEBC733532F /* Localizable.xcstrings */,
+				704ECC81E9CA12118F6BA5EA /* PrivacyInfo.xcprivacy */,
 			);
 			name = Resources;
 			path = MIConsumoBar/Resources;
@@ -171,6 +192,7 @@
 		99229B0400505E9921A079D6 = {
 			isa = PBXGroup;
 			children = (
+				D496F6440BD64718CD0AEFED /* DrinkTrack */,
 				914851967353136BC0647197 /* DrinkTrackWidget */,
 				F8F69CD535D5D3AD761EF1A9 /* MIConsumoBar */,
 				2386B0244F44AC32EC9A8D0B /* MIConsumoBarTests */,
@@ -192,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				293BE421587716F9232C3667 /* AddConsumicionView.swift */,
+				E34BC3A2A1A790E77C0882DD /* AnalyticsConsentView.swift */,
 				09930B9CD649E37ABA726899 /* BebidaCounterCard.swift */,
 				C15DA57DD267B7F2365E794F /* ConsumicionRowView.swift */,
 				E66B9C099E81064DFEACB679 /* ConsumptionChartView.swift */,
@@ -208,11 +231,21 @@
 		C52D6A9A837946534F03A511 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6DBBD61F9291116F1E5C6F09 /* Analytics.swift */,
 				8848D6339E7464CE6E4149E8 /* BebidaConstants.swift */,
 				DCA9C4D2A7BB679B949256A9 /* BebidaExporter.swift */,
 				51249624601C4C590776AE4F /* BebidaImporter.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		D496F6440BD64718CD0AEFED /* DrinkTrack */ = {
+			isa = PBXGroup;
+			children = (
+				0AFA651B7786D6DE63A53D34 /* Secrets.xcconfig */,
+			);
+			name = DrinkTrack;
+			path = .;
 			sourceTree = "<group>";
 		};
 		F8F69CD535D5D3AD761EF1A9 /* MIConsumoBar */ = {
@@ -223,6 +256,7 @@
 				324D43BFC29C4E0B6E76B2AB /* MiConsumoBarApp.swift */,
 				C300DCE86201D5E1CD154279 /* MiConsumoBar.xcdatamodeld */,
 				1B759DAD2E38DB421B41206D /* Models */,
+				75A7B5620D10FC6D4B660FD1 /* Resources */,
 				C52D6A9A837946534F03A511 /* Utils */,
 				B8DF0EF3C300E82B025B50B4 /* ViewModels */,
 				C1FE2EA999AB89C78FE8C6AA /* Views */,
@@ -275,6 +309,7 @@
 			buildPhases = (
 				95D361416FE8967FC5C2E64B /* Sources */,
 				B8810C2145996A4F90025218 /* Resources */,
+				7A7CEC14E16C4CC18D35A2BB /* Frameworks */,
 				CBCA2F3135D9F1A745C4E01D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -284,6 +319,7 @@
 			);
 			name = MyBarTrack;
 			packageProductDependencies = (
+				00A2706A9AFCC941807D6A22 /* PostHog */,
 			);
 			productName = MyBarTrack;
 			productReference = CD9659E5CAAD068B8175DBD8 /* MyBarTrack.app */;
@@ -296,12 +332,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					F9171E4CFBF76161B2895507 = {
+						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 					FC806FD735966E918995490C = {
+						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -316,6 +354,9 @@
 			);
 			mainGroup = 99229B0400505E9921A079D6;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				559DC5471AD0ABCA8977B20D /* XCRemoteSwiftPackageReference "posthog-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 95E9689D5CAFDF56AB1EA0F2 /* Products */;
 			projectDirPath = "";
@@ -334,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A469CC1D622CD4EB8A1C4989 /* Localizable.xcstrings in Resources */,
+				CE7F95FD0136056EDADCF39C /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +386,7 @@
 				924B814F58B74D7711DA75DF /* Assets.xcassets in Resources */,
 				E8EFE29ECD09E5C9A708D8F9 /* LaunchScreen.storyboard in Resources */,
 				CBF2F01E6F02EA75BF222EBA /* Localizable.xcstrings in Resources */,
+				42D8221CDE83DB613A8AB5EB /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +409,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				022F1CABD4CE186C39A592B1 /* AddConsumicionView.swift in Sources */,
+				867282D7BCD24E12C98A578D /* Analytics.swift in Sources */,
+				45F7E30DC595EB0B8C4D6CC4 /* AnalyticsConsentView.swift in Sources */,
 				C6763A145EF0CA4E929D6105 /* BebidaConstants.swift in Sources */,
 				DE2B6281C2F5DAE066A018C9 /* BebidaCounterCard.swift in Sources */,
 				671FD0FB99343BD8756BBE5E /* BebidaExporter.swift in Sources */,
@@ -415,44 +460,15 @@
 /* Begin XCBuildConfiguration section */
 		0A45570FEE05065C06B2AC71 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AFA651B7786D6DE63A53D34 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.5;
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -461,10 +477,9 @@
 		382369D92898EFAC60E91CDD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = DrinkTrackWidget/DrinkTrackWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DQ7D6387N8;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DrinkTrackWidget/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack.DrinkTrackWidget;
 				SKIP_INSTALL = YES;
@@ -475,10 +490,9 @@
 		422365C9FA10A9D3C35FE038 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = DrinkTrackWidget/DrinkTrackWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DQ7D6387N8;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DrinkTrackWidget/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack.DrinkTrackWidget;
 				SKIP_INSTALL = YES;
@@ -488,43 +502,14 @@
 		};
 		6625751261B41E94EA9B9B30 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AFA651B7786D6DE63A53D34 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -533,7 +518,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = YES;
 				INFOPLIST_FILE = MIConsumoBarTests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrackTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBarTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyBarTrack";
@@ -544,10 +528,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = MyBarTrack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DQ7D6387N8;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "MyBarTrack-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -558,8 +541,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				DEVELOPMENT_TEAM = DQ7D6387N8;
 				INFOPLIST_FILE = MIConsumoBarTests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrackTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBarTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyBarTrack";
@@ -570,10 +551,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = MyBarTrack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DQ7D6387N8;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "MyBarTrack-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -620,6 +600,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		559DC5471AD0ABCA8977B20D /* XCRemoteSwiftPackageReference "posthog-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PostHog/posthog-ios";
+			requirement = {
+				kind = exactVersion;
+				version = 3.86.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		00A2706A9AFCC941807D6A22 /* PostHog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 559DC5471AD0ABCA8977B20D /* XCRemoteSwiftPackageReference "posthog-ios" */;
+			productName = PostHog;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C300DCE86201D5E1CD154279 /* MiConsumoBar.xcdatamodeld */ = {

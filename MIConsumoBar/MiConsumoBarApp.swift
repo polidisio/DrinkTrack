@@ -6,6 +6,10 @@ struct MiConsumoBarApp: App {
     @State private var showingImportAlert = false
     @State private var pendingImportURL: URL?
     @StateObject private var importViewModel = ImportViewModel()
+
+    init() {
+        Analytics.setup()
+    }
     
     var body: some Scene {
         WindowGroup {
@@ -65,6 +69,7 @@ class ImportViewModel: ObservableObject {
             }
 
             print("Bebidas importadas exitosamente")
+            Analytics.track("import_done", ["mode": importMode == .overwrite ? "overwrite" : "merge", "source": "open_url"])
         }
 
         if securityAccessed {
