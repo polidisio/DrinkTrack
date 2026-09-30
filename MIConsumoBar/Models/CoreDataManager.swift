@@ -175,7 +175,7 @@ class CoreDataManager {
     
     // MARK: - Consumicion Operations
     
-    func addConsumicion(bebidaID: UUID, cantidad: Int, precioUnitario: Double, notas: String? = nil) {
+    func addConsumicion(bebidaID: UUID, cantidad: Int, precioUnitario: Double, notas: String? = nil, source: String? = nil) {
         let consumicion = Consumicion(context: context)
         consumicion.id = UUID()
         consumicion.bebidaID = bebidaID
@@ -185,11 +185,13 @@ class CoreDataManager {
         consumicion.notas = notas
         
         save()
-        Analytics.track("consumption_added", [
+        var properties: [String: Any] = [
             "category": fetchBebidaByID(bebidaID)?.categoria ?? "",
             "quantity": cantidad,
             "has_notes": notas != nil
-        ])
+        ]
+        if let source { properties["source"] = source }
+        Analytics.track("consumption_added", properties)
     }
     
     func fetchConsumiciones(for date: Date? = nil, last7Days: Bool = false) -> [Consumicion] {

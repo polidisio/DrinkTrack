@@ -9,6 +9,7 @@ struct MiConsumoBarApp: App {
 
     init() {
         Analytics.setup()
+        WatchBridge.start()
     }
     
     var body: some Scene {

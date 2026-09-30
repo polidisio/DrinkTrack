@@ -39,6 +39,8 @@ targets:
       - path: Shared
     settings:
       base:
+        SDKROOT: iphoneos
+        SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
         INFOPLIST_FILE: MyBarTrack-Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.polidisio.MyBarTrack
         TARGETED_DEVICE_FAMILY: "1,2"
@@ -50,6 +52,7 @@ targets:
       - target: DrinkTrackWidgetExtension
         embed: true
       - package: PostHog
+      - target: MyBarTrackWatch
 
   DrinkTrackWidgetExtension:
     type: app-extension
@@ -57,9 +60,13 @@ targets:
     sources:
       - path: DrinkTrackWidget
       - path: Shared
+        excludes:
+          - "Watch/**"
       - path: MIConsumoBar/Resources
     settings:
       base:
+        SDKROOT: iphoneos
+        SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
         INFOPLIST_FILE: DrinkTrackWidget/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.polidisio.MyBarTrack.DrinkTrackWidget
         TARGETED_DEVICE_FAMILY: "1,2"
@@ -69,6 +76,34 @@ targets:
         SKIP_INSTALL: true
     dependencies: []
 
+  MyBarTrackWatch:
+    type: application
+    platform: watchOS
+    deploymentTarget: "10.0"
+    sources:
+      - path: MyBarTrackWatch
+        excludes:
+          - Info.plist
+      - path: Shared/Watch
+      - path: Shared/WidgetSnapshot.swift
+      - path: MIConsumoBar/Resources/Localizable.xcstrings
+    info:
+      path: MyBarTrackWatch/Info.plist
+      properties:
+        CFBundleDisplayName: MyBarTrack
+        WKApplication: true
+        WKCompanionAppBundleIdentifier: com.polidisio.MyBarTrack
+    settings:
+      base:
+        SDKROOT: watchos
+        SUPPORTED_PLATFORMS: "watchos watchsimulator"
+        PRODUCT_BUNDLE_IDENTIFIER: com.polidisio.MyBarTrack.watchkitapp
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: DQ7D6387N8
+        TARGETED_DEVICE_FAMILY: "4"
+        SKIP_INSTALL: true
+
   DrinkTrackTests:
     type: bundle.unit-test
     platform: iOS
@@ -76,6 +111,8 @@ targets:
       - path: MIConsumoBarTests
     settings:
       base:
+        SDKROOT: iphoneos
+        SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
         INFOPLIST_FILE: MIConsumoBarTests/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.polidisio.MyBarTrackTests
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/MyBarTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyBarTrack"

@@ -114,6 +114,9 @@ struct ContentView: View {
         .onAppear {
             viewModel.loadData()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .watchDidChangeData)) { _ in
+            viewModel.loadData()
+        }
         .onChangeCompat(of: scenePhase) { newPhase in
             if newPhase == .active {
                 viewModel.loadData()
