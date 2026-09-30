@@ -91,6 +91,8 @@ targets:
       path: MyBarTrackWatch/Info.plist
       properties:
         CFBundleDisplayName: MyBarTrack
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         WKApplication: true
         WKCompanionAppBundleIdentifier: com.polidisio.MyBarTrack
     settings:
