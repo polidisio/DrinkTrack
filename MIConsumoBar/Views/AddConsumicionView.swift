@@ -50,7 +50,7 @@ struct AddConsumicionView: View {
                         TextField("0.00", text: $precioUnitario)
                             .frame(width: 80)
                             .keyboardType(.decimalPad)
-                            .onChange(of: precioUnitario) { newValue in
+                            .onChangeCompat(of: precioUnitario) { newValue in
                                 let filtered = newValue.replacingOccurrences(of: ",", with: ".")
                                 if filtered != newValue {
                                     precioUnitario = filtered
@@ -118,7 +118,7 @@ struct AddConsumicionView: View {
             .onAppear {
                 reloadBebidas()
             }
-            .onChange(of: selectedBebidaIndex) { _ in
+            .onChangeCompat(of: selectedBebidaIndex) { _ in
                 updatePrecioUnitario()
             }
         }

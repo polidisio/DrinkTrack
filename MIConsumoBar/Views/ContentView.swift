@@ -114,7 +114,7 @@ struct ContentView: View {
         .onAppear {
             viewModel.loadData()
         }
-        .onChange(of: scenePhase) { newPhase in
+        .onChangeCompat(of: scenePhase) { newPhase in
             if newPhase == .active {
                 viewModel.loadData()
             }

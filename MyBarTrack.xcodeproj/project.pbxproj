@@ -43,6 +43,7 @@
 		E8EFE29ECD09E5C9A708D8F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC2EEBB759A7603EF8AD69C7 /* LaunchScreen.storyboard */; };
 		EA645590B818199DC264FA90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA84A8572D76FA19A27F676 /* ContentView.swift */; };
 		EC16C0A0C3DFF1AC335205DE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F97DA842183BD3B22AA9B3 /* SettingsView.swift */; };
+		EEC420750593A5357C0950EE /* OnChangeCompat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579C049FD4E8856685C5418 /* OnChangeCompat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		9B14BB57354E7465AE9B6876 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 		9DBE5AA3CB6F59AF8CADAEC2 /* DrinkTrackExportTypesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackExportTypesTests.swift; sourceTree = "<group>"; };
 		AE06C34EB01DF8160B7E836C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B579C049FD4E8856685C5418 /* OnChangeCompat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChangeCompat.swift; sourceTree = "<group>"; };
 		C1104F119C955933BBAF11BB /* DrinkTrackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackWidget.swift; sourceTree = "<group>"; };
 		C15DA57DD267B7F2365E794F /* ConsumicionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumicionRowView.swift; sourceTree = "<group>"; };
 		C2329B9CD347DE822143392C /* DrinkTrackTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DrinkTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +237,7 @@
 				8848D6339E7464CE6E4149E8 /* BebidaConstants.swift */,
 				DCA9C4D2A7BB679B949256A9 /* BebidaExporter.swift */,
 				51249624601C4C590776AE4F /* BebidaImporter.swift */,
+				B579C049FD4E8856685C5418 /* OnChangeCompat.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				6EC2842F82FD7A894CAC4D98 /* HistorialView.swift in Sources */,
 				A0414300A4DD5D3E9AE9F5CB /* MiConsumoBar.xcdatamodeld in Sources */,
 				BA4B18C78380705FC5627CD3 /* MiConsumoBarApp.swift in Sources */,
+				EEC420750593A5357C0950EE /* OnChangeCompat.swift in Sources */,
 				EC16C0A0C3DFF1AC335205DE /* SettingsView.swift in Sources */,
 				3CDCEAD1EFB6E6F51715E71E /* WidgetSnapshot.swift in Sources */,
 			);

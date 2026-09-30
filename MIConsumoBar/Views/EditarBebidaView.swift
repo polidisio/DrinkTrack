@@ -73,7 +73,7 @@ struct EditarBebidaView: View {
                         Text(Locale.current.currencySymbol ?? "€")
                         TextField("0.00", text: $precio)
                             .keyboardType(.decimalPad)
-                            .onChange(of: precio) { newValue in
+                            .onChangeCompat(of: precio) { newValue in
                                 let filtered = newValue.replacingOccurrences(of: ",", with: ".")
                                 if filtered != newValue {
                                     precio = filtered

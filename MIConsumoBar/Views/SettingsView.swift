@@ -119,7 +119,7 @@ struct SettingsView: View {
                 
                 Section {
                     Toggle("analytics_toggle", isOn: $analyticsEnabled)
-                        .onChange(of: analyticsEnabled) { Analytics.setEnabled($0) }
+                        .onChangeCompat(of: analyticsEnabled) { Analytics.setEnabled($0) }
                 } header: {
                     Text("analytics_section")
                 } footer: {

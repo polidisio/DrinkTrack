@@ -96,15 +96,15 @@ struct HistorialView: View {
                         }
                 }
             }
-            .onChange(of: selectedDate) { _ in
+            .onChangeCompat(of: selectedDate) { _ in
                 if filterMode != .last7Days {
                     loadConsumiciones()
                 }
             }
-            .onChange(of: filterMode) { _ in
+            .onChangeCompat(of: filterMode) { _ in
                 loadConsumiciones()
             }
-            .onChange(of: chartDayRange) { _ in
+            .onChangeCompat(of: chartDayRange) { _ in
                 Analytics.track("history_range_changed", ["range_days": chartDayRange])
                 loadChartData()
             }
