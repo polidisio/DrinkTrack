@@ -20,6 +20,17 @@ struct WatchContentView: View {
                                 Text("\(drink.count)").font(.title3.bold().monospacedDigit())
                             }
                         }
+                        // Restar 1 a una bebida concreta (como el "−" del iPhone).
+                        .swipeActions(edge: .trailing) {
+                            Button {
+                                sync.send(.undo, bebidaID: drink.id)
+                                WKInterfaceDevice.current().play(.click)
+                            } label: {
+                                Image(systemName: "minus")
+                            }
+                            .tint(.red)
+                            .disabled(drink.count == 0)
+                        }
                     }
                 }
                 .toolbar {
