@@ -21,7 +21,7 @@ settings:
     PRODUCT_NAME: "$(TARGET_NAME)"
     ALWAYS_SEARCH_USER_PATHS: NO
     MARKETING_VERSION: "1.6"
-    CURRENT_PROJECT_VERSION: "3"
+    CURRENT_PROJECT_VERSION: "4"
   configs:
     Debug:
       ENABLE_TESTABILITY: YES
@@ -87,6 +87,13 @@ targets:
       - path: Shared/Watch
       - path: Shared/WidgetSnapshot.swift
       - path: MIConsumoBar/Resources/Localizable.xcstrings
+    dependencies:
+      - target: DrinkTrackWatchWidget
+    entitlements:
+      path: MyBarTrackWatch/MyBarTrackWatch.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.polidisio.MyBarTrack
     info:
       path: MyBarTrackWatch/Info.plist
       properties:
@@ -101,6 +108,36 @@ targets:
         SUPPORTED_PLATFORMS: "watchos watchsimulator"
         PRODUCT_BUNDLE_IDENTIFIER: com.polidisio.MyBarTrack.watchkitapp
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: DQ7D6387N8
+        TARGETED_DEVICE_FAMILY: "4"
+        SKIP_INSTALL: true
+
+  DrinkTrackWatchWidget:
+    type: app-extension
+    platform: watchOS
+    deploymentTarget: "10.0"
+    sources:
+      - path: DrinkTrackWatchWidget
+      - path: Shared/WidgetSnapshot.swift
+    info:
+      path: DrinkTrackWatchWidget/Info.plist
+      properties:
+        CFBundleDisplayName: MyBarTrack
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: DrinkTrackWatchWidget/DrinkTrackWatchWidget.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.polidisio.MyBarTrack
+    settings:
+      base:
+        SDKROOT: watchos
+        SUPPORTED_PLATFORMS: "watchos watchsimulator"
+        PRODUCT_BUNDLE_IDENTIFIER: com.polidisio.MyBarTrack.watchkitapp.DrinkTrackWatchWidget
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: DQ7D6387N8
         TARGETED_DEVICE_FAMILY: "4"

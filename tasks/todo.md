@@ -24,10 +24,10 @@ Fuera de v1: gráficos, HealthKit, CoreData/CloudKit en watch, analytics propio 
 3. [x] `Shared/WatchSyncService.swift` (WCSession delegate, iOS y watch con `#if os(watchOS)`).
 4. [x] iOS: activar sesión en `MiConsumoBarApp.init`; hook en `ConsumicionViewModel.refreshTodayData` para push de estado; handler de comandos con idempotencia. Test unitario de idempotencia.
 5. [x] watchOS UI: `WatchContentView` (List de bebidas, tap +1, toolbar undo, cabecera resumen), haptic `WKInterfaceDevice.current().play(.success)`.
-6. [ ] Complicación: reutilizar vista del widget iOS (`DrinkTrackWidget.swift`) adaptada a `accessory*` families.
+6. [x] Complicación: reutilizar vista del widget iOS (`DrinkTrackWidget.swift`) adaptada a `accessory*` families.
 7. [x] Strings es/en (`Localizable.xcstrings` compartido con el target watch).
 8. [x] Privacy: watch no envía analytics; iPhone ya emite `consumption_added` al procesar comando (añadir prop `source=watch`).
-9. [ ] Docs: README/`Docs/WATCH.md`; actualizar CLAUDE.md estructura.
+9. [x] Docs: README/`Docs/WATCH.md`; actualizar CLAUDE.md estructura.
 
 ## Riesgos
 - Extraer `ConsumicionViewModel` de la vista para llamarlo sin UI (hoy vive en `ContentView` como @StateObject) → usar `CoreDataManager` directo + notificar UI (`NotificationCenter`) — decidir en paso 4.
@@ -47,3 +47,5 @@ Pasos 1–5 ≈ 3 días; 6–9 ≈ 1–2 días.
 ## Estado (2026-09-30)
 Hecho: pasos 1–5, 7, 8 (commits a099f29 + fix de activación WCSession). Verificado en simuladores emparejados (iPhone 17 + Watch Ultra 4): el reloj recibe el estado del iPhone.
 Pendiente: 6 (complicación: target widget watchOS + App Group en watch), 9 (docs), y probar Watch→iPhone (tap +1 / deshacer) en simulador o dispositivo real; solo hay tests unitarios de modelos e idempotencia.
+
+2026-09-30 (tarde): complicación (DrinkTrackWatchWidget) y docs hechos; build 1.6 (4). Verificado: build simulador + archive firmado con la complicación embebida. Sin verificar visualmente la complicación en una esfera.

@@ -15,8 +15,10 @@ enum WidgetSync {
         let budgetPeriod = defaults.string(forKey: "budgetPeriod") ?? "monthly"
         var budgetProgress: Double? = nil
         if budgetAmount > 0 {
-            let spending = coreData.getTotalSpending(since: coreData.periodStart(for: budgetPeriod))
-            budgetProgress = min(spending / budgetAmount, 1.5)
+            let periodStart = coreData.periodStart(for: budgetPeriod)
+            let progress = min(coreData.getTotalSpending(since: periodStart) / budgetAmount, 1.5)
+            budgetProgress = progress
+            trackBudgetExceeded(progress, period: budgetPeriod, periodStart: periodStart, defaults: defaults)
         }
         let currencyCode = Locale.current.currency?.identifier ?? "EUR"
 
@@ -40,5 +42,14 @@ enum WidgetSync {
             currencyCode: currencyCode,
             budgetProgress: budgetProgress
         ))
+    }
+
+    /// Una vez por periodo de presupuesto, aunque `refresh` se ejecute muchas veces.
+    private static func trackBudgetExceeded(_ progress: Double, period: String, periodStart: Date, defaults: UserDefaults) {
+        guard progress >= 1 else { return }
+        let key = "\(period)-\(Int(periodStart.timeIntervalSince1970))"
+        guard defaults.string(forKey: "budgetExceededPeriod") != key else { return }
+        defaults.set(key, forKey: "budgetExceededPeriod")
+        Analytics.track("budget_exceeded", ["period": period])
     }
 }

@@ -44,7 +44,12 @@ DrinkTrack/
 │   │   └── BebidaListViewModel.swift
 │   └── Utils/
 │       ├── BebidaExporter.swift
-│       └── BebidaImporter.swift
+│       ├── BebidaImporter.swift
+│       ├── Analytics.swift
+│       ├── WidgetSync.swift / WatchBridge.swift
+│       └── OnChangeCompat.swift
+├── MyBarTrackWatch/ (app watchOS) · DrinkTrackWatchWidget/ (complicación)
+├── Shared/ (WidgetSnapshot, Watch/)
 ├── MIConsumoBarTests/
 ├── MyBarTrack.xcodeproj
 ├── project.yml
@@ -64,6 +69,7 @@ DrinkTrack/
 - ✅ Export/Import via JSON + AirDrop
 - ✅ Multi-language (Spanish/English)
 - ✅ History by date
+- ✅ Apple Watch companion + complicación — ver `Docs/WATCH.md`
 - ✅ Analytics opt-in (PostHog EU) — ver `Docs/ANALYTICS.md`; nunca enviar nombres/precios/importes
 
 ## Architecture

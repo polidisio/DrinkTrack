@@ -36,6 +36,7 @@
 		867282D7BCD24E12C98A578D /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBD61F9291116F1E5C6F09 /* Analytics.swift */; };
 		8831223F1FA20DC3C6109638 /* DrinkTrackWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3D3CB26947454946E47863E0 /* DrinkTrackWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		924B814F58B74D7711DA75DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C24FF21E0FE1FA364FBBB66F /* Assets.xcassets */; };
+		95664E3916206C5F24048157 /* DrinkTrackWatchWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CD4B5A5ED842F3E1DDB1782B /* DrinkTrackWatchWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		95878334380836F4095DCA4A /* WatchModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A827A594A9A43141289CB0B /* WatchModels.swift */; };
 		9AFABBB04DF22C3154428857 /* ConsumptionChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66B9C099E81064DFEACB679 /* ConsumptionChartView.swift */; };
 		A0414300A4DD5D3E9AE9F5CB /* MiConsumoBar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C300DCE86201D5E1CD154279 /* MiConsumoBar.xcdatamodeld */; };
@@ -50,6 +51,7 @@
 		CCDEB069063F178E5C39D7E9 /* DrinkTrackExportTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B164A02A61353AAEF3378 /* DrinkTrackExportTypes.swift */; };
 		CE242FF2170316162AB1A42C /* MyBarTrackWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3EDBD550CE25B3E7CA1937 /* MyBarTrackWatchApp.swift */; };
 		CE7F95FD0136056EDADCF39C /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 704ECC81E9CA12118F6BA5EA /* PrivacyInfo.xcprivacy */; };
+		D33B9982BE9EDD480F56CB54 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74569D7FBA639F01EBEC6FCD /* WidgetSnapshot.swift */; };
 		D978093A02A7251D8BE323EB /* EmojiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD7E16FEFE85D53469AD0F /* EmojiPickerView.swift */; };
 		DE2B6281C2F5DAE066A018C9 /* BebidaCounterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09930B9CD649E37ABA726899 /* BebidaCounterCard.swift */; };
 		E67F569515F901FC2F78AC73 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 62844B7740FB6FEBC733532F /* Localizable.xcstrings */; };
@@ -57,6 +59,7 @@
 		EA645590B818199DC264FA90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA84A8572D76FA19A27F676 /* ContentView.swift */; };
 		EC16C0A0C3DFF1AC335205DE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F97DA842183BD3B22AA9B3 /* SettingsView.swift */; };
 		EEC420750593A5357C0950EE /* OnChangeCompat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579C049FD4E8856685C5418 /* OnChangeCompat.swift */; };
+		EF701CC560CB0845EA0A7E8B /* DrinkTrackWatchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E0B165C4E7037D00E3A31B /* DrinkTrackWatchWidget.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = FC806FD735966E918995490C;
 			remoteInfo = MyBarTrack;
+		};
+		B1DBA306B22C4F94BDE3B963 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 356B6DCFDEA30C0E307C8189 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5CC5FA044150BD873869AAA;
+			remoteInfo = DrinkTrackWatchWidget;
 		};
 		B97ADA56F692E11C2A5B82E4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -93,6 +103,17 @@
 				13CBDD22EE2DAE3EC2EDEA92 /* MyBarTrackWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EC0A50E3D14F7C4F8DC7D35 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				95664E3916206C5F24048157 /* DrinkTrackWatchWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CBCA2F3135D9F1A745C4E01D /* Embed Foundation Extensions */ = {
@@ -131,15 +152,19 @@
 		666E714C5978BB334568D99C /* DrinkTrackWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackWidgetBundle.swift; sourceTree = "<group>"; };
 		6DBBD61F9291116F1E5C6F09 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		704ECC81E9CA12118F6BA5EA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		736E45B6732EB5A10323AD0F /* MyBarTrackWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyBarTrackWatch.entitlements; sourceTree = "<group>"; };
 		74569D7FBA639F01EBEC6FCD /* WidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSnapshot.swift; sourceTree = "<group>"; };
 		7AA84A8572D76FA19A27F676 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		84504740FF0BD69D0F943782 /* DrinkTrackWatchWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrinkTrackWatchWidget.entitlements; sourceTree = "<group>"; };
 		8848D6339E7464CE6E4149E8 /* BebidaConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaConstants.swift; sourceTree = "<group>"; };
 		88D661D46A1560DF523E516D /* WatchBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchBridge.swift; sourceTree = "<group>"; };
 		919F50CE4296C876946A7489 /* GestionarBebidasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestionarBebidasView.swift; sourceTree = "<group>"; };
+		91E0B165C4E7037D00E3A31B /* DrinkTrackWatchWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackWatchWidget.swift; sourceTree = "<group>"; };
 		954FF0B2B6BFBBA522FEC934 /* ConsumicionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumicionViewModel.swift; sourceTree = "<group>"; };
 		9B14BB57354E7465AE9B6876 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 		9C3EDBD550CE25B3E7CA1937 /* MyBarTrackWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBarTrackWatchApp.swift; sourceTree = "<group>"; };
 		9DBE5AA3CB6F59AF8CADAEC2 /* DrinkTrackExportTypesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackExportTypesTests.swift; sourceTree = "<group>"; };
+		A7E845E4BAC7CA3F5DAFD97D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AE06C34EB01DF8160B7E836C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B579C049FD4E8856685C5418 /* OnChangeCompat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChangeCompat.swift; sourceTree = "<group>"; };
 		C1104F119C955933BBAF11BB /* DrinkTrackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTrackWidget.swift; sourceTree = "<group>"; };
@@ -147,6 +172,7 @@
 		C2329B9CD347DE822143392C /* DrinkTrackTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DrinkTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C24FF21E0FE1FA364FBBB66F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD47D0CB35D318B49FA5A1B4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		CD4B5A5ED842F3E1DDB1782B /* DrinkTrackWatchWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DrinkTrackWatchWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9659E5CAAD068B8175DBD8 /* MyBarTrack.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MyBarTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA674DFD40AC9ED502F65E7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DCA9C4D2A7BB679B949256A9 /* BebidaExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidaExporter.swift; sourceTree = "<group>"; };
@@ -206,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				DA674DFD40AC9ED502F65E7F /* Assets.xcassets */,
+				736E45B6732EB5A10323AD0F /* MyBarTrackWatch.entitlements */,
 				9C3EDBD550CE25B3E7CA1937 /* MyBarTrackWatchApp.swift */,
 				0BECB8BEBC3C09A5BA20E7B6 /* WatchContentView.swift */,
 			);
@@ -219,6 +246,16 @@
 				DFF57B46B3AD1D8681B9F705 /* WatchSyncService.swift */,
 			);
 			path = Watch;
+			sourceTree = "<group>";
+		};
+		6B697E9705D743A063FBEF10 /* DrinkTrackWatchWidget */ = {
+			isa = PBXGroup;
+			children = (
+				84504740FF0BD69D0F943782 /* DrinkTrackWatchWidget.entitlements */,
+				91E0B165C4E7037D00E3A31B /* DrinkTrackWatchWidget.swift */,
+				A7E845E4BAC7CA3F5DAFD97D /* Info.plist */,
+			);
+			path = DrinkTrackWatchWidget;
 			sourceTree = "<group>";
 		};
 		75A7B5620D10FC6D4B660FD1 /* Resources */ = {
@@ -246,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				C2329B9CD347DE822143392C /* DrinkTrackTests.xctest */,
+				CD4B5A5ED842F3E1DDB1782B /* DrinkTrackWatchWidget.appex */,
 				3D3CB26947454946E47863E0 /* DrinkTrackWidgetExtension.appex */,
 				CD9659E5CAAD068B8175DBD8 /* MyBarTrack.app */,
 				09BDECF2DFC5CC5A4F2637CC /* MyBarTrackWatch.app */,
@@ -257,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				D496F6440BD64718CD0AEFED /* DrinkTrack */,
+				6B697E9705D743A063FBEF10 /* DrinkTrackWatchWidget */,
 				914851967353136BC0647197 /* DrinkTrackWidget */,
 				F8F69CD535D5D3AD761EF1A9 /* MIConsumoBar */,
 				2386B0244F44AC32EC9A8D0B /* MIConsumoBarTests */,
@@ -359,10 +398,12 @@
 			buildPhases = (
 				4A04D472C14A539C122BEBF8 /* Sources */,
 				A24CC6EFDF2A55D554CA3013 /* Resources */,
+				7EC0A50E3D14F7C4F8DC7D35 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1F508F0EE4FC03D81BE87519 /* PBXTargetDependency */,
 			);
 			name = MyBarTrackWatch;
 			packageProductDependencies = (
@@ -370,6 +411,23 @@
 			productName = MyBarTrackWatch;
 			productReference = 09BDECF2DFC5CC5A4F2637CC /* MyBarTrackWatch.app */;
 			productType = "com.apple.product-type.application";
+		};
+		E5CC5FA044150BD873869AAA /* DrinkTrackWatchWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67F79F6B044FECC18A4EF41E /* Build configuration list for PBXNativeTarget "DrinkTrackWatchWidget" */;
+			buildPhases = (
+				49C7A8E6DCACBA38A36A2622 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DrinkTrackWatchWidget;
+			packageProductDependencies = (
+			);
+			productName = DrinkTrackWatchWidget;
+			productReference = CD4B5A5ED842F3E1DDB1782B /* DrinkTrackWatchWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		F9171E4CFBF76161B2895507 /* DrinkTrackWidgetExtension */ = {
 			isa = PBXNativeTarget;
@@ -426,6 +484,10 @@
 						DevelopmentTeam = DQ7D6387N8;
 						ProvisioningStyle = Automatic;
 					};
+					E5CC5FA044150BD873869AAA = {
+						DevelopmentTeam = DQ7D6387N8;
+						ProvisioningStyle = Automatic;
+					};
 					F9171E4CFBF76161B2895507 = {
 						DevelopmentTeam = DQ7D6387N8;
 						ProvisioningStyle = Automatic;
@@ -455,6 +517,7 @@
 			projectRoot = "";
 			targets = (
 				5482D705C86FC7F084D36FC8 /* DrinkTrackTests */,
+				E5CC5FA044150BD873869AAA /* DrinkTrackWatchWidget */,
 				F9171E4CFBF76161B2895507 /* DrinkTrackWidgetExtension */,
 				FC806FD735966E918995490C /* MyBarTrack */,
 				A3A5D30942AC0B8391136EA2 /* MyBarTrackWatch */,
@@ -504,6 +567,15 @@
 				16D1B707938736C47D2FAA47 /* CoreDataManagerTests.swift in Sources */,
 				089EFD81C52EB197B6FC64F2 /* DrinkTrackExportTypesTests.swift in Sources */,
 				69BA60DEF0B3BF2A384A9C58 /* WatchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49C7A8E6DCACBA38A36A2622 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF701CC560CB0845EA0A7E8B /* DrinkTrackWatchWidget.swift in Sources */,
+				D33B9982BE9EDD480F56CB54 /* WidgetSnapshot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +642,11 @@
 			target = F9171E4CFBF76161B2895507 /* DrinkTrackWidgetExtension */;
 			targetProxy = B97ADA56F692E11C2A5B82E4 /* PBXContainerItemProxy */;
 		};
+		1F508F0EE4FC03D81BE87519 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5CC5FA044150BD873869AAA /* DrinkTrackWatchWidget */;
+			targetProxy = B1DBA306B22C4F94BDE3B963 /* PBXContainerItemProxy */;
+		};
 		37098EE8AD54A59F16E9150A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FC806FD735966E918995490C /* MyBarTrack */;
@@ -588,7 +665,7 @@
 			baseConfigurationReference = 0AFA651B7786D6DE63A53D34 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				ENABLE_TESTABILITY = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.6;
@@ -614,6 +691,22 @@
 			};
 			name = Release;
 		};
+		41D921A769BE04922C43C147 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DrinkTrackWatchWidget/DrinkTrackWatchWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DQ7D6387N8;
+				INFOPLIST_FILE = DrinkTrackWatchWidget/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack.watchkitapp.DrinkTrackWatchWidget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
 		422365C9FA10A9D3C35FE038 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -633,6 +726,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyBarTrackWatch/MyBarTrackWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DQ7D6387N8;
 				INFOPLIST_FILE = MyBarTrackWatch/Info.plist;
@@ -650,7 +744,7 @@
 			baseConfigurationReference = 0AFA651B7786D6DE63A53D34 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -701,6 +795,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyBarTrackWatch/MyBarTrackWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DQ7D6387N8;
 				INFOPLIST_FILE = MyBarTrackWatch/Info.plist;
@@ -728,6 +823,22 @@
 			};
 			name = Debug;
 		};
+		B06AEE26BCD2B2CC4387C70D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DrinkTrackWatchWidget/DrinkTrackWatchWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DQ7D6387N8;
+				INFOPLIST_FILE = DrinkTrackWatchWidget/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.polidisio.MyBarTrack.watchkitapp.DrinkTrackWatchWidget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -745,6 +856,15 @@
 			buildConfigurations = (
 				660FDC16CF0D0DE0C4B80A28 /* Debug */,
 				9BF7D75C48299E4C4C4FD627 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		67F79F6B044FECC18A4EF41E /* Build configuration list for PBXNativeTarget "DrinkTrackWatchWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41D921A769BE04922C43C147 /* Debug */,
+				B06AEE26BCD2B2CC4387C70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
