@@ -132,6 +132,7 @@ struct EditarBebidaView: View {
             print("  Nuevo precio: \(precioDouble)")
             print("  Nueva categoría: \(categoria)")
             CoreDataManager.shared.updateBebidaByID(id, nombre: nombreTrimmed, emoji: emoji, precio: precioDouble, categoria: categoria)
+            Analytics.track("drink_edited", ["category": categoria])
             if let bebidaActualizada = CoreDataManager.shared.fetchBebidaByID(id) {
                 onSave(bebidaActualizada)
             }

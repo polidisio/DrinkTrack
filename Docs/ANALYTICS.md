@@ -20,7 +20,8 @@ Solo contadores, booleanos y categorías. **Nunca** nombres de bebida, precios, 
 |---|---|---|
 | `consumption_added` | `category`, `quantity`, `has_notes` | `CoreDataManager.addConsumicion` |
 | `consumption_removed` | — | `CoreDataManager.deleteConsumicion` |
-| `drink_created` / `drink_edited` / `drink_deleted` | `category` | `CoreDataManager` |
+| `drink_created` / `drink_deleted` | `category` | `CoreDataManager` |
+| `drink_edited` | `category` | `EditarBebidaView.save` (no en el alta manual, que también actualiza el precio) |
 | `import_done` | `mode`, `source` (`settings`/`open_url`) | `SettingsView`, `ImportViewModel` |
 | `history_range_changed` | `range_days` | `HistorialView` |
 | `$screen` | `$screen_name` (`settings`, `history`) | `Analytics.screen` |

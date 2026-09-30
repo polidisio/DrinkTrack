@@ -138,7 +138,6 @@ class CoreDataManager {
                 bebida.precioBase = precio
                 bebida.categoria = categoria
                 save()
-                Analytics.track("drink_edited", ["category": categoria])
             }
         } catch {
             print("Error updating bebida: \(error)")
