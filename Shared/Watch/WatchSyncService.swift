@@ -19,6 +19,8 @@ final class WatchSyncService: NSObject, ObservableObject, WCSessionDelegate {
     @Published private(set) var lastAddedID: UUID?
     #else
     var onCommand: ((WatchCommand) -> Void)?
+    /// El estado que se mandó antes de activar la sesión se pierde: se reenvía al activarse o cambiar el reloj.
+    var onNeedsState: (() -> Void)?
     #endif
 
     private override init() { super.init() }
@@ -30,14 +32,18 @@ final class WatchSyncService: NSObject, ObservableObject, WCSessionDelegate {
     }
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        guard activationState == .activated else { return }
         #if os(watchOS)
-        if activationState == .activated { receive(session.receivedApplicationContext) }
+        receive(session.receivedApplicationContext)
+        #else
+        onNeedsState?()
         #endif
     }
 
     #if os(iOS)
     func sessionDidBecomeInactive(_ session: WCSession) {}
     func sessionDidDeactivate(_ session: WCSession) { session.activate() }
+    func sessionWatchStateDidChange(_ session: WCSession) { onNeedsState?() }
 
     func push(_ state: WatchState) {
         let session = WCSession.default

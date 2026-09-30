@@ -19,14 +19,14 @@ Fuera de v1: gráficos, HealthKit, CoreData/CloudKit en watch, analytics propio 
 - Complicación lee `WidgetSnapshot` copiada al App Group del watch (o recibida por WCSession y guardada en UserDefaults del watch; App Group no cruza dispositivos).
 
 ## Pasos
-1. [ ] `project.yml`: target `MyBarTrackWatch` (type `application`, platform watchOS, deploy 9.0, bundle `com.polidisio.MyBarTrack.watchkitapp`, `WKCompanionAppBundleIdentifier`), embed en app iOS; target `DrinkTrackWatchWidget` (app-extension watchOS) para complicación. Regenerar con xcodegen. Probar que scheme iOS sigue compilando.
-2. [ ] `Shared/WatchModels.swift` (WatchState, WatchCommand) + tests de codificación en `DrinkTrackTests`.
-3. [ ] `Shared/WatchSyncService.swift` (WCSession delegate, iOS y watch con `#if os(watchOS)`).
-4. [ ] iOS: activar sesión en `MiConsumoBarApp.init`; hook en `ConsumicionViewModel.refreshTodayData` para push de estado; handler de comandos con idempotencia. Test unitario de idempotencia.
-5. [ ] watchOS UI: `WatchContentView` (List de bebidas, tap +1, toolbar undo, cabecera resumen), haptic `WKInterfaceDevice.current().play(.success)`.
+1. [x] `project.yml`: target `MyBarTrackWatch` (type `application`, platform watchOS, deploy 9.0, bundle `com.polidisio.MyBarTrack.watchkitapp`, `WKCompanionAppBundleIdentifier`), embed en app iOS; target `DrinkTrackWatchWidget` (app-extension watchOS) para complicación. Regenerar con xcodegen. Probar que scheme iOS sigue compilando.
+2. [x] `Shared/WatchModels.swift` (WatchState, WatchCommand) + tests de codificación en `DrinkTrackTests`.
+3. [x] `Shared/WatchSyncService.swift` (WCSession delegate, iOS y watch con `#if os(watchOS)`).
+4. [x] iOS: activar sesión en `MiConsumoBarApp.init`; hook en `ConsumicionViewModel.refreshTodayData` para push de estado; handler de comandos con idempotencia. Test unitario de idempotencia.
+5. [x] watchOS UI: `WatchContentView` (List de bebidas, tap +1, toolbar undo, cabecera resumen), haptic `WKInterfaceDevice.current().play(.success)`.
 6. [ ] Complicación: reutilizar vista del widget iOS (`DrinkTrackWidget.swift`) adaptada a `accessory*` families.
-7. [ ] Strings es/en (`Localizable.xcstrings` compartido con el target watch).
-8. [ ] Privacy: watch no envía analytics; iPhone ya emite `consumption_added` al procesar comando (añadir prop `source=watch`).
+7. [x] Strings es/en (`Localizable.xcstrings` compartido con el target watch).
+8. [x] Privacy: watch no envía analytics; iPhone ya emite `consumption_added` al procesar comando (añadir prop `source=watch`).
 9. [ ] Docs: README/`Docs/WATCH.md`; actualizar CLAUDE.md estructura.
 
 ## Riesgos
@@ -43,3 +43,7 @@ Fuera de v1: gráficos, HealthKit, CoreData/CloudKit en watch, analytics propio 
 
 ## Estimación
 Pasos 1–5 ≈ 3 días; 6–9 ≈ 1–2 días.
+
+## Estado (2026-09-30)
+Hecho: pasos 1–5, 7, 8 (commits a099f29 + fix de activación WCSession). Verificado en simuladores emparejados (iPhone 17 + Watch Ultra 4): el reloj recibe el estado del iPhone.
+Pendiente: 6 (complicación: target widget watchOS + App Group en watch), 9 (docs), y probar Watch→iPhone (tap +1 / deshacer) en simulador o dispositivo real; solo hay tests unitarios de modelos e idempotencia.

@@ -11,6 +11,7 @@ enum WatchBridge {
 
     static func start() {
         WatchSyncService.shared.onCommand = handle
+        WatchSyncService.shared.onNeedsState = { DispatchQueue.main.async { WidgetSync.refresh() } }
         WatchSyncService.shared.activate()
     }
 
