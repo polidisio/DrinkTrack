@@ -44,7 +44,7 @@ targets:
         TARGETED_DEVICE_FAMILY: "1,2"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Automatic
-        DEVELOPMENT_TEAM: ""
+        DEVELOPMENT_TEAM: DQ7D6387N8
         CODE_SIGN_ENTITLEMENTS: MyBarTrack.entitlements
     dependencies:
       - target: DrinkTrackWidgetExtension
@@ -64,7 +64,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.polidisio.MyBarTrack.DrinkTrackWidget
         TARGETED_DEVICE_FAMILY: "1,2"
         CODE_SIGN_STYLE: Automatic
-        DEVELOPMENT_TEAM: ""
+        DEVELOPMENT_TEAM: DQ7D6387N8
         CODE_SIGN_ENTITLEMENTS: DrinkTrackWidget/DrinkTrackWidget.entitlements
         SKIP_INSTALL: true
     dependencies: []
